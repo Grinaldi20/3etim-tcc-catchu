@@ -10,16 +10,9 @@
     width: 450px;
 }
 
-body {
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    background-color: #ffffff; 
-}
 
-h1 {
+
+.titulo {
     font-size: 1.5rem;
     font-weight: 600;
     margin-left: 8rem;
@@ -66,14 +59,14 @@ h1 {
     background-color: #ffffff;
 }
 
-input::placeholder {
+.input::placeholder {
     font-size: 1.1rem;
     font-family: "Roboto";
     color: #0E6567;
    
 }
 
-button {
+.button {
     border-radius: 16px;
     border: 2px solid white; 
     padding: 10px 20px;
@@ -91,7 +84,7 @@ button {
     font-weight: bold;
 }
 
-button:hover {
+.button:hover {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); 
     background-color: white;
     border: 2px solid #0E6567; 
@@ -142,7 +135,7 @@ button:hover {
     margin-top: 11.9%;
 }
 
-main {
+.main {
     display: flex;
 }
 
@@ -159,7 +152,7 @@ main {
     margin-left: 8%;
 }
 
-h2 {
+.subtitulo {
     text-align: center;
     font-family: "Arial";
     font-size: 28px;
@@ -167,7 +160,7 @@ h2 {
     font-weight: 600;
 }
 
-h3 {
+.texto {
     text-align: center;
     font-family: "";
     font-size: 17px;
