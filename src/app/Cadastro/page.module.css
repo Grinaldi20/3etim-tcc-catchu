@@ -23,13 +23,13 @@
     font-weight: bold;
 }
 
-.input-container {
+.inputContainer {
     position: relative;
     margin-bottom: 1rem;
     width: 100%;
 }
 
-.input-container .icon {
+.inputContainer .icon {
     position: absolute;
     left: 10px;
     top: 50%;
@@ -39,7 +39,7 @@
     margin-bottom: 10rem;
 }
 
-.input-container input {
+.inputContainer input {
     width: 100%; 
     box-sizing: border-box; 
     padding: 1rem 1rem 1rem 40px; 
@@ -51,7 +51,7 @@
 }
 
 
-.input-container input:focus {
+.inputContainer input:focus {
     transform: scale(1.05);
     outline: none;
     border-color: #0E6567;
@@ -91,7 +91,7 @@
     color: #0E6567;
 }
 
-.form-group {
+.formGroup  {
     display: flex;
     align-items: center;
     border-bottom: 2px solid #3a7c7b;
@@ -99,7 +99,7 @@
     padding: 5px;
 }
 
-.form-group input {
+.formGroup  input {
     border: none;
     outline: none;
     font-size: 1rem;
@@ -108,7 +108,7 @@
     transition: transform 0.2s ease;
 }
 
-.form-group input:focus {
+.formGroup  input:focus {
     transform: scale(1.05);
     outline: none;
     background-color: #ffffff;
@@ -120,7 +120,7 @@
     height: 40px;
 }
 
-.form-group .icon {
+.formGroup  .icon {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -191,7 +191,7 @@
     color: #0E6567;
 }
 
-.form-group .icon2 {
+.formGroup .icon2 {
     display: flex;
     align-items: center;
     justify-content: center;
