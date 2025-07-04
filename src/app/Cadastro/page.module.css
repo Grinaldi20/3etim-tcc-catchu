@@ -100,7 +100,7 @@
     transition: all 0.3s ease;
     display: block;        
     margin: 1rem auto 0;   
-    margin-top: 5.5rem;
+    margin-top: 1rem;
     height: 40px;
     font-family: "Arial";
     font-weight: bold;
@@ -224,4 +224,12 @@
     color: #0E6567;
     width: 40px;  
     height: 40px;
+}
+
+.span {
+  color: #0E6567;
+  font-size: 0.875rem;
+  text-align: center;
+  margin-left: 155px;
+  margin-top: -2rem;
 }

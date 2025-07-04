@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import Link from "next/link";
 export default function Cadastro() {
     return (
       <main  className={styles.main} >
@@ -72,7 +73,9 @@ export default function Cadastro() {
                 <input  type="password" className={styles.linhaInput} placeholder="Confirmar Senha"/>
               </div>
     
-    
+     <Link href="http://localhost:3000/login">
+      <span className={styles.span} >Já possui uma conta?</span>
+           </Link>
             <button className={styles.button} >
               Cadastrar
             </button>
