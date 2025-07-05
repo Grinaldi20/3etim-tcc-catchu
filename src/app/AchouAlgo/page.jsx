@@ -2,7 +2,7 @@ import Image from "next/image";
 import styles from "./page.module.css";
 
 
-export default function PoliticaRetirada() {
+export default function AchouAlgo() {
     return (
    <main className={styles.main}>
 
@@ -14,29 +14,25 @@ export default function PoliticaRetirada() {
 </svg>
       </a>
 
-      <h1 className={styles.titulo}>POLÍTICA DE RETIRADA</h1>
+      <h1 className={styles.titulo}>POLÍTICA DE ENTREGA</h1>
 
       <div className={styles.text}>
       <p className={styles.p}>
-          O CatchU assegura as seguintes diretrizes para a retirada de objetos encontrados e armazenados 
-          na seção de Achados e Perdidos, garantindo a organização e a correta devolução aos alunos:
+        O Catchu assegura as seguintes diretrizes para garantir a organização e a correta devolução aos alunos:
       </p>
          <br/>
       <p className={styles.p}>
-       Para a retirada de um objeto da seção de Achados e Perdidos, o aluno deverá:
-            <br />• Informar seu nome completo;
-            <br />• Informar sua sala/turma;
+        Todos os objetos encontrados nas dependências de seu local deverão ser postados e devem ser entregues à administração do mesmo para autorizar a sua publicação.
       </p>
       <br/>
       <p className={styles.p}>
-          A equipe da biblioteca registrará a entrega do objeto, anotando os dados do aluno
-           e a data da retirada, como forma de controle interno.
+        Os objetos permanecerão na seção de Achados e Perdidos por um prazo máximo de 30 dias. Após esse período, os itens não reclamados poderão ser destinados à doação.
       </p>
       </div>
     </div>
 
     <div className={styles.cardImage}>
-      <img className={styles.achou} src="/opcao2.png"
+      <img className={styles.achou} src="/achou3.png"
        alt="Logo CatchU"
             width={430}
             height={700}
@@ -46,7 +42,7 @@ export default function PoliticaRetirada() {
       <div className={styles.logo}>
         <Image src="/logo1.png"
           alt="Logo CatchU"
-            width={400}
+            width={500}
             height={300}
             quality={100}
       
