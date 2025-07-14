@@ -1,6 +1,6 @@
 /* Wrapper simulando o body */
 .pageWrapper {
-   height: 10px;
+  height: 10px;
   background-color: #ffffff;
   font-family: "Poppins", sans-serif;
   display: flex;
@@ -10,29 +10,26 @@
 
 /* TOPO VERDE */
 .topoFeedback {
-  width: 1343px;
+  width: 1357px;
   background-color: #3a7c7b;
- height: 100px;
+  height: 100px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
+  
 }
 
 .logoFeedback {
-  object-fit: contain;
- margin-left: -75rem;
+object-fit: contain;
+ margin-left: -70rem;
 }
 
  .voltar {
     font-size: 25px;
     color: #ffffff;
     cursor: pointer;
-    margin-left: rem;
+    margin-right: 3rem;
   }
 
   .a{
@@ -42,7 +39,7 @@
 /* TÍTULO */
 .tituloContainer {
   text-align: center;
-  margin-top: 6rem;
+  margin-top: -0rem;
 }
 
 .titulo {
@@ -75,13 +72,13 @@
   padding: 2.5rem;
   background-color: white;
   border-radius: 16px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   text-align: center;
 }
 
 .formTitle {
   font-size: 1.6rem;
-  color: #000000;
+  color: #ffc107;
   font-family: 'Roboto', sans-serif;
   margin-bottom: 2rem;
 }
@@ -159,7 +156,7 @@
   width: 20rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
-  margin-top: 2rem;
+  margin-top: 1rem;
   height: 40px;
   font-family: "Arial", sans-serif;
   font-weight: bold;
