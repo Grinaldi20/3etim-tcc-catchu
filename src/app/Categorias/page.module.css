@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+:root {
+  font-size: 62.5%;
+}
+
+.main {
+  font-family: 'Poppins', sans-serif;
+}
+
+.Gradiente {
+  background: linear-gradient(to bottom, #4B8C8D, #0e6667da);
+  padding-bottom: 3rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  margin-bottom: 1rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+  width: 1350;
+  height: 100px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+    .img {
+        margin-left: -120px;
+    }
+
+
+
+.Pesquisa input {
+  height: 5rem;
+  width: 90rem;
+  margin: 2rem;
+  border-radius: 5rem;
+  border: none;
+  background-color: #0E6567;
+  font-size: 2rem;
+  color: white;
+  padding: 1.5rem;
+  margin-left: -120px;
+}
+
+.Pesquisa input::placeholder {
+  color: white;
+}
+
+.Icons {
+  margin-right: 4rem;
+}
+
+.Icons :global(svg) {
+  height: 4.5rem;
+  width: 4.5rem;
+  margin-left: 1.5rem;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.titulo {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 600;
+  padding: 20px 0 30px 0;
+  color: #fff;
+}
+
+.tituloSecao {
+  font-size: 2rem;
+  color: #fff;
+  text-align: center;
+}
+
+.CardsCarrocel a{
+    text-decoration: none;
+    color: black;
+    transition: transform 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25); /* sombra suave para baixo */
+    border-radius: 20px;
+}
+
+.CardsCarrocel a:hover {
+    transform: scale(1.05);
+}
+
+.h2{
+    font-size: 2rem;
+}
+
+.CardsCarrocel{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 5rem;
+
+}
+
+.CardsCarrocel svg{
+    height: 6.5rem; 
+    width: 6.5rem; 
+  
+}
+
+.CardsCarrocel .MaterialEscolar{
+    background-color: #0E6567;
+    width: 15rem;
+    height: 14.5rem;
+    font-size: 2rem;
+    font-weight: 300;
+    font-family: Poppins;
+    color: #ffff;
+    text-align: center;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.CardsCarrocel .Roupas{
+    background-color: #0E6567;
+    width: 15rem;
+    height: 14.5rem;
+    font-size: 2rem;
+    font-weight: 300;
+    font-family: Poppins;
+    color: #ffff;
+    text-align: center;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.CardsCarrocel .Sapatos{
+    background-color: #0E6567;
+    width: 15rem;
+    height: 14.5rem;
+    font-size: 2rem;
+    font-weight: 300;
+    font-family: Poppins;
+    color: #ffff;
+    text-align: center;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.CardsCarrocel .ObjetosGerais{
+    background-color: #0E6567;
+    width: 15rem;
+    height: 14.5rem;
+    font-size: 2rem;
+    font-weight: 300;
+    font-family: Poppins;
+    color: #ffff;
+    text-align: center;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.CardsCarrocel .Resgatados{
+    background-color: #0E6567;
+    width: 15rem;
+    height: 14.5rem;
+    font-size: 2rem;
+    font-weight: 300;
+    font-family: Poppins;
+    color: #ffff;
+    text-align: center;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+
+.CardsItens {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  gap: 5.5rem;
+  padding: 3rem;
+  flex-wrap: wrap;
+}
+
+.Cards {
+  background-color: #0E6567;
+  width: 24rem;
+  height: 27.5rem;
+  font-size: 2rem;
+  font-weight: 300;
+  color: #fff;
+  padding: 15px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Cards img {
+  width: 17rem;
+  height: 16.5rem;
+  border-radius: 20px;
+}
+
+.Cards button {
+  background-color: transparent;
+  color: #fff;
+  border: solid 2px #fff;
+  font-size: 2rem;
+  font-weight: 300;
+  border-radius: 20px;
+  padding: 5px;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+.Cards button:hover {
+  background-color: #4B8C8D;
+  transform: scale(1.05);
+}
+
+.modal {
+  position: fixed;
+  z-index: 10;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalContent {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  width: 40%;
+  height: auto;
+  text-align: center;
+  position: relative;
+}
+
+.fechar {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.modalContent img {
+  width: 25rem;
+  height: 25rem;
+  border-radius: 20px;
+}
+
+.modalEscondido {
+  display: none;
+}
