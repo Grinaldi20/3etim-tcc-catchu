@@ -16,7 +16,7 @@ export default function Feedback() {
       <div className={styles.pageWrapper}>
         <header className={styles.topoFeedback}>
           <Image
-            src="/logo2.png"
+            src="/logo1.png"
             alt="Logo Catch"
             width={3500}
             height={220}

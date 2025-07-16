@@ -42,6 +42,11 @@
     cursor: pointer;
   }
 
+  .voltar svg{
+    width: 30px;
+    height: 30px;
+  }
+
 .titulo{
     text-align: center;
     color: #2a7c73;

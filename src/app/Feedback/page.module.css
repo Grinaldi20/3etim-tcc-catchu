@@ -30,6 +30,12 @@ object-fit: contain;
     color: #ffffff;
     cursor: pointer;
     margin-right: 3rem;
+    margin-top: 0.5rem;
+  }
+
+  .voltar svg{
+    width: 30px;
+    height: 30px;
   }
 
   .a{
