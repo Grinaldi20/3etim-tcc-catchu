@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
-export default function Resgatados() {
+export default function Calçados() {
     return (
    <div>
     <header className={styles.header}>
@@ -29,7 +29,7 @@ export default function Resgatados() {
     </header>
     <main className={styles.main}>
         <div className={styles.centro}>
-            <h1 className={styles.h1}>Resgatados</h1>
+            <h1 className={styles.h1}>Calçados</h1>
         </div>
 
         <div className={styles.CardsItens}>
@@ -37,28 +37,28 @@ export default function Resgatados() {
                  <Image src="/sapato.png" alt="Estojo" width={170} height={165} />
                 <div className={styles.linha}></div>
                 <h3 className={styles.h3}>Estojo</h3>
-                <button className={styles.button}>Resgatado</button>
+                <button className={styles.button}>Saber Mais</button>
             </div>
 
             <div className={styles.Cards}>
-               <Image src="/camisa.png" alt="Estojo" width={170} height={165} />
+               <Image src="/sapato2.png" alt="Estojo" width={170} height={165} />
                 <div className={styles.linha}></div>
                 <h3 className={styles.h3}>Caderno</h3>
-                <button className={styles.button}>Resgatado</button>
+                <button className={styles.button}>Saber Mais</button>
             </div>
 
             <div className={styles.Cards}>
                <Image src="/sapato3.png" alt="Estojo" width={170} height={165} />
                 <div className={styles.linha}></div>
                 <h3 className={styles.h3}>Regua</h3>
-                <button className={styles.button}>Resgatado</button>
+                <button className={styles.button}>Saber Mais</button>
             </div>
 
             <div className={styles.Cards}>
-                <Image src="/caderno.png" alt="Estojo" width={170} height={165} />
+                <Image src="/sapato4.png" alt="Estojo" width={170} height={165} />
                 <div className={styles.linha}></div>
                 <h3 className={styles.h3}>Caderno</h3>
-                <button className={styles.button}>Resgatado</button>
+                <button className={styles.button}>Saber Mais</button>
             </div>
         </div>
         <div className={styles.CardsItens}>
@@ -66,28 +66,28 @@ export default function Resgatados() {
                <Image src="/chinelo2.png" alt="Estojo" width={170} height={165} />
                 <div className={styles.linha}></div>
                 <h3 className={styles.h3}>Bolsa</h3>
-                <button className={styles.button}>Resgatado</button>
+                <button className={styles.button}>Saber Mais</button>
             </div>
 
             <div className={styles.Cards}>
-                <Image src="/estojo.png" alt="Estojo" width={170} height={165} />
+                <Image src="/timao6.png" alt="Estojo" width={170} height={165} />
                 <div className={styles.linha}></div>
                 <h3 className={styles.h3}>Caderno</h3>
-                <button className={styles.button}>Resgatado</button>
+                <button className={styles.button}>Saber Mais</button>
             </div>
 
             <div className={styles.Cards}>
                <Image src="/timao7.png" alt="Estojo" width={170} height={165} />
                 <div className={styles.linha}></div>
                 <h3 className={styles.h3}>Bolsa</h3>
-                <button className={styles.button}>Resgatado</button>
+                <button className={styles.button}>Saber Mais</button>
             </div>
 
             <div className={styles.Cards}>
-              <Image src="/bolsa.png" alt="Estojo" width={170} height={165} />
+              <Image src="/chinelo.png" alt="Estojo" width={170} height={165} />
                 <div className={styles.linha}></div>
                 <h3 className={styles.h3}>Estojo</h3>
-                <button className={styles.button}>Resgatado</button>
+                <button className={styles.button}>Saber Mais</button>
             </div>
         </div>
     </main>
