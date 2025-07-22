@@ -1,0 +1,198 @@
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.form {
+    position: relative; 
+    background-color: #fff;
+    padding: 3rem;
+    width: 650px;
+    height: 625px;
+    margin: 0;
+    border-radius: 0.9rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.verde {
+    margin-bottom: 5rem;
+    margin-top: -3rem;
+    background-color: #0E6567;
+    width: 650px;
+    height: 65px;
+    margin-left: -3rem;
+    border-radius: 0.9rem 0.9rem 0 0;
+}
+
+.button {
+    border-radius: 16px;
+    border: 2px solid white;
+    padding: 10px 20px;
+    background-color: #0E6567;
+    color: white;
+    cursor: pointer;
+    width: 15rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    display: block;
+    margin: 1rem auto 0;
+    height: 40px;
+    font-family: "Arial";
+    font-weight: bold;
+}
+
+.button:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    background-color: white;
+    border: 2px solid #0E6567;
+    color: #0E6567;
+}
+
+.junto {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+
+.h2 {
+    font-family: "Arial";
+    font-weight: bold;
+    margin-left: 1rem;
+}
+
+.ImgMaior {
+    margin-left: 7.5rem;
+    margin-top: -4.5rem;
+}
+
+.backArrow {
+    position: absolute;
+    top: 1.4rem;
+    left: 1rem;
+    cursor: pointer;
+    color: #ffffff;
+    z-index: 10;
+}
+
+.backArrow svg {
+    width: 24px;
+    height: 24px;
+}
+
+
+.formGroup  {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #3a7c7b;
+    margin: 20px 0;
+     color: #0E6567;
+    padding: 5px;
+     margin-bottom: 3.5rem;
+}
+
+.formGroup  input {
+    border: none;
+    outline: none;
+    color: #000000;
+    font-size: 1rem;
+    flex: 1;
+    transition: transform 0.2s ease;
+}
+
+.formGroup  input:focus {
+    transform: scale(1.05);
+    outline: none;
+    background-color: #ffffff;
+}
+
+.formGroup  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px ;  
+
+}
+
+
+.formGroup .icon2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 3px ;  
+}
+
+
+.formGroup2  {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #3a7c7b;
+    margin: 20px 0;
+    color: #0E6567;
+    padding: 5px;
+    margin-bottom: 4rem;
+}
+
+
+.formGroup2  input {
+    border: none;
+    outline: none;
+    color: #000000;
+    font-size: 1rem;
+    flex: 1;
+    transition: transform 0.2s ease;
+}
+
+.formGroup2  input:focus {
+    transform: scale(1.05);
+    outline: none;
+    background-color: #ffffff;
+}
+
+.icon > svg {
+    color: #0E6567;
+    width: 40px;  
+    height: 40px;
+    
+}
+
+
+.input::placeholder {
+    font-size: 2rem;
+    font-family: "Roboto";
+    
+   
+}
+
+.formGroup2  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px ;  
+
+}
+
+
+.formGroup2 .icon2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 3px ;  
+}
+
+.icon2 > svg {
+    color: #0E6567;
+    width: 40px;  
+    height: 40px;
+}
+
+.span {
+  color: #0E6567;
+  font-size: 0.875rem;
+  text-align: center;
+  margin-left: 155px;
+  margin-top: -2rem;
+}
