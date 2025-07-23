@@ -1,0 +1,97 @@
+/* Wrapper simulando o body */
+.pageWrapper {
+  height: 10px;
+  background-color: #ffffff;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main{
+    font-family: "Poppins";
+}
+
+/* TOPO VERDE */
+.topoFeedback {
+  width: 1357px;
+  background-color: #3a7c7b;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  
+}
+
+.logoFeedback {
+object-fit: contain;
+ margin-left: -70rem;
+}
+
+ .voltar {
+    font-size: 25px;
+    color: #ffffff;
+    cursor: pointer;
+    margin-right: 3rem;
+    margin-top: 0.5rem;
+  }
+
+  .voltar svg{
+    width: 30px;
+    height: 30px;
+  }
+
+  .a{
+    text-decoration: none;
+  }
+
+/* TÍTULO */
+.tituloContainer {
+  text-align: center;
+  margin-top: -0rem;
+}
+
+.titulo {
+  display: inline-block;
+  padding: 10px 43px;
+  background-color: #ffffff;
+  color: #0E6567;
+  font-family: Poppins, sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  border-radius: 0 0 15px 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  margin-bottom: 5rem;
+}
+
+.Branco{
+  display: flex;
+  background-color: #ffffff;
+  border-radius: 27px ;
+  width: 900px;
+  padding: 15px;
+  box-shadow: 0 4px 4px 4px  rgba(0, 0, 0, 0.3);
+  margin-bottom: 4.5rem;
+  cursor: pointer;
+}
+
+.Branco svg {
+  width: 42px ;
+  height: 42px ;
+}
+
+.Branco h2{
+  color: #0E6567;
+  font-size: 2rem;
+  margin-left: 2rem;
+  font-family: "Arial";
+  font-weight: bold;
+  margin-top: 0.3rem;
+}
+
+.ImgMenor {
+    width: 550px;
+    height: 430px;
+    
+}
