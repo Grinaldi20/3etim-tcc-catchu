@@ -1,7 +1,20 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
 export default function Calçados() {
+ const [modalAberto, setModalAberto] = useState(false);
+
+  function abrirModal() {
+    setModalAberto(true);
+  }
+
+  function fecharModal() {
+    setModalAberto(false);
+  }
+
     return (
    <div>
     <header className={styles.header}>

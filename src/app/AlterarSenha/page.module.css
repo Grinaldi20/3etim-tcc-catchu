@@ -18,7 +18,7 @@
 }
 
 .verde {
-    margin-bottom: 5rem;
+    margin-bottom: 7rem;
     margin-top: -3rem;
     background-color: #0E6567;
     width: 650px;
@@ -34,12 +34,12 @@
     background-color: #0E6567;
     color: white;
     cursor: pointer;
-    width: 15rem;
+    width: 20rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
     display: block;
     margin: 1rem auto 0;
-    height: 40px;
+    height: 55px;
     font-family: "Arial";
     font-weight: bold;
 }
