@@ -19,7 +19,10 @@ export default function Cadastro() {
 
          <h2 className={styles.subtitulo} >Bem-vindo de volta</h2>
          <h3 className={styles.texto} >Acesse sua conta agora</h3>
+          <Link href="http://localhost:3000/login">
+      
         <button className={styles.button2}>Entrar</button>
+          </Link>
         <Image className={styles.ImgMenor} 
         src="/logo2.png"  
          width={500}
@@ -73,9 +76,9 @@ export default function Cadastro() {
                 <input  type="password" className={styles.linhaInput} placeholder="Confirmar Senha"/>
               </div>
     
-     <Link href="http://localhost:3000/login">
-      <span className={styles.span} >Já possui uma conta?</span>
-           </Link>
+     
+      
+         
             <button className={styles.button} >
               Cadastrar
             </button>
