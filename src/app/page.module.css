@@ -131,3 +131,17 @@
   opacity: 1;
   background-color: #0E6567; 
 }
+
+@media (min-width: 1200px) {
+  .Cards {
+  display: flex;
+  justify-content: center;
+  gap: 15rem;
+  padding: 3rem;
+  flex-wrap: wrap;
+}
+.Icons {
+  margin-right: 3rem;
+}
+}
+
