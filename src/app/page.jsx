@@ -5,6 +5,7 @@ import Image from 'next/image';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import styles from './page.module.css';
+import Link from "next/link";
 
 export default function TelaPrincipal() {
   return (
@@ -68,15 +69,16 @@ export default function TelaPrincipal() {
             <div className={styles.PoliticaRetirada}>
               <p>Política de Retirada</p>
               <Image className={styles.imagem} src="/retirada.png" alt="Pertences" width={200} height={150} quality={100} />
+   
             </div>
           </a>
 
-          <a href="Categorias.html">
+<Link href="http://localhost:3000/Categorias">      
             <div className={styles.Pertences}>
               <p>Pertences</p>
               <Image className={styles.imagem} src="/pertences.png" alt="Pertences" width={200} height={150} quality={100} />
-            </div>
-          </a>
+            </div>   
+       </Link>
 
           <a href="ACHOU ALGO/achoualgo.html">
             <div className={styles.AchouAlgo}>
