@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem;
+  max-width: 100%;
   width: 100%;
   height: 100px;
   background-color: #4B8C8D;
@@ -131,17 +132,3 @@
   opacity: 1;
   background-color: #0E6567; 
 }
-
-@media (min-width: 1200px) {
-  .Cards {
-  display: flex;
-  justify-content: center;
-  gap: 15rem;
-  padding: 3rem;
-  flex-wrap: wrap;
-}
-.Icons {
-  margin-right: 3rem;
-}
-}
-
