@@ -10,7 +10,7 @@
 
 /* TOPO VERDE */
 .topoFeedback {
-  width: 1357px;
+  width: 100%;
   background-color: #3a7c7b;
   height: 100px;
   display: flex;
@@ -23,6 +23,8 @@
 .logoFeedback {
 object-fit: contain;
  margin-left: -70rem;
+ width: 500px;
+ height: 500px;
 }
 
  .voltar {
@@ -37,6 +39,13 @@ object-fit: contain;
     width: 30px;
     height: 30px;
   }
+
+
+  .img{
+    width: 300px;
+   height: 350px;
+  }
+
 
   .a{
     text-decoration: none;

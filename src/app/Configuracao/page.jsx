@@ -21,9 +21,11 @@ export default function Configuracao() {
             quality={100}
           />
         </Link>
-
+   <Link href="http://localhost:3000">      
+        
+         
         <div className={styles.backArrow}>
-            <Link href="/TelaP">
+         
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="25"
@@ -38,8 +40,9 @@ export default function Configuracao() {
               d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"
             />
           </svg>
-           </Link>
+      
         </div>
+        </Link>
       </header>
 
       <h1 className={styles.h1}>Configuração</h1>
@@ -49,6 +52,9 @@ export default function Configuracao() {
         <div className={styles.container}>
          
             <div className={styles.grid}>
+                 <Link href="http://localhost:3000/Ajuda">      
+        
+        
               <div className={styles.option}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -65,6 +71,7 @@ export default function Configuracao() {
                   <p>Falar com desenvolvedores.</p>
                 </div>
               </div>
+              </Link>
 
               <div className={styles.option}>
                 <svg

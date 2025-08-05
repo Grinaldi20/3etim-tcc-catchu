@@ -20,9 +20,9 @@ export default function Feedback() {
           <Image
             src="/logo1.png"
             alt="Logo Catch"
-            width={3500}
-            height={220}
-            className={styles.logoFeedback}
+            width={100}
+            height={100}
+            className={styles.img}
           />
           <div  className={styles.voltar}>
           <a href="/Configuracao" >
