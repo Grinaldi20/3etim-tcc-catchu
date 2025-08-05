@@ -65,38 +65,51 @@ export default function Categorias() {
                 </div>
                 </Link>
            
+           
+          <Link href="http://localhost:3000/Roupas">      
+           
+            
 
-            <a href="Roupas.html">
+         
                 <div className={styles.Roupas}>
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff"><path d="m240-522-40 22q-14 8-30 4t-24-18L66-654q-8-14-4-30t18-24l230-132h70q9 0 14.5 5.5T400-820v20q0 33 23.5 56.5T480-720q33 0 56.5-23.5T560-800v-20q0-9 5.5-14.5T580-840h70l230 132q14 8 18 24t-4 30l-80 140q-8 14-23.5 17.5T760-501l-40-20v361q0 17-11.5 28.5T680-120H280q-17 0-28.5-11.5T240-160v-362Z"/></svg>
                     <h2 className={styles.h2}>Roupas</h2>
                 </div>
-            </a>
+         </Link>
 
-            <a href="Sapatos.html">
+         
+          <Link href="http://localhost:3000/Calcados">      
+           
+            
                 <div className={styles.Sapatos}>
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff"><path d="M216-580H88q4-14 10.5-26.5T114-631l154-206q17-23 45.5-30.5T368-861l28 14q21 11 32.5 30t11.5 42v84l74-19q30-8 58 7.5t38 44.5l65 196 170 170q20 20 27.5 43t7.5 49q0 37-20 66t-52 43L354-525q-29-27-64-41t-74-14ZM566-80q-30 0-57-11t-50-31L134-417q-19-17-31-38.5T86-500h130q23 0 44.5 8t38.5 25L703-80H566Z"/></svg>
                      <h2 className={styles.h2}>Calçados</h2>
                 </div>
-            </a>
+          </Link>
 
-            <a href="ObjetosGerais.html">
+          
+          <Link href="http://localhost:3000/ObjetosGerais">      
+           
+       
                 <div className={styles.ObjetosGerais}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-fill" viewBox="0 0 16 16">
                         <path fillRule="evenodd" d="M15.528 2.973a.75.75 0 0 1 .472.696v8.662a.75.75 0 0 1-.472.696l-7.25 2.9a.75.75 0 0 1-.557 0l-7.25-2.9A.75.75 0 0 1 0 12.331V3.669a.75.75 0 0 1 .471-.696L7.443.184l.004-.001.274-.11a.75.75 0 0 1 .558 0l.274.11.004.001zm-1.374.527L8 5.962 1.846 3.5 1 3.839v.4l6.5 2.6v7.922l.5.2.5-.2V6.84l6.5-2.6v-.4l-.846-.339Z"/>
                     </svg>
                     <h2 className={styles.h2}>Objetos Gerais</h2>
                 </div>
-            </a>
+         </Link>
 
-            <a href="Resgatados.html">
+           
+          <Link href="http://localhost:3000/Resgatados">      
+           
+   
                 <div className={styles.Resgatados}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
                         <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0"/>
                     </svg>
                     <h2 className={styles.h2}>Resgatados</h2>
                 </div>
-             </a>
+           </Link>
 </div>
 </div>
         <div className={styles.CardsItens}>
