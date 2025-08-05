@@ -19,10 +19,10 @@ export default function Cadastro() {
 
          <h2 className={styles.subtitulo} >Bem-vindo de volta</h2>
          <h3 className={styles.texto} >Acesse sua conta agora</h3>
-          <Link href="http://localhost:3000/login">
+            <a href="/Carrinho">
       
         <button className={styles.button2}>Entrar</button>
-          </Link>
+         </a>
         <Image className={styles.ImgMenor} 
         src="/logo2.png"  
          width={500}
