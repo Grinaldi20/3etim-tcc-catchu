@@ -121,7 +121,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
   transition: all 0.3s ease;
   font-family: "Arial";
-  font-weight: bold;
+  font-size: 18px;
 }
 
 .button:hover {

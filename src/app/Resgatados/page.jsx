@@ -36,21 +36,21 @@ export default function Resgatados() {
             <div className={styles.Cards}>
                  <Image src="/sapato.png" alt="Estojo" width={170} height={165} />
                 <div className={styles.linha}></div>
-                <h3 className={styles.h3}>Estojo</h3>
+                <h3 className={styles.h3}>Sapatos</h3>
                 <button className={styles.button}>Resgatado</button>
             </div>
 
             <div className={styles.Cards}>
                <Image src="/camisa.png" alt="Estojo" width={170} height={165} />
                 <div className={styles.linha}></div>
-                <h3 className={styles.h3}>Caderno</h3>
+                <h3 className={styles.h3}>Camisa roxa</h3>
                 <button className={styles.button}>Resgatado</button>
             </div>
 
             <div className={styles.Cards}>
                <Image src="/sapato3.png" alt="Estojo" width={170} height={165} />
                 <div className={styles.linha}></div>
-                <h3 className={styles.h3}>Regua</h3>
+                <h3 className={styles.h3}>Sandalha</h3>
                 <button className={styles.button}>Resgatado</button>
             </div>
 
@@ -65,28 +65,28 @@ export default function Resgatados() {
             <div className={styles.Cards}>
                <Image src="/chinelo2.png" alt="Estojo" width={170} height={165} />
                 <div className={styles.linha}></div>
-                <h3 className={styles.h3}>Bolsa</h3>
+                <h3 className={styles.h3}>Chinelo nike</h3>
                 <button className={styles.button}>Resgatado</button>
             </div>
 
             <div className={styles.Cards}>
                 <Image src="/estojo.png" alt="Estojo" width={170} height={165} />
                 <div className={styles.linha}></div>
-                <h3 className={styles.h3}>Caderno</h3>
+                <h3 className={styles.h3}>Estojo</h3>
                 <button className={styles.button}>Resgatado</button>
             </div>
 
             <div className={styles.Cards}>
                <Image src="/timao7.png" alt="Estojo" width={170} height={165} />
                 <div className={styles.linha}></div>
-                <h3 className={styles.h3}>Bolsa</h3>
+                <h3 className={styles.h3}>Meia</h3>
                 <button className={styles.button}>Resgatado</button>
             </div>
 
             <div className={styles.Cards}>
               <Image src="/bolsa.png" alt="Estojo" width={170} height={165} />
                 <div className={styles.linha}></div>
-                <h3 className={styles.h3}>Estojo</h3>
+                <h3 className={styles.h3}>Bolsa Vermelha</h3>
                 <button className={styles.button}>Resgatado</button>
             </div>
         </div>
