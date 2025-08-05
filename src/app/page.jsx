@@ -65,13 +65,15 @@ export default function TelaPrincipal() {
        
 
         <div className={styles.Cards}>
-          <a href="RETIRADA/retirada.html">
+        <Link href="http://localhost:3000/PoliticaRetirada">      
+           
+     
             <div className={styles.PoliticaRetirada}>
               <p>Política de Retirada</p>
               <Image className={styles.imagem} src="/retirada.png" alt="Pertences" width={200} height={150} quality={100} />
    
             </div>
-          </a>
+          </Link>
 
 <Link href="http://localhost:3000/Categorias">      
             <div className={styles.Pertences}>
@@ -80,12 +82,15 @@ export default function TelaPrincipal() {
             </div>   
        </Link>
 
-          <a href="ACHOU ALGO/achoualgo.html">
+       <Link href="http://localhost:3000/AchouAlgo">      
+           
+  
             <div className={styles.AchouAlgo}>
               <p>Achou Algo?</p>
               <Image className={styles.imagem} src="/algo.png" alt="Achou algo" width={200} height={150} quality={100} />
             </div>
-          </a>
+       </Link>
+
         </div>
       </main>
     </div>
