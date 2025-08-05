@@ -50,7 +50,7 @@ export default function Resgatados() {
             <div className={styles.Cards}>
                <Image src="/sapato3.png" alt="Estojo" width={170} height={165} />
                 <div className={styles.linha}></div>
-                <h3 className={styles.h3}>Regua</h3>
+                <h3 className={styles.h3}>Sandalha</h3>
                 <button className={styles.button}>Resgatado</button>
             </div>
 
