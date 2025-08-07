@@ -1,19 +1,10 @@
-/* Wrapper simulando o body */
-.pageWrapper {
-  height: 10px;
-  background-color: #ffffff;
-  font-family: "Poppins", sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 .main{
     font-family: "Poppins";
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgb(206, 206, 206);
+    background-color: rgb(238, 235, 235);
     height: 100%;
     width: 100%;
 }
@@ -24,6 +15,7 @@
   width: 900px;
   margin:200px;
   background-color: rgb(255, 255, 255);
+  box-shadow: 0 4px 4px 4px  rgba(117, 117, 117, 0.3);
   font-family: "Poppins", sans-serif;
   display: flex;
   flex-direction: column;
@@ -31,45 +23,6 @@
   border-radius: 30px;
 }
 
-/* TOPO VERDE */
-.topoFeedback {
-  width: 1357px;
-  background-color: #3a7c7b;
-  height: 100px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  
-}
-
-.logoFeedback {
-object-fit: contain;
- margin-left: -70rem;
-}
-
- .voltar {
-    font-size: 25px;
-    color: #ffffff;
-    cursor: pointer;
-    margin-right: 3rem;
-    margin-top: 0.5rem;
-  }
-
-  .voltar svg{
-    width: 30px;
-    height: 30px;
-  }
-
-  .a{
-    text-decoration: none;
-  }
-
-/* TÍTULO */
-.tituloContainer {
-  text-align: center;
-  margin-top: -0rem;
-}
 
 .titulo {
   display: inline-block;
@@ -81,39 +34,6 @@ object-fit: contain;
  
 }
 
-.container{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #adadad;
-  border-radius: 27px ;
-  width: 200px;
-  height: 200px;
-  box-shadow: 0 4px 4px 4px  rgba(0, 0, 0, 0.3);
-  cursor: pointer;
-  margin-top: 0%;
-  margin: 20px;
-}
-
-.Branco svg {
-  width: 42px ;
-  height: 42px ;
-}
-
-.Branco h2{
-  color: #0E6567;
-  font-size: 2rem;
-  margin-left: 2rem;
-  font-family: "Arial";
-  font-weight: bold;
-  margin-top: 0.3rem;
-}
-
-.ImgMenor {
-    width: 550px;
-    height: 430px;
-    
-}
 
 .icon{
   margin-top: 20px;
@@ -125,3 +45,78 @@ object-fit: contain;
   display: flex;
   
 }
+
+.containerfacebook{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #3b5998;
+  border-radius: 27px ;
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+  margin-top: 0%;
+  margin: 20px;
+}
+
+.containerinstagram{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: linear-gradient(to bottom, rgb(69, 14, 170), rgb(204, 20, 164), rgb(204, 94, 20), rgb(238, 181, 76));
+  border-radius: 27px ;
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+  margin-top: 0%;
+  margin: 20px;
+}
+.containertiktok{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+  box-shadow: 0 4px 4px 4px  rgba(117, 117, 117, 0.3);
+  border-radius: 27px ;
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+  margin-top: 0%;
+  margin: 20px;
+}
+
+.containerx{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #000000;
+  border-radius: 27px ;
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+  margin-top: 0%;
+  margin: 20px;
+}
+
+.iconredes{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin:20px;
+}
+
+.titulo2{
+  color:#ffffff;
+  font-size: large;
+  font-weight: bold;
+}
+
+.titulo3{
+  color:#000000;
+  font-size: large;
+  font-weight: bold;
+  
+}
+
+
+
