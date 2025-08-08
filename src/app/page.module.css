@@ -59,8 +59,8 @@
 
 .Cards {
   display: flex;
-  justify-content: center;
-  gap: 18rem;
+  justify-content: space-between;
+  /*gap: 18rem;*/
   padding: 6rem;
   flex-wrap: wrap;
 }
@@ -142,7 +142,7 @@
 }
 
 
-  @media (min-width: 1024px) and (max-width: 1269px)
+ /* @media (min-width: 1024px) and (max-width: 1269px)
    {
 
     .Pesquisa input {
@@ -198,4 +198,4 @@
   object-fit: cover;
 }
     
-  }
+  }*/
