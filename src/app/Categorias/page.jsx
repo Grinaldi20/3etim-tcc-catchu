@@ -86,7 +86,7 @@ export default function Categorias() {
          </a>
 
          
-          <a href="/Roupas">    
+          <a href="/Calcados">    
            
             
                 <div className={styles.Sapatos}>
