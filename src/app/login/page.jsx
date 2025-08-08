@@ -49,13 +49,15 @@ export default function Cadastro() {
                     </div>
               <input  type="password" className={styles.linhaInput} placeholder="Senha"/>
             </div>
-       <Link href="http://localhost:3000/Cadastro">
+       <a href="/Cadastro">
   <span className={styles.span} >Não possui uma conta?</span>
-       </Link>
+       </a>
+       <Link href="http://localhost:3000"> 
             <button className={styles.button} >
               Entrar
             </button>
-    
+      </Link>
+
             </form>
           </main>
     );

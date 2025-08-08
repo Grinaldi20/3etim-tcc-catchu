@@ -32,19 +32,19 @@ export default function Categorias() {
 
           <div className={styles.Icons}>
                       
-       <Link href="http://localhost:3000/Carrinho">      
+       <a href="/Carrinho">      
 
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi bi-archive-fill" viewBox="0 0 16 16">
                 <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1M.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8z" />
               </svg>
-            </Link>
+        </a>    
 
                      
-       <Link href="http://localhost:3000/Configuracao">     
+       <a href="/Configuracao">   
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
   <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
 </svg>
-            </Link>
+           </a> 
           </div>
         </header>
 
@@ -54,7 +54,7 @@ export default function Categorias() {
 
        <div className={styles.CardsCarrocel}>
 
-          <Link href="http://localhost:3000/MaterialEscolar">      
+          <a href="/MaterialEscolar">    
            
                 <div className={styles.MaterialEscolar}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-backpack-fill" viewBox="0 0 16 16">
@@ -63,10 +63,10 @@ export default function Categorias() {
                     </svg>
                     <h2 className={styles.h2}>Material Escolar</h2>
                 </div>
-                </Link>
+                </a>
            
            
-          <Link href="http://localhost:3000/Roupas">      
+          <a href="/Roupas">    
            
             
 
@@ -75,20 +75,20 @@ export default function Categorias() {
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff"><path d="m240-522-40 22q-14 8-30 4t-24-18L66-654q-8-14-4-30t18-24l230-132h70q9 0 14.5 5.5T400-820v20q0 33 23.5 56.5T480-720q33 0 56.5-23.5T560-800v-20q0-9 5.5-14.5T580-840h70l230 132q14 8 18 24t-4 30l-80 140q-8 14-23.5 17.5T760-501l-40-20v361q0 17-11.5 28.5T680-120H280q-17 0-28.5-11.5T240-160v-362Z"/></svg>
                     <h2 className={styles.h2}>Roupas</h2>
                 </div>
-         </Link>
+         </a>
 
          
-          <Link href="http://localhost:3000/Calcados">      
+          <a href="/Roupas">    
            
             
                 <div className={styles.Sapatos}>
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fff"><path d="M216-580H88q4-14 10.5-26.5T114-631l154-206q17-23 45.5-30.5T368-861l28 14q21 11 32.5 30t11.5 42v84l74-19q30-8 58 7.5t38 44.5l65 196 170 170q20 20 27.5 43t7.5 49q0 37-20 66t-52 43L354-525q-29-27-64-41t-74-14ZM566-80q-30 0-57-11t-50-31L134-417q-19-17-31-38.5T86-500h130q23 0 44.5 8t38.5 25L703-80H566Z"/></svg>
                      <h2 className={styles.h2}>Calçados</h2>
                 </div>
-          </Link>
+          </a>
 
           
-          <Link href="http://localhost:3000/ObjetosGerais">      
+        <a href="/ObjetosGerais">    
            
        
                 <div className={styles.ObjetosGerais}>
@@ -97,10 +97,10 @@ export default function Categorias() {
                     </svg>
                     <h2 className={styles.h2}>Objetos Gerais</h2>
                 </div>
-         </Link>
+         </a>
 
            
-          <Link href="http://localhost:3000/Resgatados">      
+          <a href="/Resgatados">    
            
    
                 <div className={styles.Resgatados}>
@@ -109,7 +109,7 @@ export default function Categorias() {
                     </svg>
                     <h2 className={styles.h2}>Resgatados</h2>
                 </div>
-           </Link>
+           </a>
 </div>
 </div>
         <div className={styles.CardsItens}>

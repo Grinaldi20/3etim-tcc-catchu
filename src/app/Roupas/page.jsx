@@ -5,7 +5,7 @@ export default function Roupas() {
     return (
    <div>
     <header className={styles.header}>
-        <Link href="/TelaP">
+        <Link href="http://localhost:3000">  
                    <Image className={styles.img} src="/logo1.png" alt="Logo" width={420} height={235} quality={100} />
                  </Link>
 
