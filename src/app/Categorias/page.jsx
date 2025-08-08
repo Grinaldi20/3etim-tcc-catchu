@@ -150,35 +150,7 @@ export default function Categorias() {
           </div>
         </div>
 
-        <div className={styles.CardsItens}>
-          <div className={styles.Cards}>
-            <Image src="/sapato.png" alt="Sapato" width={170} height={165} />
-             <div className={styles.linha}></div>
-            <h3 className={styles.h3}>Sapato</h3>
-            <button className={styles.button} onClick={abrirModal}>Saber Mais</button>
-          </div>
-
-          <div className={styles.Cards}>
-            <Image src="/camisa2.png" alt="Uniforme" width={170} height={165} />
-             <div className={styles.linha}></div>
-            <h3 className={styles.h3}>Uniforme</h3>
-            <button className={styles.button} onClick={abrirModal}>Saber Mais</button>
-          </div>
-
-          <div className={styles.Cards}>
-            <Image src="/estojo2.png" alt="Estojo" width={170} height={165} />
-             <div className={styles.linha}></div>
-            <h3 className={styles.h3}>Estojo</h3>
-            <button className={styles.button}  onClick={abrirModal}>Saber Mais</button>
-          </div>
-
-          <div className={styles.Cards}>
-            <Image src="/sapato.png" alt="Sapato preto" width={170} height={165} />
-             <div className={styles.linha}></div>
-            <h3   className={styles.h3}>Sapato preto</h3>
-            <button className={styles.button} onClick={abrirModal}>Saber Mais</button>
-          </div>
-        </div>
+      
 
         {modalAberto && (
           <div className={styles.modal}>
