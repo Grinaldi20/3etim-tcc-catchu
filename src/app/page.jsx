@@ -11,7 +11,7 @@ export default function TelaPrincipal() {
   return (
     <div>
       <header className={styles.header}>
-        <Image className={styles.img} src="/logo1.png" alt="Logo" width={420} height={235} quality={100} />
+        <Image className={styles.img} src="/logo1.png" alt="Logo" width={100} height={100}  />
 
         <div className={styles.Pesquisa}>
           <input type="text" placeholder="Pesquisa" />
