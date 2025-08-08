@@ -9,6 +9,57 @@
     width: 100%;
 }
 
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 4rem; /* removi margem negativa, usei padding horizontal */
+  width: 100%;
+  height: 100px;
+  background-color: #4B8C8D;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  gap: 20rem; /* espaçamento entre os elementos */
+}
+
+
+
+/* Centraliza a pesquisa entre os elementos */
+.Pesquisa {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.Pesquisa input {
+  height: 3.7rem;
+  width: 100%;
+  max-width: 90rem;
+  border-radius: 5rem;
+  border: none;
+  background-color: #0E6567;
+  font-size: 1.5rem;
+  color: white;
+  padding: 1.5rem 2rem;
+}
+
+.Pesquisa input::placeholder {
+  color: white;
+}
+
+.Icons {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.Icons :global(svg) {
+  height: 3.5rem;
+  width: 3.5rem;
+  color: #ffffff;
+  cursor: pointer;
+}
+
 /*topo redes sociais*/
 .redes{
   height: 600px;
@@ -21,6 +72,7 @@
   flex-direction: column;
   align-items: center;
   border-radius: 30px;
+  margin-top: 7rem;
 }
 
 
@@ -56,8 +108,14 @@
   height: 200px;
   cursor: pointer;
   margin-top: 0%;
+   transition: transform 0.3s;
   margin: 20px;
 }
+
+.containerfacebook :hover{
+  transform: scale(1.05);
+}
+
 
 .containerinstagram{
   display: flex;
@@ -70,7 +128,14 @@
   cursor: pointer;
   margin-top: 0%;
   margin: 20px;
+   transition: transform 0.3s;
 }
+
+.containerinstagram :hover{
+  transform: scale(1.05);
+}
+
+
 .containertiktok{
   display: flex;
   flex-direction: column;
@@ -83,7 +148,13 @@
   cursor: pointer;
   margin-top: 0%;
   margin: 20px;
+   transition: transform 0.3s;
 }
+
+.containertiktok :hover{
+  transform: scale(1.05);
+}
+
 
 .containerx{
   display: flex;
@@ -96,7 +167,15 @@
   cursor: pointer;
   margin-top: 0%;
   margin: 20px;
+   transition: transform 0.3s;
 }
+
+.containerx :hover{
+  transform: scale(1.05);
+}
+
+
+
 
 .iconredes{
   display: flex;
