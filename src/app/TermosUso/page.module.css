@@ -11,7 +11,7 @@
 /* TOPO VERDE */
 .topoFeedback {
   width: 100%;
-  background-color: #3a7c7b;
+  background-color: #4B8C8D;
   height: 100px;
   display: flex;
   justify-content: space-between;
@@ -20,10 +20,6 @@
   
 }
 
-.logoFeedback {
-object-fit: contain;
- margin-left: -70rem;
-}
 
  .voltar {
     font-size: 25px;

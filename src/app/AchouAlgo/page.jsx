@@ -48,13 +48,12 @@ export default function AchouAlgo() {
       />
 
       <div className={styles.logo}>
-        <Image src="/logo1.png"
-          alt="Logo CatchU"
-            width={500}
-            height={300}
-            quality={100}
-      
-        />
+        <Image
+            src="/logo1.png"
+            alt="Logo"
+            width={120}
+            height={120}
+          />
 
         </div>
     </div>

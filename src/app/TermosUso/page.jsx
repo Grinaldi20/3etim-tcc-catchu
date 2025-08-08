@@ -18,11 +18,11 @@ export default function TermosUso() {
       <div className={styles.pageWrapper}>
         <header className={styles.topoFeedback}>
           <Image
-            src="/logo1.png"
-            alt="Logo Catch"
-            width={3500}
-            height={220}
             className={styles.logoFeedback}
+            src="/logo1.png"
+            alt="Logo"
+            width={100}
+            height={100}
           />
           <div  className={styles.voltar}>
           <a href="/Configuracao" >

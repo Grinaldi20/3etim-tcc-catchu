@@ -6,7 +6,14 @@ export default function MaterialEscolar() {
    <div>
     <header className={styles.header}>
         <Link href="http://localhost:3000">  
-                   <Image className={styles.img} src="/logo1.png" alt="Logo" width={420} height={235} quality={100} />
+                   <Image
+            className={styles.img}
+            src="/logo1.png"
+            alt="Logo"
+            width={100}
+            height={100}
+
+          />
                  </Link>
 
         <div className={styles.Pesquisa}>

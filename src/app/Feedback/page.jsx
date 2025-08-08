@@ -18,19 +18,19 @@ export default function Feedback() {
       <div className={styles.pageWrapper}>
         <header className={styles.topoFeedback}>
           <Image
+            className={styles.ImgMaior}
             src="/logo1.png"
-            alt="Logo Catch"
+            alt="Logo"
             width={100}
             height={100}
-            className={styles.img}
           />
-          <div  className={styles.voltar}>
-          <a href="/Configuracao" >
-       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  viewBox="0 0 16 16">
-  <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
-</svg>
-      </a>
-      </div>
+          <div className={styles.voltar}>
+            <a href="/Configuracao" >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path fillRule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
+              </svg>
+            </a>
+          </div>
         </header>
 
         <div className={styles.tituloContainer}>

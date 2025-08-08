@@ -1,99 +1,90 @@
+.a {
+  text-decoration: none;
+}
 
+.main {
+  background-color: #F5F5F5;
+  padding: 40px;
+  margin: 0;
+  padding: 0;
+  height: 95vh;
+  display: flex;
+  justify-content: center;
+  /* alinha horizontalmente */
+  align-items: center;
+}
 
-  .a{
-    text-decoration: none;
-  }
+.container {
+  width: 1000px;
+  height: 610px;
+  margin: 0 auto;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: row;
+}
 
-  .main{
-    background-color: #F5F5F5;
-    padding: 40px;
-    margin: 0;
-    padding: 0;
-    height: 95vh;
-    display: flex;
-    justify-content: center; /* alinha horizontalmente */
-    align-items: center;    
-  }
+.cardText {
+  flex: 1;
+  background-color: #ffffff;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 
-  .container {
-    width: 1000px;
-    height:610px;
-    margin: 0 auto;
-    background-color: #f4f4f4;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: row;
-  }
+.voltar {
+  font-size: 20px;
+  color: #2a7c73;
+  cursor: pointer;
+}
 
-  .cardText {
-    flex: 1;
-    background-color: #ffffff;
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
+.voltar svg {
+  width: 30px;
+  height: 30px;
+}
 
-  .voltar {
-    font-size: 20px;
-    color: #2a7c73;
-    cursor: pointer;
-  }
-
-  .voltar svg{
-    width: 30px;
-    height: 30px;
-  }
-
-.titulo{
-    text-align: center;
-    color: #2a7c73;
-    font-size: 21px;
-    margin-top: -41px;
-    font-weight: bold;
-    font-family: "Arial";
-    margin-bottom: 40px;
+.titulo {
+  text-align: center;
+  color: #2a7c73;
+  font-size: 21px;
+  margin-top: -41px;
+  font-weight: bold;
+  font-family: "Arial";
+  margin-bottom: 40px;
 }
 
 
-  .p {
-    font-size: 22px;
-    color: #000000;
-    line-height: 1.5;
-    font-family:"Arial" ;
-  }
+.p {
+  font-size: 22px;
+  color: #000000;
+  line-height: 1.5;
+  font-family: "Arial";
+}
 
-  .cardImage {
-    flex: 1;
-    background-color: #2a7c73;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
+.cardImage {
+  flex: 1;
+  background-color: #4B8C8D;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
 
-  .cardImage img {
-    max-width: 100%;
-    border-radius: 10px;
-  }
+.cardImage img {
+  max-width: 80%;
+  border-radius: 10px;
+}
 
-  .logo {
-    border-radius: 8px;
-    font-weight: bold;
-    color: #2a7c73;
-    font-size: 18px;
-    margin-top: -70px;
-  }
+.achou {
+  margin-top: 105px;
+  width: 430px;
+  height: 600px;
+}
 
-  .achou{
-    margin-top: 105px;
-    width: 430px;
-    height: 600px;
-  }
-
-  .text{
-    margin-top: -10px;
-  }
+.text {
+  margin-top: -10px;
+}

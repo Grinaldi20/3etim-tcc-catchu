@@ -69,7 +69,7 @@
 
   .cardImage {
     flex: 1;
-    background-color: #2a7c73;
+  background-color: #4B8C8D;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -78,17 +78,11 @@
   }
 
   .cardImage img {
-    max-width: 100%;
+    max-width: 80%;
     border-radius: 10px;
   }
 
-  .logo {
-    border-radius: 8px;
-    font-weight: bold;
-    color: #2a7c73;
-    font-size: 18px;
-    margin-top: -70px;
-  }
+ 
 
   .achou{
     margin-top: 105px;

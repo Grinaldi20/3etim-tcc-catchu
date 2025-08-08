@@ -7,7 +7,7 @@
 }
 
 .form {
-    position: relative; 
+    position: relative;
     background-color: #fff;
     padding: 3rem;
     width: 650px;
@@ -20,11 +20,15 @@
 .verde {
     margin-bottom: 3.5rem;
     margin-top: -3rem;
-    background-color: #0E6567;
+    background-color: #4B8C8D;
     width: 650px;
     height: 65px;
     margin-left: -3rem;
     border-radius: 0.9rem 0.9rem 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
 
 .button {
@@ -76,8 +80,8 @@
 }
 
 .ImgMaior {
-    margin-left: 7.5rem;
-    margin-top: -4.5rem;
+    display: flex;
+    align-items: center;
 }
 
 .backArrow {
@@ -87,7 +91,7 @@
     cursor: pointer;
     color: #ffffff;
     z-index: 10;
-    
+
 }
 
 .backArrow svg {
