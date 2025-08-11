@@ -39,6 +39,15 @@
   font-size: 20px;
   color: #2a7c73;
   cursor: pointer;
+  position: relative;
+}
+.volta::before {
+  content: "";
+  position: absolute;
+  top: -1px;   /* aumenta área acima */
+  left: -1px;  /* aumenta área à esquerda */
+  right: -1px; /* aumenta área à direita */
+  bottom: -1px;/* aumenta área abaixo */
 }
 
 .voltar svg {
