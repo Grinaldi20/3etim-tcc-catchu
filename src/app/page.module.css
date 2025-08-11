@@ -98,10 +98,11 @@
 
 .imagem {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
   border-radius: 10px;
 }
+
 
 
 .carroselControlPrevIcon {
@@ -139,6 +140,7 @@
 }
 
 
+
   @media (max-width: 1170px)
    {
 
@@ -168,7 +170,8 @@
   margin-top: 1rem;
   object-fit: cover;
 }
-    
+
+   
   }
 
   @media (max-width: 1020px)
@@ -234,5 +237,10 @@
   margin-top: 1rem;
   object-fit: cover;
 }
+
+.imagem {
+    max-height: 250px; /* aumenta no mobile */
+    object-fit: cover;
+  }
     
   }
