@@ -88,35 +88,7 @@ export default function Calçados() {
                         <button className={styles.button}>Saber Mais</button>
                     </div>
                 </div>
-                <div className={styles.CardsItens}>
-                    <div className={styles.Cards}>
-                        <Image src="/chinelo2.png" alt="Estojo" width={170} height={165} />
-                        <div className={styles.linha}></div>
-                        <h3 className={styles.h3}>Chinelo Nike</h3>
-                        <button className={styles.button}>Saber Mais</button>
-                    </div>
-
-                    <div className={styles.Cards}>
-                        <Image src="/timao6.png" alt="Estojo" width={170} height={165} />
-                        <div className={styles.linha}></div>
-                        <h3 className={styles.h3}>Meia</h3>
-                        <button className={styles.button}>Saber Mais</button>
-                    </div>
-
-                    <div className={styles.Cards}>
-                        <Image src="/timao7.png" alt="Estojo" width={170} height={165} />
-                        <div className={styles.linha}></div>
-                        <h3 className={styles.h3}>Meia</h3>
-                        <button className={styles.button}>Saber Mais</button>
-                    </div>
-
-                    <div className={styles.Cards}>
-                        <Image src="/chinelo.png" alt="Estojo" width={170} height={165} />
-                        <div className={styles.linha}></div>
-                        <h3 className={styles.h3}>Havaianas</h3>
-                        <button className={styles.button}>Saber Mais</button>
-                    </div>
-                </div>
+               
             </main>
         </div>
     );

@@ -12,7 +12,6 @@
   justify-content: space-between;
   padding: 0.5rem;
   width: 100%;
-  height: 100px;
   background-color:#4B8C8D;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
@@ -50,6 +49,7 @@
 
 .centro{
     text-align: center;
+    margin-bottom: 8rem;
 }
 
 
@@ -78,7 +78,7 @@
     justify-content: space-around;
     align-items: center;
     text-align: center;
-    gap: 5.5rem;
+    gap: 3rem;
     padding: 3rem;
     flex-wrap: wrap;
     
@@ -87,9 +87,9 @@
 .CardsItens .Cards{
     background-color: #0E6567;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
-     background-image: linear-gradient(#0E6567 ,  #449d9e);
-      width: 28rem;
-    height: 28.5rem;
+    background-image: linear-gradient(#0E6567 ,  #449d9e);
+    width: 35rem;
+    height: 36rem;
     font-size: 2rem;
     font-weight: 300;
     font-family: Poppins;
@@ -100,25 +100,25 @@
 }
 
 .h3{
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     font-size: 20px;
 }
 
 .linha{
- width: 280px;
+ width: 350px;
   border-bottom: 3px solid #ffffff;
   margin-left: -15px;
   margin-bottom: 1rem;
 }
 
 .button {
-  border-radius: 12px;
+  border-radius: 16px;
   border: 2px solid white; 
   background-color: #0E6567; 
   color: white;
   cursor: pointer;
-  width: 15rem;
-  height: 3.5rem;
+  width: 20rem;
+  height: 5rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
   transition: all 0.3s ease;
   font-family: "Arial";
@@ -134,8 +134,33 @@
 
 
 .CardsItens .Cards img{
-    width: 17rem;
-    height: 16.5rem; 
+    width: 22rem;
+    height: 21rem; 
     border-radius: 20px;
     margin-bottom: 0.5rem;
+}
+
+.footer{
+ background-color:#4B8C8D;
+  color: white;
+  text-align: center;
+  padding: 50px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  left: 0;
+  
+}
+
+.fh1{
+  text-align: left;
+  font-size: 2.5rem;
+  font-family: "Poppins";
+}
+
+.fh2{
+   font-size: 1.5rem;
+  font-family: "Poppins";
+  margin: 20px;
 }

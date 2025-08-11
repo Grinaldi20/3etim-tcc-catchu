@@ -68,35 +68,17 @@ export default function MaterialEscolar() {
                 <button className={styles.button}>Saber Mais</button>
             </div>
         </div>
-        <div className={styles.CardsItens}>
-            <div className={styles.Cards}>
-               <Image src="/bolsa3.png" alt="Estojo" width={170} height={165} />
-                <div className={styles.linha}></div>
-                <h3 className={styles.h3}>Bolsa</h3>
-                <button className={styles.button}>Saber Mais</button>
-            </div>
 
-            <div className={styles.Cards}>
-                <Image src="/caderno2.png" alt="Estojo" width={170} height={165} />
-                <div className={styles.linha}></div>
-                <h3 className={styles.h3}>Caderno</h3>
-                <button className={styles.button}>Saber Mais</button>
-            </div>
+       <div className={styles.footer}>
+<h1 className={styles.fh1} >CONTATOS</h1>
+<h2 className={styles.fh2}>+55 149987423742</h2>
+<h2 className={styles.fh2}>catchu123@gmail.com</h2>
 
-            <div className={styles.Cards}>
-               <Image src="/bolsa2.png" alt="Estojo" width={170} height={165} />
-                <div className={styles.linha}></div>
-                <h3 className={styles.h3}>Bolsa</h3>
-                <button className={styles.button}>Saber Mais</button>
-            </div>
 
-            <div className={styles.Cards}>
-              <Image src="/estojo2.png" alt="Estojo" width={170} height={165} />
-                <div className={styles.linha}></div>
-                <h3 className={styles.h3}>Estojo</h3>
-                <button className={styles.button}>Saber Mais</button>
-            </div>
-        </div>
+
+
+
+       </div>
     </main>
     </div>
     );
