@@ -28,7 +28,7 @@
   font-size: 2rem;
   color: white;
   padding: 1.5rem;
-  margin-left: -120px;
+ 
 }
 
 .Pesquisa input::placeholder {
@@ -81,7 +81,7 @@
     gap: 3rem;
     padding: 3rem;
     flex-wrap: wrap;
-    
+   margin-bottom: 5rem;
 }
 
 .CardsItens .Cards{
@@ -96,11 +96,11 @@
     color: #ffff;
     padding: 15px;
     border-radius: 20px;
-  
+    margin-bottom: 5rem;
 }
 
 .h3{
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     font-size: 20px;
 }
 
@@ -134,33 +134,52 @@
 
 
 .CardsItens .Cards img{
-    width: 22rem;
-    height: 21rem; 
+    width: 24rem;
+    height: 23rem; 
     border-radius: 20px;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.2rem;
 }
 
 .footer{
- background-color:#4B8C8D;
+  background-color:#4B8C8D;
   color: white;
-  text-align: center;
-  padding: 50px;
+  padding: 10px;
   width: 100%;
   position: fixed;
   bottom: 0;
-  display: flex;
   left: 0;
-  
+  display: flex;
+  gap: 7%;
+}
+
+.contatos{
+  margin-left: 5rem;
 }
 
 .fh1{
-  text-align: left;
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-family: "Poppins";
+  margin-top: 1.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.linha2{
+  width: 8.5rem;
+  background-color: #fff;
+  padding: 0.1rem;
+  margin-bottom: 1.3rem;
+
 }
 
 .fh2{
-   font-size: 1.5rem;
+   font-size: 1.3rem;
   font-family: "Poppins";
-  margin: 20px;
+   margin-bottom: 1.8rem;
+
+}
+
+.icon svg{
+width: 22px;
+height: 22px;
+gap: 5%;
 }
