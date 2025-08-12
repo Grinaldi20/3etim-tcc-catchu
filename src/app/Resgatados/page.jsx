@@ -68,35 +68,7 @@ export default function Resgatados() {
                         <button className={styles.button}>Resgatado</button>
                     </div>
                 </div>
-                <div className={styles.CardsItens}>
-                    <div className={styles.Cards}>
-                        <Image src="/chinelo2.png" alt="Estojo" width={170} height={165} />
-                        <div className={styles.linha}></div>
-                        <h3 className={styles.h3}>Chinelo nike</h3>
-                        <button className={styles.button}>Resgatado</button>
-                    </div>
-
-                    <div className={styles.Cards}>
-                        <Image src="/estojo.png" alt="Estojo" width={170} height={165} />
-                        <div className={styles.linha}></div>
-                        <h3 className={styles.h3}>Estojo</h3>
-                        <button className={styles.button}>Resgatado</button>
-                    </div>
-
-                    <div className={styles.Cards}>
-                        <Image src="/timao7.png" alt="Estojo" width={170} height={165} />
-                        <div className={styles.linha}></div>
-                        <h3 className={styles.h3}>Meia</h3>
-                        <button className={styles.button}>Resgatado</button>
-                    </div>
-
-                    <div className={styles.Cards}>
-                        <Image src="/bolsa.png" alt="Estojo" width={170} height={165} />
-                        <div className={styles.linha}></div>
-                        <h3 className={styles.h3}>Bolsa Vermelha</h3>
-                        <button className={styles.button}>Resgatado</button>
-                    </div>
-                </div>
+             
             </main>
         </div>
     );
