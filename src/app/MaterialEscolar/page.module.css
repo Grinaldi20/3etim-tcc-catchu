@@ -149,7 +149,7 @@
   bottom: 0;
   left: 0;
   display: flex;
-  gap: 7%;
+  gap: 12%;
 }
 
 .contatos{
@@ -167,19 +167,52 @@
   width: 8.5rem;
   background-color: #fff;
   padding: 0.1rem;
-  margin-bottom: 1.3rem;
+  margin-bottom: 1.8rem;
 
 }
 
 .fh2{
-   font-size: 1.3rem;
+   font-size: 1.4rem;
   font-family: "Poppins";
    margin-bottom: 1.8rem;
 
 }
 
 .icon svg{
-width: 22px;
-height: 22px;
-gap: 5%;
+width: 25px;
+height: 25px;
+cursor: pointer;
+
 }
+
+.icon{
+gap: 15px;
+display: flex;
+}
+
+.email{
+  display: flex;
+  gap: 9px;
+ 
+}
+
+.email svg{
+  width: 22px;
+  height: 22px;
+  margin-top: -0.3rem;
+  margin-bottom: 1.8rem;
+  cursor: pointer;
+}
+
+.telefone{
+  display: flex;
+  gap: 9px;
+}
+
+.telefone svg{
+  width: 22px;
+  height: 22px;
+  margin-top: -0.3rem;
+  cursor: pointer;
+}
+
