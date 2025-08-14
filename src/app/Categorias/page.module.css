@@ -275,15 +275,15 @@
 
 
 .footer{
-
+ 
   color: white;
   width: 100%;
-  padding: 40px;
+ 
   position: relative;
   bottom: 0;
   left: 0;
-  display: flex;
   gap: 12%;
+  display: flex;
   box-shadow: 6px 6px 6px 12px rgba(0, 0, 0, 0.2); 
   margin-top: 10rem;
   background: linear-gradient( to bottom,  #4B8C8D 83%, #0E6567 17%);
@@ -291,6 +291,7 @@
 
 .contatos{
   margin-left: 5rem;
+  
 }
 
 .fh1{
@@ -375,6 +376,17 @@ display: flex;
 }
 
 .img2{
-   width: 450px;
+   width: 320px;
   height: 210px;
+    object-fit: contain;
+}
+
+.imagem{
+   display: flex;
+  justify-content: flex-end;
+}
+
+.gap{
+  gap: 160%;
+  display: flex;
 }
