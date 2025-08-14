@@ -44,14 +44,14 @@ export default function Configuracao() {
           </div>
         </Link>
       </header>
-    
+      <div className={styles.tituloContainer}>
+          <h1 className={styles.titulo}>Configuração</h1>
+        </div>
 
       <main className={styles.main}>
         <div className={styles.fundo}>
           <div className={styles.container}>
-              <div className={styles.titulo}>
-                <p>Configuração</p>
-              </div>
+            
             <div className={styles.grid}>
             
 
