@@ -309,6 +309,14 @@ export default function Categorias() {
 <h2>2025 CatchuEtec.com</h2>
 </div>
 
+     <Image 
+     className={styles.img2}
+     src="/logo5.png" 
+     alt="Bolsa preta" 
+     width={150} 
+     height={150} 
+     />
+
        </div>
      
     </main>

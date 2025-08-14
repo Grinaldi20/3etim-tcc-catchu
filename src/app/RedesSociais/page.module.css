@@ -4,9 +4,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgb(238, 235, 235);
+    background-color:#ffffff;
     height: 100%;
     width: 100%;
+    position: absolute;
 }
 
 
@@ -24,41 +25,6 @@
 
 
 
-/* Centraliza a pesquisa entre os elementos */
-.Pesquisa {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-}
-
-.Pesquisa input {
-  height: 3.7rem;
-  width: 100%;
-  max-width: 90rem;
-  border-radius: 5rem;
-  border: none;
-  background-color: #0E6567;
-  font-size: 1.5rem;
-  color: white;
-  padding: 1.5rem 2rem;
-}
-
-.Pesquisa input::placeholder {
-  color: white;
-}
-
-.Icons {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.Icons :global(svg) {
-  height: 3.5rem;
-  width: 3.5rem;
-  color: #ffffff;
-  cursor: pointer;
-}
 
 /*topo redes sociais*/
 .redes{
