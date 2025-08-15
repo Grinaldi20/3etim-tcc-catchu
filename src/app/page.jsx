@@ -62,7 +62,7 @@ export default function TelaPrincipal() {
             <span className="visually-hidden">Próximo</span>
           </button>
         </div>
-       
+
 
         <div className={styles.Cards}>
         <Link href="http://localhost:3000/PoliticaRetirada">      

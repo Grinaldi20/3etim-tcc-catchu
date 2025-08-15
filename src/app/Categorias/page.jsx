@@ -151,6 +151,7 @@ export default function Categorias() {
         </div>
 
 
+
       
 
         {modalAberto && (
@@ -273,7 +274,7 @@ export default function Categorias() {
 </div>
 
 
-
+<div className={styles.gap}>
 
 <div className={styles.RedesSociais}>
 <h1 className={styles.fh1}>Redes Socias</h1>
@@ -308,7 +309,17 @@ export default function Categorias() {
 
 <h2>2025 CatchuEtec.com</h2>
 </div>
+<div className={styles.imagem}>
+     <Image 
+     className={styles.img2}
+     src="/logo6.png" 
+     alt="Bolsa preta" 
+     width={450} 
+     height={450} 
+     />
+</div>
 
+</div>
        </div>
      
     </main>
