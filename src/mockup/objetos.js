@@ -1,9 +1,9 @@
-import celularSansung from '../../../public/objetos/celular1.png';
-import celularBranco from '../../../public/objetos/celularbranco.png';
-import relogioPulso from '../../../public/objetos/relogio1.png';
-import cadernoVermelho from '../../../public/objetos/caderno1.png';
+import celularSansung from '../../public/objetos/celular1.png';
+import celularBranco from '../../public/objetos/celularbranco.png';
+import relogioPulso from '../../public/objetos/relogio1.png';
+import cadernoVermelho from '../../public/objetos/caderno1.png';
 
-const produtos = [
+const objetos = [
 		{
 			"obj_id": 1,
 			"categ_id": 1,
@@ -50,4 +50,4 @@ const produtos = [
 		}
 ];
 
-export default Categorias;
+export default objetos;
