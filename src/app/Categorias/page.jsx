@@ -6,15 +6,38 @@ import Link from "next/link";
 import styles from "./page.module.css";
 
 export default function Categorias() {
-  const [modalAberto, setModalAberto] = useState(false);
+   const [modalItem, setModalItem] = useState(null);
 
-  function abrirModal() {
-    setModalAberto(true);
-  }
-
-  function fecharModal() {
-    setModalAberto(false);
-  }
+  const itens = [
+    {
+      titulo: "Bolsa Vermelha",
+      imagem: "/bolsa.png",
+      data: "09/08/2024",
+      local: "Refeitório",
+      classificacao: "Objetos gerais",
+    },
+    {
+      titulo: "Camisa",
+      imagem: "/Camisa.png",
+      data: "01/07/2025",
+      local: "Quadra",
+      classificacao: "Roupas",
+    },
+    {
+      titulo: "Chinelo",
+      imagem: "/chinelo.png",
+      data: "04/04/2024",
+      local: "Pátio",
+      classificacao: "Calçados",
+    },
+    {
+      titulo: "Estojo Azul",
+      imagem: "/estojo.png",
+      data: "20/10/2023",
+      local: "Sala 03",
+      classificacao: "Material Escolar",
+    },
+  ];
 
   return (
     <main className={styles.main}>
@@ -120,143 +143,32 @@ export default function Categorias() {
            </a>
 </div>
 </div>
-
-      <div className={styles.fundo}> 
-       
       
         <div className={styles.CardsItens}>
-          <div className={styles.Cards}>
-            <Image src="/bolsa.png" alt="Blusa Azul" width={170} height={165} />
-             <div className={styles.linha}></div>
-            <h3 className={styles.h3}>Bolsa Vermelha</h3>
-            <button className={styles.button} onClick={abrirModal}>Saber Mais</button>
-          </div>
-
-          <div className={styles.Cards}>
-            <Image src="/Camisa.png" alt="Camisa" width={170} height={165} />
-             <div className={styles.linha}></div>
-            <h3 className={styles.h3}>Camisa</h3>
-            <button className={styles.button} onClick={abrirModal}>Saber Mais</button>
-          </div>
-
-          <div className={styles.Cards}>
-            <Image src="/chinelo.png" alt="Chinelo" width={170} height={165} />
-             <div className={styles.linha}></div>
-            <h3 className={styles.h3}>Chinelo</h3>
-            <button className={styles.button} onClick={abrirModal}>Saber Mais</button>
-          </div>
-
-          <div className={styles.Cards}>
-            <Image src="/estojo.png" alt="Estojo" width={170} height={165} />
-             <div className={styles.linha}></div>
-            <h3 className={styles.h3}>Estojo</h3>
-            <button className={styles.button} onClick={abrirModal}>Saber Mais</button>
-          </div>
+          {itens.map((item, index) => (
+            <div key={index} className={styles.Cards}>
+              <Image src={item.imagem} alt={item.titulo} width={170} height={165} />
+              <div className={styles.linha}></div>
+              <h3 className={styles.h3}>{item.titulo}</h3>
+              <button className={styles.button} onClick={() => setModalItem(item)}>Saber Mais</button>
+            </div>
+          ))}
         </div>
 
-
-
-      
-
-        {modalAberto && (
+        {/* Modal */}
+        {modalItem && (
           <div className={styles.modal}>
             <div className={styles.modalContent}>
-              <span className={styles.fechar} onClick={fecharModal}>×</span>
-              <p className={styles.tituloSecao}>Bolsa Vermelha</p>
-              <Image src="/bolsa.png" alt="Bolsa Vermelha" width={250} height={250} />
-              <p><strong>Encontrada dia:</strong> 09/08/2024</p>
-              <p><strong>Local:</strong> Refeitório</p>
-              <p><strong>Classificação:</strong> Objetos gerais</p>
+              <span className={styles.fechar} onClick={() => setModalItem(null)}>×</span>
+              <p className={styles.tituloSecao}>{modalItem.titulo}</p>
+              <Image src={modalItem.imagem} alt={modalItem.titulo} width={250} height={250} />
+              <p><strong>Encontrada dia:</strong> {modalItem.data}</p>
+              <p><strong>Local:</strong> {modalItem.local}</p>
+              <p><strong>Classificação:</strong> {modalItem.classificacao}</p>
               <button>Reservar</button>
             </div>
           </div>
         )}
-
-         {modalAberto && (
-          <div className={styles.modal}>
-            <div className={styles.modalContent}>
-              <span className={styles.fechar} onClick={fecharModal}>×</span>
-              <p className={styles.tituloSecao}>Blusa Roxa</p>
-              <Image src="/Camisa.png" alt="Camisa" width={250} height={250} />
-              <p><strong>Encontrada dia:</strong> 01/07/2025</p>
-              <p><strong>Local:</strong> Quadra</p>
-              <p><strong>Classificação:</strong>Roupas</p>
-              <button>Reservar</button>
-            </div>
-          </div>
-        )}
-
-         {modalAberto && (
-          <div className={styles.modal}>
-            <div className={styles.modalContent}>
-              <span className={styles.fechar} onClick={fecharModal}>×</span>
-              <p className={styles.tituloSecao}>Blusa Azul</p>
-              <Image src="/chinelo.png" alt="Chinelo Azul" width={250} height={250} />
-              <p><strong>Encontrada dia:</strong> 04/04/2024</p>
-              <p><strong>Local:</strong> Patio</p>
-              <p><strong>Classificação:</strong>Calçados</p>
-              <button>Reservar</button>
-            </div>
-          </div>
-        )}
-
-         {modalAberto && (
-          <div className={styles.modal}>
-            <div className={styles.modalContent}>
-              <span className={styles.fechar} onClick={fecharModal}>×</span>
-              <p className={styles.tituloSecao}>Estojo Azul</p>
-              <Image src="/estojo.png" alt="Estojo Azul" width={250} height={250} />
-              <p><strong>Encontrada dia:</strong> 20/10/2023</p>
-              <p><strong>Local:</strong>Sala 03</p>
-              <p><strong>Classificação:</strong>Material Escolar</p>
-              <button>Reservar</button>
-            </div>
-          </div>
-        )}
-
-         {modalAberto && (
-          <div className={styles.modal}>
-            <div className={styles.modalContent}>
-              <span className={styles.fechar} onClick={fecharModal}>×</span>
-              <p className={styles.tituloSecao}>Blusa Azul</p>
-              <Image src="/bolsa.png" alt="Bolsa preta" width={250} height={250} />
-              <p><strong>Encontrada dia:</strong> 09/08/2024</p>
-              <p><strong>Local:</strong> Refeitório</p>
-              <p><strong>Classificação:</strong> Objetos gerais</p>
-              <button>Reservar</button>
-            </div>
-          </div>
-        )}
-
-         {modalAberto && (
-          <div className={styles.modal}>
-            <div className={styles.modalContent}>
-              <span className={styles.fechar} onClick={fecharModal}>×</span>
-              <p className={styles.tituloSecao}>Blusa Azul</p>
-              <Image src="/bolsa.png" alt="Bolsa preta" width={250} height={250} />
-              <p><strong>Encontrada dia:</strong> 09/08/2024</p>
-              <p><strong>Local:</strong> Refeitório</p>
-              <p><strong>Classificação:</strong> Objetos gerais</p>
-              <button>Reservar</button>
-            </div>
-          </div>
-        )}
-
-         {modalAberto && (
-          <div className={styles.modal}>
-            <div className={styles.modalContent}>
-              <span className={styles.fechar} onClick={fecharModal}>×</span>
-              <p className={styles.tituloSecao}>Blusa Azul</p>
-              <Image src="/bolsa.png" alt="Bolsa preta" width={250} height={250} />
-              <p><strong>Encontrada dia:</strong> 09/08/2024</p>
-              <p><strong>Local:</strong> Refeitório</p>
-              <p><strong>Classificação:</strong> Objetos gerais</p>
-              <button>Reservar</button>
-            </div>
-          </div>
-        )}
-</div>
-        
        <div className={styles.footer}>
         <div className={styles.contatos}> 
 <h1 className={styles.fh1} >CONTATOS</h1>
