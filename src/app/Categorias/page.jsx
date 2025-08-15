@@ -120,6 +120,10 @@ export default function Categorias() {
            </a>
 </div>
 </div>
+
+      <div className={styles.fundo}> 
+       
+      
         <div className={styles.CardsItens}>
           <div className={styles.Cards}>
             <Image src="/bolsa.png" alt="Blusa Azul" width={170} height={165} />
@@ -251,7 +255,7 @@ export default function Categorias() {
             </div>
           </div>
         )}
-
+</div>
         
        <div className={styles.footer}>
         <div className={styles.contatos}> 
