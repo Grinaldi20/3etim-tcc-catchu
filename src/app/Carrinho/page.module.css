@@ -6,7 +6,7 @@
     margin: 0;
     padding: 0;
     height: 100vh;
-    display: flex;
+    
     justify-content: center; /* alinha horizontalmente */
     align-items: center;     /* alinha verticalmente */
   }
@@ -49,7 +49,7 @@
     height: 30px;
   }
 
-  .h1{
+  .h1c{
     font-size: 30px;
     font-family: Arial, sans-serif;
   }
@@ -106,9 +106,120 @@
     background-color: #c8e6c9;
   }
 
-  .footer {
-    background-color: #0E6567;
-    border-bottom-right-radius: 12px;
-    border-bottom-left-radius: 12px;
-    height: 60px;
-  }
+  
+.footer{
+ 
+  color: white;
+  width: 100%;
+ 
+  position: relative;
+  bottom: 0;
+  left: 0;
+  gap: 12%;
+  display: flex;
+  box-shadow: 6px 6px 6px 12px rgba(0, 0, 0, 0.2); 
+  margin-top: 10rem;
+  background: linear-gradient( to bottom,  #4B8C8D 83%, #0E6567 17%);
+}
+
+.contatos{
+  margin-left: 5rem;
+  
+}
+
+.fh1{
+  font-size: 2.2rem;
+  font-family: "Poppins";
+  margin-top: 1.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.linha2{
+  width: 9rem;
+  background-color: #fff;
+  margin-bottom: 1.8rem;
+ padding: 0.1rem;
+}
+
+.fh2{
+   font-size: 1.5rem;
+  font-family: "Poppins";
+   margin-bottom: 1.8rem;
+   cursor: pointer;
+
+}
+
+.icon svg{
+width: 28px;
+height: 28px;
+cursor: pointer;
+
+}
+
+.icon{
+gap: 2.5rem;
+display: flex;
+}
+
+.email{
+  display: flex;
+  gap: 9px;
+ 
+}
+
+.email svg{
+  width: 28px;
+  height: 28px;
+  margin-top: -0.3rem;
+  margin-bottom: 1.8rem;
+  cursor: pointer;
+}
+
+.telefone{
+  display: flex;
+  gap: 9px;
+}
+
+.telefone svg{
+  width: 28px;
+  height: 28px;
+  margin-top: -0.3rem;
+  cursor: pointer;
+}
+
+.c{
+  display: flex;
+  gap: 6px;
+  position: absolute;
+  bottom: 10px; /* distância do final */
+ left: 50%; /* joga para o meio */
+  transform: translateX(-50%); /* centraliza de verdade */
+  align-items: center;
+
+}
+
+.c svg{
+  width: 18px;
+  height: 18px;
+}
+
+.c h2{
+  font-size: 1.3rem;
+  margin-top: 0.2rem;
+}
+
+.img2{
+   width: 320px;
+  height: 210px;
+    object-fit: contain;
+}
+
+.imagem{
+   display: flex;
+  justify-content: flex-end;
+}
+
+.gap{
+  gap: 160%;
+  display: flex;
+}
