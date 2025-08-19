@@ -8,7 +8,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
-    background-color: #f2f2f2;
+    background-color: #ffffff;
 }
 
 /* HEADER */
@@ -56,6 +56,8 @@ body {
 .h3 {
     color: #0E6567;
     font-size: 2rem;
+
+   
 }
 
 /* GRID */
@@ -108,7 +110,9 @@ body {
     border-radius: 20px;
     position: relative;
     cursor: pointer;
-    margin-left: auto;
+    margin-left: 400px;
+    display: flex;
+
 }
 
 .toggleSwtich::before {
@@ -143,9 +147,11 @@ body {
     background-color: #ffffff;
     color: #0E6567;
     font-size: 3rem;
+     font-family: Poppins, sans-serif;
     font-weight: 600;
     border-radius: 0 0 15px 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    margin-bottom: 100px;
 }
 
 /* ===== RESPONSIVIDADE ===== */

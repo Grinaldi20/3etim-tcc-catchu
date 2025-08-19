@@ -13,7 +13,7 @@
   padding: 0.5rem;
   width: 100%;
   background-color:#4B8C8D;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
 
 
@@ -60,18 +60,16 @@
 
 .h1 {
     display: inline-block;
-  padding: 10px 25px;
-  background-color: #4B8C8D;
-  color: #fff;
-  font-family: Poppins, sans-serif;
-  font-size: 2.5rem;              
-  font-weight: 600;
-  border-radius: 0 0 15px 15px;     
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  margin: 0 auto;
-  position: relative;
-  top: -0.5px;                    
-}
+    padding: 10px 25px;
+    background-color: #ffffff;
+    color: #0E6567;
+    font-size: 3rem;
+    font-family: 'Arial';
+    font-weight: bold;
+    border-radius: 0 0 15px 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    margin-bottom: 100px;  
+  }
 
 .CardsItens{
     display: flex;

@@ -3,7 +3,7 @@ import Link from "next/link";
 import styles from "./page.module.css";
 export default function MaterialEscolar() {
     return (
-   <div>
+   <div className="main">
     <header className={styles.header}>
         <Link href="http://localhost:3000">  
                    <Image
