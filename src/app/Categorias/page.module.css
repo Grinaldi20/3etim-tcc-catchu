@@ -72,6 +72,66 @@
   text-align: center;
 }
 
+.card {
+  background: linear-gradient(#0E6567, #449d9e);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+  width: 28rem;
+  height: 32rem;
+  border-radius: 20px;
+  padding: 1.5rem;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+.thumb {
+  width: 100%;
+  height: 18rem;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff; /* fundo neutro caso a imagem tenha transparência */
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.title {
+  margin: 1rem 0 0.5rem 0;
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.meta {
+  font-size: 1.4rem;
+  margin: 0.2rem 0;
+}
+
+.badge {
+  margin-top: auto;
+  background: #fff;
+  color: #0E6567;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 0.3rem 0.8rem;
+  border-radius: 12px;
+}
+
+
 .CardsCarrocel a{
     text-decoration: none;
     color: black;
@@ -234,44 +294,7 @@
     border-radius: 20px;
     margin-bottom: 0.5rem;
 }
-.modal {
-  position: fixed;
-  z-index: 10;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(6px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
-.modalContent {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 15px;
-  width: 40%;
-  height: auto;
-  text-align: center;
-  position: relative;
-}
-
-.fechar {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 25px;
-  cursor: pointer;
-}
-
-.modalContent img {
-  width: 25rem;
-  height: 25rem;
-  border-radius: 20px;
-}
-
-.modalEscondido {
-  display: none;
-}
 
 
 .footer{
@@ -397,9 +420,10 @@ display: flex;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.5);
+
   display: flex;
   justify-content: center;
+    backdrop-filter: blur(6px);
   align-items: center;
   z-index: 1000;
 }
@@ -427,6 +451,7 @@ display: flex;
   cursor: pointer;
   font-size: 22px;
   font-weight: bold;
+  color: #fff;
 }
 
 .tituloSecao {
