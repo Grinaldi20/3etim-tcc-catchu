@@ -1,76 +1,170 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import CardCategoria from "@/components/categorias/card";
 import styles from "./page.module.css";
-export default function ObjetosGerais() {
+import objetos from "@/mockup/objetos";
+
+export default function MaterialEscolar() {
+  const [modalAberto, setModalAberto] = useState(false);
+  
+    function abrirModal () {
+      setModalAberto(true);
+    }
+  
+    function fecharModal() {
+      setModalAberto(false);
+    }
+
+     const itens = [
+    {
+      titulo: "Bolsa Vermelha",
+      imagem: "/bolsa.png",
+      data: "09/08/2024",
+      local: "Refeitório",
+      classificacao: "Objetos gerais",
+    },
+    {
+      titulo: "Camisa",
+      imagem: "/Camisa.png",
+      data: "01/07/2025",
+      local: "Quadra",
+      classificacao: "Roupas",
+    },
+    {
+      titulo: "Chinelo",
+      imagem: "/chinelo.png",
+      data: "04/04/2024",
+      local: "Pátio",
+      classificacao: "Calçados",
+    },
+    {
+      titulo: "Estojo Azul",
+      imagem: "/estojo.png",
+      data: "20/10/2023",
+      local: "Sala 03",
+      classificacao: "Material Escolar",
+    },
+  ];
     return (
-        <div>
-            <header className={styles.header}>
-                <Link href="http://localhost:3000">
-                    <Image
-                        className={styles.img}
-                        src="/logo1.png"
-                        alt="Logo"
-                        width={100}
-                        height={100}
+   <div className="main">
+    <header className={styles.header}>
+        <Link href="http://localhost:3000">  
+          <Image
+            className={styles.img}
+            src="/logo1.png"
+            alt="Logo"
+            width={100}
+            height={100}
 
-                    />
-                </Link>
+          />
+                 </Link>
 
-                <div className={styles.Pesquisa}>
-                    <input type="text" placeholder="Pesquisa" />
-                </div>
+        <div className={styles.Pesquisa}>
+            <input type="text" placeholder="Pesquisa"/>
+        </div>
 
+        <div className={styles.Icons}>
+            <a href="/Carrinho">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-archive-fill" viewBox="0 0 16 16">
+                    <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1M.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8z"/>
+                </svg>
+            </a>
 
-                <div className={styles.Icons}>
-                    <a href="/Carrinho">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1M.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8z" />
-                        </svg>
-                    </a>
+            <a href="/Configuracao">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                    <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+                </svg>
+            </a>
+            </div>
+    </header>
+    <main className={styles.main}>
+        <div className={styles.centro}>
+            <h1 className={styles.h1}>Objetos Gerais</h1>
+        </div>
 
-                    <a href="/Configuracao">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
-                            <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
-                        </svg>
-                    </a>
-                </div>
-            </header>
-            <main className={styles.main}>
-                <div className={styles.centro}>
-                    <h1 className={styles.h1}>Objetos Gerais</h1>
-                </div>
+        <div className={styles.CardsItens}>
+             {
+          objetos.map(item => <CardCategoria obj={item} onClick={abrirModal} />)
+        }
+        </div>
+{/* Modal */}
+       {modalAberto && (
+        <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            <span className={styles.fechar} onClick={fecharModal}>×</span>
+            <p className={styles.tituloSecao}>Bolsa Vermelha</p>
+            <Image src="/bolsa.png" alt="Bolsa Vermelha" width={250} height={250} />
+            <p><strong>Encontrada dia:</strong> 09/08/2024</p>
+            <p><strong>Local:</strong> Refeitório</p>
+            <p><strong>Classificação:</strong> Objetos gerais</p>
+            <button>Reservar</button>
+          </div>
+        </div>
+      )}
 
-                <div className={styles.CardsItens}>
-                    <div className={styles.Cards}>
-                        <Image src="/timao.png" alt="Estojo" width={170} height={165} />
-                        <div className={styles.linha}></div>
-                        <h3 className={styles.h3}>Camisa Corinthians</h3>
-                        <button className={styles.button}>Saber Mais</button>
-                    </div>
+      {modalAberto && (
+        <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            <span className={styles.fechar} onClick={fecharModal}>×</span>
+            <p className={styles.tituloSecao}>Blusa Roxa</p>
+            <Image src="/Camisa.png" alt="Camisa" width={250} height={250} />
+            <p><strong>Encontrada dia:</strong> 01/07/2025</p>
+            <p><strong>Local:</strong> Quadra</p>
+            <p><strong>Classificação:</strong>Roupas</p>
+            <button>Reservar</button>
+          </div>
+        </div>
+      )}
 
-                    <div className={styles.Cards}>
-                        <Image src="/timao2.png" alt="Estojo" width={170} height={165} />
-                        <div className={styles.linha}></div>
-                        <h3 className={styles.h3}>Estojo</h3>
-                        <button className={styles.button}>Saber Mais</button>
-                    </div>
+      {modalAberto && (
+        <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            <span className={styles.fechar} onClick={fecharModal}>×</span>
+            <p className={styles.tituloSecao}>Blusa Azul</p>
+            <Image src="/chinelo.png" alt="Chinelo Azul" width={250} height={250} />
+            <p><strong>Encontrada dia:</strong> 04/04/2024</p>
+            <p><strong>Local:</strong> Patio</p>
+            <p><strong>Classificação:</strong>Calçados</p>
+            <button>Reservar</button>
+          </div>
+        </div>
+      )}
 
-                    <div className={styles.Cards}>
-                        <Image src="/timao3.png" alt="Estojo" width={170} height={165} />
-                        <div className={styles.linha}></div>
-                        <h3 className={styles.h3}>Moletom</h3>
-                        <button className={styles.button}>Saber Mais</button>
-                    </div>
+      {modalAberto && (
+        <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            <span className={styles.fechar} onClick={fecharModal}>×</span>
+            <p className={styles.tituloSecao}>Estojo Azul</p>
+            <Image src="/estojo.png" alt="Estojo Azul" width={250} height={250} />
+            <p><strong>Encontrada dia:</strong> 20/10/2023</p>
+            <p><strong>Local:</strong>Sala 03</p>
+            <p><strong>Classificação:</strong>Material Escolar</p>
+            <button>Reservar</button>
+          </div>
+        </div>
+      )}
 
-                    <div className={styles.Cards}>
-                        <Image src="/timao4.png" alt="Estojo" width={170} height={165} />
-                        <div className={styles.linha}></div>
-                        <h3 className={styles.h3}>Boné</h3>
-                        <button className={styles.button}>Saber Mais</button>
-                    </div>
-                </div>
+      {modalAberto && (
+        <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            <span className={styles.fechar} onClick={fecharModal}>×</span>
+            <p className={styles.tituloSecao}>Blusa Azul</p>
+            <Image src="/bolsa.png" alt="Bolsa preta" width={250} height={250} />
+            <p><strong>Encontrada dia:</strong> 09/08/2024</p>
+            <p><strong>Local:</strong> Refeitório</p>
+            <p><strong>Classificação:</strong> Objetos gerais</p>
+            <button>Reservar</button>
+          </div>
+        </div>
+      )}
 
-      <div className={styles.footer}>
+     
+
+    
+       <div className={styles.footer}>
         <div className={styles.contatos}> 
 <h1 className={styles.fh1} >CONTATOS</h1>
 <div className={styles.linha2}></div>
@@ -138,9 +232,8 @@ export default function ObjetosGerais() {
 
 </div>
        </div>
-                
-              
-            </main>
-        </div>
+     
+    </main>
+    </div>
     );
-}
+  }
