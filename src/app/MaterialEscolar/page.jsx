@@ -90,6 +90,9 @@ export default function MaterialEscolar() {
           objetos.map(item => <CardCategoria obj={item} onClick={abrirModal} />)
         }
         </div>
+
+
+        
 {/* Modal */}
        {modalAberto && (
         <div className={styles.modal}>
