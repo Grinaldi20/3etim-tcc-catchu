@@ -1,12 +1,58 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import CardCategoria from "@/components/categorias/card";
 import styles from "./page.module.css";
+import objetos from "@/mockup/objetos";
+
 export default function MaterialEscolar() {
+  const [modalAberto, setModalAberto] = useState(false);
+  
+    function abrirModal () {
+      setModalAberto(true);
+    }
+  
+    function fecharModal() {
+      setModalAberto(false);
+    }
+
+     const itens = [
+    {
+      titulo: "Bolsa Vermelha",
+      imagem: "/bolsa.png",
+      data: "09/08/2024",
+      local: "Refeitório",
+      classificacao: "Objetos gerais",
+    },
+    {
+      titulo: "Camisa",
+      imagem: "/Camisa.png",
+      data: "01/07/2025",
+      local: "Quadra",
+      classificacao: "Roupas",
+    },
+    {
+      titulo: "Chinelo",
+      imagem: "/chinelo.png",
+      data: "04/04/2024",
+      local: "Pátio",
+      classificacao: "Calçados",
+    },
+    {
+      titulo: "Estojo Azul",
+      imagem: "/estojo.png",
+      data: "20/10/2023",
+      local: "Sala 03",
+      classificacao: "Material Escolar",
+    },
+  ];
     return (
    <div className="main">
     <header className={styles.header}>
         <Link href="http://localhost:3000">  
-                   <Image
+          <Image
             className={styles.img}
             src="/logo1.png"
             alt="Logo"
@@ -40,34 +86,82 @@ export default function MaterialEscolar() {
         </div>
 
         <div className={styles.CardsItens}>
-            <div className={styles.Cards}>
-                 <Image src="/estojo3.png" alt="Estojo" width={170} height={165} />
-                <div className={styles.linha}></div>
-                <h3 className={styles.h3}>Estojo</h3>
-                <button className={styles.button}>Saber Mais</button>
-            </div>
-
-            <div className={styles.Cards}>
-               <Image src="/caderno.png" alt="Estojo" width={170} height={165} />
-                <div className={styles.linha}></div>
-                <h3 className={styles.h3}>Caderno</h3>
-                <button className={styles.button}>Saber Mais</button>
-            </div>
-
-            <div className={styles.Cards}>
-               <Image src="/regua.png" alt="Estojo" width={170} height={165} />
-                <div className={styles.linha}></div>
-                <h3 className={styles.h3}>Regua</h3>
-                <button className={styles.button}>Saber Mais</button>
-            </div>
-
-            <div className={styles.Cards}>
-                <Image src="/caderno3.png" alt="Estojo" width={170} height={165} />
-                <div className={styles.linha}></div>
-                <h3 className={styles.h3}>Caderno</h3>
-                <button className={styles.button}>Saber Mais</button>
-            </div>
+             {
+          objetos.map(item => <CardCategoria obj={item} onClick={abrirModal} />)
+        }
         </div>
+{/* Modal */}
+       {modalAberto && (
+        <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            <span className={styles.fechar} onClick={fecharModal}>×</span>
+            <p className={styles.tituloSecao}>Bolsa Vermelha</p>
+            <Image src="/bolsa.png" alt="Bolsa Vermelha" width={250} height={250} />
+            <p><strong>Encontrada dia:</strong> 09/08/2024</p>
+            <p><strong>Local:</strong> Refeitório</p>
+            <p><strong>Classificação:</strong> Objetos gerais</p>
+            <button>Reservar</button>
+          </div>
+        </div>
+      )}
+
+      {modalAberto && (
+        <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            <span className={styles.fechar} onClick={fecharModal}>×</span>
+            <p className={styles.tituloSecao}>Blusa Roxa</p>
+            <Image src="/Camisa.png" alt="Camisa" width={250} height={250} />
+            <p><strong>Encontrada dia:</strong> 01/07/2025</p>
+            <p><strong>Local:</strong> Quadra</p>
+            <p><strong>Classificação:</strong>Roupas</p>
+            <button>Reservar</button>
+          </div>
+        </div>
+      )}
+
+      {modalAberto && (
+        <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            <span className={styles.fechar} onClick={fecharModal}>×</span>
+            <p className={styles.tituloSecao}>Blusa Azul</p>
+            <Image src="/chinelo.png" alt="Chinelo Azul" width={250} height={250} />
+            <p><strong>Encontrada dia:</strong> 04/04/2024</p>
+            <p><strong>Local:</strong> Patio</p>
+            <p><strong>Classificação:</strong>Calçados</p>
+            <button>Reservar</button>
+          </div>
+        </div>
+      )}
+
+      {modalAberto && (
+        <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            <span className={styles.fechar} onClick={fecharModal}>×</span>
+            <p className={styles.tituloSecao}>Estojo Azul</p>
+            <Image src="/estojo.png" alt="Estojo Azul" width={250} height={250} />
+            <p><strong>Encontrada dia:</strong> 20/10/2023</p>
+            <p><strong>Local:</strong>Sala 03</p>
+            <p><strong>Classificação:</strong>Material Escolar</p>
+            <button>Reservar</button>
+          </div>
+        </div>
+      )}
+
+      {modalAberto && (
+        <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            <span className={styles.fechar} onClick={fecharModal}>×</span>
+            <p className={styles.tituloSecao}>Blusa Azul</p>
+            <Image src="/bolsa.png" alt="Bolsa preta" width={250} height={250} />
+            <p><strong>Encontrada dia:</strong> 09/08/2024</p>
+            <p><strong>Local:</strong> Refeitório</p>
+            <p><strong>Classificação:</strong> Objetos gerais</p>
+            <button>Reservar</button>
+          </div>
+        </div>
+      )}
+
+     
 
     
        <div className={styles.footer}>
