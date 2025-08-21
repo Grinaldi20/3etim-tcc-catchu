@@ -147,12 +147,13 @@ body {
     background-color: #ffffff;
     color: #0E6567;
     font-size: 3rem;
-     font-family: Poppins, sans-serif;
-    font-weight: 600;
+    font-family: 'Arial';
+    font-weight: bold;
     border-radius: 0 0 15px 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    margin-bottom: 100px;
-}
+    margin-bottom: 3.5rem;  
+  }
+
 
 /* ===== RESPONSIVIDADE ===== */
 @media (max-width: 768px) {
