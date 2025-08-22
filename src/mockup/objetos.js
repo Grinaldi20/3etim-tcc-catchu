@@ -8,7 +8,7 @@ const objetos = [
 			"obj_id": 1,
 			"categ_id": 1,
 			"usu_id": 1,
-			"obj_descricao": "Celular Samsung preto com capinha azul",
+			"obj_descricao": "Celular  preto com capinha azul",
 			"obj_foto": celularSansung,
 			"obj_local_encontrado": "Biblioteca",
 			"obj_data_publicacao": "2025-03-17T11:34:18.000Z",
@@ -49,5 +49,7 @@ const objetos = [
 			"obj_encontrado": 0
 		}
 ];
+
+
 
 export default objetos;
