@@ -11,7 +11,7 @@ export default function TelaPrincipal() {
   return (
     <div>
       <header className={styles.header}>
-        <Image className={styles.img} src="/logo1.png" alt="Logo" width={100} height={100}  />
+        <Image className={styles.img} src="/logo1.png" alt="Logo" width={100} height={100} />
 
         <div className={styles.Pesquisa}>
           <input type="text" placeholder="Pesquisa" />
@@ -19,9 +19,9 @@ export default function TelaPrincipal() {
 
         <div className={styles.Icons}>
           <a href="/Carrinho">
-             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi bi-archive-fill" viewBox="0 0 16 16">
-                <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1M.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8z" />
-              </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="bi bi-archive-fill" viewBox="0 0 16 16">
+              <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1M.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8z" />
+            </svg>
           </a>
 
           <a href="/Configuracao">
@@ -33,7 +33,7 @@ export default function TelaPrincipal() {
       </header>
 
       <main>
-     
+
         <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel">
           <div className="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
@@ -65,31 +65,31 @@ export default function TelaPrincipal() {
 
 
         <div className={styles.Cards}>
-        <Link href="http://localhost:3000/PoliticaRetirada">      
-           
-     
+          <a href="/PoliticaRetirada">
+
+
             <div className={styles.PoliticaRetirada}>
               <p>Política de Retirada</p>
               <Image className={styles.imagem} src="/retirada.png" alt="Pertences" width={200} height={150} quality={100} />
-   
-            </div>
-          </Link>
 
-<Link href="http://localhost:3000/Categorias">      
+            </div>
+          </a>
+
+          <a href="/Categorias">
             <div className={styles.Pertences}>
               <p>Categorias</p>
               <Image className={styles.imagem} src="/pertences.png" alt="Pertences" width={200} height={150} quality={100} />
-            </div>   
-       </Link>
+            </div>
+          </a>
 
-       <Link href="http://localhost:3000/AchouAlgo">      
-           
-  
+          <a href="/AchouAlgo">
+
+
             <div className={styles.AchouAlgo}>
               <p>Achou Algo?</p>
               <Image className={styles.imagem} src="/algo.png" alt="Achou algo" width={200} height={150} quality={100} />
             </div>
-       </Link>
+          </a>
 
         </div>
       </main>
