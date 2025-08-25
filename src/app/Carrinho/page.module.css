@@ -2,18 +2,18 @@
 
   .main{
       font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
+    background-color: #fff;
     margin: 0;
     padding: 0;
     height: 100vh;
-    
+    display: flex;
     justify-content: center; /* alinha horizontalmente */
     align-items: center;     /* alinha verticalmente */
   }
 
   .container {
     width: 600px;
-   margin-top: 6rem;
+    margin-top: 3rem;
     background-color: #fff;
     border-radius: 12px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -56,7 +56,7 @@
 
   .item {
     background-color: #f9f9f9;
-    height: 150px;
+    height: 200px;
     color: #0E6567;
     margin: 15px;
     padding: 15px;
@@ -84,34 +84,39 @@
   }
 
   .itemText {
-    font-size: 13px;
+    font-size: 15px;
     color: black;
     margin-top: 4px;
     font-family: Arial, sans-serif;
   }
 
-  .reservdBtn {
-    margin-top: 8px;
-    padding: 6px 14px;
-    background-color: #0E6567;
-    color: white;
-    font-size: 12px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
+  .button {
+  border-radius: 16px;
+  border: 2px solid white; 
+  background-color: #0E6567; 
+  color: white;
+  cursor: pointer;
+  width: 8rem;
+  height: 2.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+  transition: all 0.3s ease;
+  font-family: "Arial";
+  font-size: 15px;
+  
+}
 
-  .reservdBtn:hover {
-    background-color: #c8e6c9;
-  }
-
+.button:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); 
+  background-color: white;
+  border: 2px solid #0E6567; 
+  color: #0E6567;
+}
   
 .footer{
  
   color: white;
   width: 100%;
- 
+  
   position: relative;
   bottom: 0;
   left: 0;
