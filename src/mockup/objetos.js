@@ -1,5 +1,5 @@
 import celularSansung from '../../public/objetos/celular1.png';
-import celularBranco from '../../public/objetos/celularbranco.png';
+import timao3 from '../../public/objetos/timao3.png';
 import relogioPulso from '../../public/objetos/relogio1.png';
 import cadernoVermelho from '../../public/objetos/caderno1.png';
 
@@ -19,8 +19,8 @@ const objetos = [
 			"obj_id": 2,
 			"categ_id": 1,
 			"usu_id": 1,
-			"obj_descricao": "Celular preto com capinha branca",
-			"obj_foto": celularBranco,
+			"obj_descricao": "Blusa de Frio",
+			"obj_foto": timao3,
 			"obj_local_encontrado": "Biblioteca",
 			"obj_data_publicacao": "2025-03-18T03:00:00.000Z",
 			"obj_status": "Perdido",
