@@ -318,10 +318,11 @@ display: flex;
 }
 
 .modalContent p {
-  margin: 5px 0;
-  color: #0E6567;
+   margin: 5px 0;
+  color: #363636;
   font-size: 15px;
    font-family: "Arial";
+   font-weight: 150;
 }
 
 .modalContent button {

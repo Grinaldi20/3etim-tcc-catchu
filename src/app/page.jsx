@@ -41,6 +41,8 @@ export default function TelaPrincipal() {
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
           </div>
 
+
+
           <div className="carousel-inner" style={{ height: "400px" }}>
             <div className="carousel-item active">
               <Image className={`d-block w-100 ${styles.imagem}`} src="/carrosel.png" alt="Slide 1" width={1200} height={400} quality={100} />
@@ -52,6 +54,7 @@ export default function TelaPrincipal() {
               <Image className={`d-block w-100 ${styles.imagem}`} src="/carrosel2.png" alt="Slide 3" width={1200} height={400} quality={100} />
             </div>
           </div>
+
 
           <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
             <span className={`carousel-control-prev-icon ${styles.carroselControlPrevIcon}`} aria-hidden="true"></span>

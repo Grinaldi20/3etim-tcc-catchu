@@ -27,6 +27,8 @@ export default function Carrinho() {
      <h1 className={styles.h1c}>Reservados</h1>
     </div>
 
+
+
     <div className={styles.item}>
        <Image 
                 src="/bolsa.png"
