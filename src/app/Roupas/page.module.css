@@ -17,18 +17,22 @@
 }
 
 
+.Pesquisa {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
 
 .Pesquisa input {
-  height: 5rem;
-  width: 90rem;
-  margin: 2rem;
+  height: 6rem;
+  width: 100%;
+  max-width: 90rem;
   border-radius: 5rem;
   border: none;
   background-color: #0E6567;
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: white;
-  padding: 1.5rem;
- 
+  padding: 1.5rem 2rem;
 }
 
 .Pesquisa input::placeholder {
@@ -138,25 +142,26 @@
     margin-bottom: 0.2rem;
 }
 
-.footer{
- 
+.footer {
   color: white;
   width: 100%;
- 
   position: relative;
   bottom: 0;
   left: 0;
-  gap: 12%;
+
   display: flex;
-  box-shadow: 6px 6px 6px 12px rgba(0, 0, 0, 0.2); 
+  flex-wrap: wrap;        /* ✅ permite quebrar linha */
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 2rem;
+  box-shadow: 6px 6px 6px 12px rgba(0, 0, 0, 0.2);
   margin-top: 10rem;
-  background: linear-gradient( to bottom,  #4B8C8D 83%, #0E6567 17%);
+  background: linear-gradient(to bottom, #4B8C8D 83%, #0E6567 17%); /* ✅ cor voltou */
+  text-align: center;
 }
 
-.contatos{
-  margin-left: 5rem;
-  
-}
+
 
 .fh1{
   font-size: 2.2rem;
@@ -218,15 +223,14 @@ display: flex;
   cursor: pointer;
 }
 
-.c{
+.c {
   display: flex;
-  gap: 6px;
-  position: absolute;
-  bottom: 10px; /* distância do final */
- left: 50%; /* joga para o meio */
-  transform: translateX(-50%); /* centraliza de verdade */
+  justify-content: center;
   align-items: center;
-
+  gap: .5rem;
+  position: relative;     /* ✅ remove absolute */
+  margin-top: 2rem;
+  flex-basis: 100%;       /* ✅ ocupa linha inteira */
 }
 
 .c svg{
@@ -239,10 +243,10 @@ display: flex;
   margin-top: 0.2rem;
 }
 
-.img2{
-   width: 320px;
-  height: 210px;
-    object-fit: contain;
+.img2 {
+  max-width: 100%;
+  height: auto;           /* ✅ mantém proporção */
+  object-fit: contain;
 }
 
 .imagem{
@@ -345,4 +349,20 @@ display: flex;
  background-color: white;
   border: 2px solid #0E6567;
   color: #0E6567;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;   /* ✅ vira coluna no mobile */
+    align-items: center;
+  }
+
+  .gap {
+    gap: 2rem;                /* antes era 160% */
+    flex-direction: column;
+  }
+
+  .imagem {
+    justify-content: center;
+  }
 }
