@@ -1,0 +1,196 @@
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Centraliza na tela verticalmente */
+   
+}
+
+.lado {
+    background-color: #ffffff;
+    height: 625px;
+    width: 500px;
+    border-radius: 0.9rem 0 0 0.9rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    margin-top: 0; /* remove margem antiga */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    margin-top: 5rem;
+}
+
+.form {
+    background-color: #4B8C8D;
+    padding: 3rem;
+    width: 390px;
+    height: 625px;
+    margin: 0; /* remove a margem antiga */
+    border-radius: 0 0.9rem 0.9rem 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    margin-top: 5rem;
+}
+
+
+
+.formGroup  input {
+    border: none;
+    display: flex;
+    font-size: 20px;
+    transition: transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    width: 355px;
+    height: 50px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 2rem;
+    margin-left: -2rem;
+}
+
+.formGroup  input:focus {
+    transform: scale(1.05);
+    outline: none;
+    background-color: #ffffff;
+}
+
+.formGroup  input::placeholder {
+   font-size: 23px;
+}
+
+
+
+
+
+
+.button2 {
+    border-radius: 16px;
+    border: 2px solid rgb(49, 49, 49); 
+    padding: 13px 17px;
+    background-color: #ffffff; 
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    width: 230px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+    transition: all 0.3s ease;
+    display: block;        
+    margin: 1rem auto 0;   
+    margin-top: 13rem;
+    height: 50px;
+    font-size: 18px;
+
+}
+
+
+.ImgMaior {
+    width: 200px;
+    height: 150px;
+    margin-left: 3%;
+    margin-top: 10rem;
+}
+
+.button2:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); 
+    background-color: white;
+    border: 2px solid #0E6567; 
+    color: #0E6567;
+}
+
+
+.button {
+    border-radius: 20px;
+    border: 2px solid white; 
+    padding: 10px 20px;
+    background-color: #ffffff; 
+    color: #0E6567 ;
+    cursor: pointer;
+    width: 230px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+    transition: all 0.3s ease;      
+    height: 50px;
+    font-family: "Arial";
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 5rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+
+.button:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); 
+    background-color: white;
+    border: 2px solid #0E6567; 
+    color: #0E6567;
+}
+
+
+.texto {
+  width: 355px;
+  height: 13rem;
+  resize: none;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  font-family: 'Roboto', sans-serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: border-color 0.3s ease;
+  border: none;
+  margin-left: -2rem;
+  transition: transform 0.2s ease;
+  margin-bottom: 2rem;
+  font-size: 20px;
+}
+
+.texto::placeholder{
+    font-size: 23px;
+}
+
+.texto:focus {
+    transform: scale(1.05);
+    outline: none;
+    background-color: #ffffff;
+}
+
+.select{
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    margin-bottom: 2rem;
+    width: 355px;
+    height: 50px;
+    font-size: 23px;
+    margin-left: -2rem;
+    transition: transform 0.2s ease;
+    color: #797979;
+    padding: 10px;
+}
+
+.select:focus {
+    transform: scale(1.05);
+    outline: none;
+    background-color: #ffffff;
+}
+
+.option{
+    font-size: 20px;
+    color: #000000;
+}
+
+.option2{
+    font-size: 20px;
+    color: #cecece;
+}

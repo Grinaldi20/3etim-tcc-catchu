@@ -1,0 +1,507 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+:root {
+  font-size: 62.5%;
+}
+
+.main {
+  font-family: 'Poppins', sans-serif;
+   flex: 1;
+}
+
+.Gradiente {
+  background: linear-gradient(to bottom, #4B8C8D, #0e6667da);
+  padding-bottom: 3rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  margin-bottom: 4rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 4rem; /* removi margem negativa, usei padding horizontal */
+  width: 100%;
+  height: 100px;
+  background-color: #4B8C8D;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.Pesquisa {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.Pesquisa input {
+  height: 6rem;
+  width: 100%;
+  /*max-width: 90rem;*/
+  border-radius: 5rem;
+  border: none;
+  background-color: #0E6567;
+  font-size: 2.5rem;
+  color: white;
+  padding: 1.5rem 2rem;
+}
+
+.Pesquisa input::placeholder {
+  color: white;
+}
+
+.Icons {
+  margin-right: 4rem;
+}
+
+.Icons :global(svg) {
+  height: 4.5rem;
+  width: 4.5rem;
+  margin-left: 1.5rem;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.titulo {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 600;
+  padding: 20px 0 30px 0;
+  color: #fff;
+}
+
+.tituloSecao {
+  font-size: 2rem;
+  color: #fff;
+  text-align: center;
+}
+
+.card {
+  background: linear-gradient(#0E6567, #449d9e);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+  width: 28rem;
+  height: 32rem;
+  border-radius: 20px;
+  padding: 1.5rem;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+.thumb {
+  width: 100%;
+  height: 18rem;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff; /* fundo neutro caso a imagem tenha transparência */
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.title {
+  margin: 1rem 0 0.5rem 0;
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.meta {
+  font-size: 1.4rem;
+  margin: 0.2rem 0;
+}
+
+.badge {
+  margin-top: auto;
+  background: #fff;
+  color: #0E6567;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 0.3rem 0.8rem;
+  border-radius: 12px;
+}
+
+
+.CardsCarrocel a{
+    text-decoration: none;
+    color: black;
+    transition: transform 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25); /* sombra suave para baixo */
+    border-radius: 20px;
+}
+
+.CardsCarrocel a:hover {
+    transform: scale(1.05);
+}
+
+.h2{
+    font-size: 2rem;
+}
+
+.CardsCarrocel{
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 5rem;
+
+}
+
+.CardsCarrocel svg{
+    height: 6.5rem; 
+    width: 6.5rem; 
+  
+}
+
+.CardsCarrocel .MaterialEscolar{
+    background-color: #0E6567;
+    width: 15rem;
+    height: 14.5rem;
+    font-size: 2rem;
+    font-weight: 300;
+    font-family: Poppins;
+    color: #ffff;
+    text-align: center;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.CardsCarrocel .Roupas{
+    background-color: #0E6567;
+    width: 15rem;
+    height: 14.5rem;
+    font-size: 2rem;
+    font-weight: 300;
+    font-family: Poppins;
+    color: #ffff;
+    text-align: center;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.CardsCarrocel .Sapatos{
+    background-color: #0E6567;
+    width: 15rem;
+    height: 14.5rem;
+    font-size: 2rem;
+    font-weight: 300;
+    font-family: Poppins;
+    color: #ffff;
+    text-align: center;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.CardsCarrocel .ObjetosGerais{
+    background-color: #0E6567;
+    width: 15rem;
+    height: 14.5rem;
+    font-size: 2rem;
+    font-weight: 300;
+    font-family: Poppins;
+    color: #ffff;
+    text-align: center;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.CardsCarrocel .Resgatados{
+    background-color: #0E6567;
+    width: 15rem;
+    height: 14.5rem;
+    font-size: 2rem;
+    font-weight: 300;
+    font-family: Poppins;
+    color: #ffff;
+    text-align: center;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+
+.CardsItens{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    gap: 5.5rem;
+    padding: 3rem;
+    flex-wrap: wrap;
+    
+}
+
+.CardsItens .Cards{
+    background-color: #0E6567;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+     background-image: linear-gradient(#0E6567 ,  #449d9e);
+    width: 28rem;
+    height: 28.5rem;
+    font-size: 2rem;
+    font-weight: 300;
+    font-family: Poppins;
+    color: #ffff;
+    padding: 15px;
+    border-radius: 20px;
+  
+}
+
+.h3{
+    margin-bottom: 1.5rem;
+    font-size: 20px;
+}
+
+.linha{
+ width: 280px;
+  border-bottom: 3px solid #ffffff;
+  margin-left: -15px;
+  margin-bottom: 1rem;
+}
+
+.button {
+  border-radius: 12px;
+  border: 2px solid white; 
+  background-color: #0E6567; 
+  color: white;
+  cursor: pointer;
+  width: 15rem;
+  height: 3.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+  transition: all 0.3s ease;
+  font-family: "Arial";
+  font-size: 18px;
+  
+}
+
+.button:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); 
+  background-color: white;
+  border: 2px solid #0E6567; 
+  color: #0E6567;
+}
+
+
+.CardsItens .Cards img{
+    width: 17rem;
+    height: 16.5rem; 
+    border-radius: 20px;
+    margin-bottom: 0.5rem;
+}
+
+
+
+.footer{
+ 
+  color: white;
+  width: 100%;
+ 
+  position: relative;
+  bottom: 0;
+  left: 0;
+  gap: 12%;
+  display: flex;
+  box-shadow: 6px 6px 6px 12px rgba(0, 0, 0, 0.2); 
+  margin-top: 10rem;
+  background: linear-gradient( to bottom,  #4B8C8D 83%, #0E6567 17%);
+}
+
+.contatos{
+  margin-left: 5rem;
+  
+}
+
+.fh1{
+  font-size: 2.2rem;
+  font-family: "Poppins";
+  margin-top: 1.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.linha2{
+  width: 9rem;
+  background-color: #fff;
+  margin-bottom: 1.8rem;
+ padding: 0.1rem;
+}
+
+.fh2{
+   font-size: 1.5rem;
+  font-family: "Poppins";
+   margin-bottom: 1.8rem;
+   cursor: pointer;
+
+}
+
+.icon svg{
+width: 28px;
+height: 28px;
+cursor: pointer;
+
+}
+
+.icon{
+gap: 2.5rem;
+display: flex;
+}
+
+.email{
+  display: flex;
+  gap: 9px;
+ 
+}
+
+.email svg{
+  width: 28px;
+  height: 28px;
+  margin-top: -0.3rem;
+  margin-bottom: 1.8rem;
+  cursor: pointer;
+}
+
+.telefone{
+  display: flex;
+  gap: 9px;
+}
+
+.telefone svg{
+  width: 28px;
+  height: 28px;
+  margin-top: -0.3rem;
+  cursor: pointer;
+}
+
+.c{
+  display: flex;
+  gap: 6px;
+  position: absolute;
+  bottom: 10px; /* distância do final */
+ left: 50%; /* joga para o meio */
+  transform: translateX(-50%); /* centraliza de verdade */
+  align-items: center;
+
+}
+
+.c svg{
+  width: 18px;
+  height: 18px;
+}
+
+.c h2{
+  font-size: 1.3rem;
+  margin-top: 0.2rem;
+}
+
+.img2{
+   width: 320px;
+  height: 210px;
+    object-fit: contain;
+}
+
+.imagem{
+   display: flex;
+  justify-content: flex-end;
+}
+
+.gap{
+  gap: 160%;
+  display: flex;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+    backdrop-filter: blur(6px);
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  position: relative;
+  background: linear-gradient(to right, #fff 90%, #0E6567 10% );
+  padding: 30px 20px;
+  border-radius: 12px;
+  width: 550px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.modalContent img {
+  margin: 15px 0;
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.fechar {
+  position: absolute;
+  top: 20px;
+  left: 15px;
+  cursor: pointer;
+  font-size: 22px;
+  font-weight: bold;
+  color: #0E6567;
+}
+
+.fechar svg{
+  width: 50px;
+  height: 50px;
+}
+
+.tituloSecao {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #0E6567;
+  font-family: "Arial";
+  margin-top: 0.5rem;
+}
+
+.tituloSecao h1{
+   font-size: 35px;
+  font-weight: bold;
+  font-family: "Arial";
+}
+
+.modalContent p {
+  margin: 5px 0;
+  color: #363636;
+  font-size: 15px;
+   font-family: "Arial";
+   font-weight: 150;
+}
+
+.modalContent button {
+ border-radius: 10px;
+  border: 2px solid white;
+  background-color: #0E6567;
+  color: white;
+  cursor: pointer;
+  width: 22rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  height: 41.5px;
+  font-family: "Arial";
+  font-weight: bold;
+  font-size: 14px;
+}
+.modalContent button:hover {
+ background-color: white;
+  border: 2px solid #0E6567;
+  color: #0E6567;
+}

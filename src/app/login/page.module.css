@@ -1,0 +1,185 @@
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Centraliza na tela verticalmente */
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.lado {
+    background-color: #0E6567;
+    height: 520px;
+    width: 150px;
+    border-radius: 0.9rem 0 0 0.9rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 1rem;
+    margin-top: 0; /* remove margem antiga */
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.form {
+    background-color: #fff;
+    padding: 3rem;
+    max-width: 550px;
+    width: 700px;
+    height: 520px;
+    margin: 0; /* remove a margem antiga */
+    border-radius: 0 0.9rem 0.9rem 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.titulo {
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-align: center;
+    color: #0E6567;
+    margin-bottom: 3.5rem;
+    margin-top: 0.5rem;
+    font-family: "Arial";
+    font-weight: bold;
+}
+
+.inputContainer {
+    position: relative;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.inputContainer .icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+    margin-bottom: 10rem;
+}
+
+.inputContainer input {
+    width: 100%; 
+    box-sizing: border-box; 
+    padding: 1rem 1rem 1rem 40px; 
+    background-color: #f7f7f7f5;
+    border-radius: 0.5rem;
+    border: 1px solid #e5e7eb;
+     color: #0E6567;
+    font-size: 0.875rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.inputContainer input:focus {
+    transform: scale(1.05);
+    outline: none;
+    border-color: #0E6567;
+    box-shadow: 0 0 8px #0E6567;
+    background-color: #ffffff;
+    
+}
+
+.input::placeholder {
+    font-size: 1.1rem;
+    font-family: "Roboto";
+    color: #0E6567;
+   
+}
+
+.button {
+    border-radius: 16px;
+    border: 2px solid white; 
+    padding: 10px 20px;
+    background-color: #0E6567; 
+    color: white;
+    cursor: pointer;
+    width: 20rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+    transition: all 0.3s ease;
+    display: block;        
+    margin: 1rem auto 0;   
+    margin-top: 1rem;
+    height: 40px;
+    font-family: "Arial";
+    font-weight: bold;
+}
+
+.button:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); 
+    background-color: white;
+    border: 2px solid #0E6567; 
+    color: #0E6567;
+}
+
+.formGroup  {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #3a7c7b;
+    margin: 20px 0;
+     color: #0E6567;
+    padding: 5px;
+     margin-bottom: 2.7rem;
+}
+
+.formGroup  input {
+    border: none;
+    outline: none;
+     color: #0E6567;
+    font-size: 1rem;
+    flex: 1;
+    /* Animação no foco dos inputs da form-group */
+    transition: transform 0.2s ease;
+}
+
+.formGroup  input:focus {
+    transform: scale(1.05);
+    outline: none;
+    background-color: #ffffff;
+}
+
+.icon > svg {
+    color: #0E6567;
+    width: 40px;  
+    height: 40px;
+    
+}
+
+.formGroup  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px ;  
+
+}
+
+
+
+.ImgMaior {
+    margin-top: -15%;
+    margin-left: 26%;
+}
+
+
+
+.formGroup .icon2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 3px ;  
+}
+
+.icon2 > svg {
+    color: #0E6567;
+    width: 40px;  
+    height: 40px;
+}
+
+.span {
+  color: #0E6567;
+  font-size: 0.875rem;
+  text-align: center;
+  margin-left: 155px;
+  margin-top: -2rem;
+}
