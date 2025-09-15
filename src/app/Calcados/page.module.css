@@ -138,15 +138,14 @@
     margin-bottom: 0.2rem;
 }
 
+
 .footer{
- 
   color: white;
   width: 100%;
- 
   position: relative;
   bottom: 0;
   left: 0;
-  gap: 12%;
+  padding-left: 5%;
   display: flex;
   box-shadow: 6px 6px 6px 12px rgba(0, 0, 0, 0.2); 
   margin-top: 10rem;
@@ -154,7 +153,8 @@
 }
 
 .contatos{
-  margin-left: 5rem;
+  padding-right: 20rem;
+
   
 }
 
@@ -169,7 +169,7 @@
   width: 9rem;
   background-color: #fff;
   margin-bottom: 1.8rem;
- padding: 0.1rem;
+  padding: 0.1rem;
 }
 
 .fh2{
@@ -223,7 +223,7 @@ display: flex;
   gap: 6px;
   position: absolute;
   bottom: 10px; /* distância do final */
- left: 50%; /* joga para o meio */
+  left: 50%; /* joga para o meio */
   transform: translateX(-50%); /* centraliza de verdade */
   align-items: center;
 
@@ -248,14 +248,13 @@ display: flex;
 .imagem{
    display: flex;
   justify-content: flex-end;
+  padding-left: 80rem;
 }
 
 .gap{
-  gap: 160%;
+ 
   display: flex;
 }
-
-
 
 .modal {
   position: fixed;

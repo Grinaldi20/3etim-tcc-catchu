@@ -40,6 +40,8 @@ export default function Categorias() {
 
   return (
     <main className={styles.main}>
+       
+
       <div className={styles.Gradiente}>
         <header className={styles.header}>
 
@@ -240,7 +242,7 @@ export default function Categorias() {
 
         </div>
       </div>
-
+ 
     </main>
   );
 }
