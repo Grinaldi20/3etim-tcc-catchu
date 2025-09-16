@@ -101,6 +101,9 @@ export default function MaterialEscolar() {
 
     
        <div className={styles.footer}>
+
+<div className={styles.gap}>
+
         <div className={styles.contatos}> 
 <h1 className={styles.fh1} >CONTATOS</h1>
 <div className={styles.linha2}></div>
@@ -121,7 +124,7 @@ export default function MaterialEscolar() {
 </div>
 
 
-<div className={styles.gap}>
+
 
 <div className={styles.RedesSociais}>
 <h1 className={styles.fh1}>Redes Socias</h1>

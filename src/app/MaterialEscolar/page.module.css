@@ -150,13 +150,9 @@
   box-shadow: 6px 6px 6px 12px rgba(0, 0, 0, 0.2); 
   margin-top: 10rem;
   background: linear-gradient( to bottom,  #4B8C8D 83%, #0E6567 17%);
+    justify-content: space-between;
 }
 
-.contatos{
-  padding-right: 20rem;
-
-  
-}
 
 .fh1{
   font-size: 2.2rem;
@@ -190,6 +186,10 @@ cursor: pointer;
 .icon{
 gap: 2.5rem;
 display: flex;
+}
+
+.gap{
+  display: flex;
 }
 
 .email{
@@ -247,14 +247,9 @@ display: flex;
 
 .imagem{
    display: flex;
-  justify-content: flex-end;
-  padding-left: 80rem;
+  
 }
 
-.gap{
- 
-  display: flex;
-}
 
 .modal {
   position: fixed;
@@ -343,4 +338,17 @@ display: flex;
  background-color: white;
   border: 2px solid #0E6567;
   color: #0E6567;
+}
+
+
+@media (max-width: 1806px) {
+
+
+.imagem{
+   display: flex;
+   padding-right: 20rem;
+}
+
+
+
 }
