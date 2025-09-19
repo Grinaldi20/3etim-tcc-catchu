@@ -100,7 +100,7 @@ export default function Roupas() {
 
   <footer className={styles.footer}>
         <div className={styles.footerInner}>
-          <div className={styles.footerBrand}>
+          <div className={styles.footerBrand}>  
             <Link href="/">
               <Image src="/logo1.png" alt="Logo" width={72} height={72} className={styles.footerLogo} />
             </Link>
@@ -114,13 +114,13 @@ export default function Roupas() {
           <div className={styles.footerSocial}>
             <a href="#" aria-label="Instagram" className={styles.iconLink}>
               {/* ícone simples */}
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" fill="currentColor" aria-hidden="true">
                 <path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 2 .3 2.5.6.6.3 1 .7 1.3 1.3.3.5.5 1.3.6 2.5.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 2-.6 2.5-.3.6-.7 1-1.3 1.3-.5.3-1.3.5-2.5.6-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-2-.3-2.5-.6-.6-.3-1-.7-1.3-1.3-.3-.5-.5-1.3-.6-2.5C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-2 .6-2.5.3-.6.7-1 1.3-1.3.5-.3 1.3-.5 2.5-.6C8.4 2.2 8.8 2.2 12 2.2zm0 2.1c-3 0-3.4 0-4.6.1-1 .1-1.6.3-2 .5-.5.2-.9.5-1.2.9-.3.4-.6.7-.8 1.2-.2.4-.5 1-.5 2C2.2 9.6 2.2 10 2.2 12s0 2.4.1 3.4c.1 1 .3 1.6.5 2 .2.5.5.9.8 1.2.4.4.8.7 1.2.9.4.2 1 .4 2 .5 1.2.1 1.6.1 4.6.1s3.4 0 4.6-.1c1-.1 1.6-.3 2-.5.5-.2.9-.5 1.2-.9.3-.4.6-.7.8-1.2.2-.4.5-1 .5-2 .1-1 .1-1.4.1-3.4s0-2.4-.1-3.4c-.1-1-.3-1.6-.5-2-.2-.5-.5-.9-.8-1.2-.4-.4-.8-.7-1.2-.9-.4-.2-1-.4-2-.5-1.2-.1-1.6-.1-4.6-.1zM12 7.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 2.1a2.4 2.4 0 1 0 0 4.8 2.4 2.4 0 0 0 0-4.8zM18.4 6.1a1.05 1.05 0 1 1 0 2.1 1.05 1.05 0 0 1 0-2.1z"/>
               </svg>
             </a>
 
             <a href="#" aria-label="Facebook" className={styles.iconLink}>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" fill="currentColor" aria-hidden="true">
                 <path d="M22 12a10 10 0 1 0-11.5 9.9v-7H8.9v-2.9h1.6V9.1c0-1.6 1-2.5 2.4-2.5.7 0 1.4.1 1.4.1v1.6h-.8c-.8 0-1 0-1 1v1.2h1.8l-.3 2.9h-1.5v7A10 10 0 0 0 22 12z"/>
               </svg>
             </a>
