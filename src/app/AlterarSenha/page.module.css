@@ -18,13 +18,16 @@
 }
 
 .verde {
-    margin-bottom: 7rem;
+    margin-bottom: 3.5rem;
     margin-top: -3rem;
-    background-color: #0E6567;
-    width: 650px;
+    background-color: #4B8C8D;
+    width: calc(100% + 6rem); /* ocupa a largura + padding do form */
     height: 65px;
-    margin-left: -3rem;
+    margin-left: -3rem; /* "anula" o padding lateral do form */
     border-radius: 0.9rem 0.9rem 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .button {
@@ -64,9 +67,10 @@
     margin-left: 1rem;
 }
 
+
 .ImgMaior {
-    margin-left: 7.5rem;
-    margin-top: -4.5rem;
+    display: flex;
+    align-items: center;
 }
 
 .backArrow {
