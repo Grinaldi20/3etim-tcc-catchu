@@ -180,17 +180,26 @@
 
 }
 
-.icon svg{
-width: 28px;
-height: 28px;
-cursor: pointer;
-
+.Icons {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
 }
 
-.icon{
-gap: 2.5rem;
-display: flex;
+.Icons :global(svg) {
+  height: 5.5rem;
+  width: 5.5rem;
+  color: #ffffff;
+  cursor: pointer;
+  transition: transform 0.3s;
+  /* tira o transform daqui */
 }
+
+/* efeito só quando passar o mouse */
+.Icons :global(svg):hover {
+  transform: scale(1.05);
+}
+
 
 .email{
   display: flex;
