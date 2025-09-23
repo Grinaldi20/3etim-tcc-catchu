@@ -45,9 +45,9 @@ export default function Dados() {
                 </div>
 
                 <div className={styles.junto}>
-                    <a href="/AlterarSenha">
+                    <Link href="/AlterarSenha">
                         <button className={styles.button}>Alterar Senha</button>
-                    </a>
+                    </Link>
                     <button className={styles.button}>Excluir Conta</button>
                 </div>
             </form>

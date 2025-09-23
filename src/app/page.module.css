@@ -16,7 +16,7 @@
   height: 100px;
   background-color: #4B8C8D;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
- 
+  
 }
 
 
@@ -54,8 +54,14 @@
   width: 5.5rem;
   color: #ffffff;
   cursor: pointer;
+  transition: transform 0.3s;
+  /* tira o transform daqui */
 }
 
+/* efeito só quando passar o mouse */
+.Icons :global(svg):hover {
+  transform: scale(1.05);
+}
 
 .Cards {
   display: flex;
