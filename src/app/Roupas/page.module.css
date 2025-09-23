@@ -13,7 +13,7 @@
   padding: 0.5rem;
   width: 100%;
   background-color:#4B8C8D;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
 
 
@@ -43,7 +43,7 @@
   margin-right: 4rem;
 }
 
-.Icons :global(svg) {
+.Icons svg {
   height: 4.5rem;
   width: 4.5rem;
   margin-left: 1.5rem;
@@ -142,124 +142,6 @@
     margin-bottom: 0.2rem;
 }
 
-.footer {
-  color: white;
-  width: 100%;
-  position: relative;
-  bottom: 0;
-  left: 0;
-
-  display: flex;
-  flex-wrap: wrap;        /* ✅ permite quebrar linha */
-  justify-content: space-around;
-  align-items: flex-start;
-  gap: 2rem;
-  padding: 2rem;
-  box-shadow: 6px 6px 6px 12px rgba(0, 0, 0, 0.2);
-  margin-top: 10rem;
-  background: linear-gradient(to bottom, #4B8C8D 83%, #0E6567 17%); /* ✅ cor voltou */
-  text-align: center;
-}
-
-
-
-.fh1{
-  font-size: 2.2rem;
-  font-family: "Poppins";
-  margin-top: 1.5rem;
-  margin-bottom: 0.6rem;
-}
-
-.linha2{
-  width: 9rem;
-  background-color: #fff;
-  margin-bottom: 1.8rem;
- padding: 0.1rem;
-}
-
-.fh2{
-   font-size: 1.5rem;
-  font-family: "Poppins";
-   margin-bottom: 1.8rem;
-   cursor: pointer;
-
-}
-
-.icon svg{
-width: 28px;
-height: 28px;
-cursor: pointer;
-
-}
-
-.icon{
-gap: 2.5rem;
-display: flex;
-}
-
-.email{
-  display: flex;
-  gap: 9px;
- 
-}
-
-.email svg{
-  width: 28px;
-  height: 28px;
-  margin-top: -0.3rem;
-  margin-bottom: 1.8rem;
-  cursor: pointer;
-}
-
-.telefone{
-  display: flex;
-  gap: 9px;
-}
-
-.telefone svg{
-  width: 28px;
-  height: 28px;
-  margin-top: -0.3rem;
-  cursor: pointer;
-}
-
-.c {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: .5rem;
-  position: relative;     /* ✅ remove absolute */
-  margin-top: 2rem;
-  flex-basis: 100%;       /* ✅ ocupa linha inteira */
-}
-
-.c svg{
-  width: 18px;
-  height: 18px;
-}
-
-.c h2{
-  font-size: 1.3rem;
-  margin-top: 0.2rem;
-}
-
-.img2 {
-  max-width: 100%;
-  height: auto;           /* ✅ mantém proporção */
-  object-fit: contain;
-}
-
-.imagem{
-   display: flex;
-  justify-content: flex-end;
-}
-
-.gap{
-  gap: 160%;
-  display: flex;
-}
-
-
 
 .modal {
   position: fixed;
@@ -351,12 +233,106 @@ display: flex;
   color: #0E6567;
 }
 
+/* ===== Footer ===== */
+.footer {
+  background-color:#4B8C8D;
+  color: #ffffff;
+  padding: 0.7rem;
+  margin-top: 10rem;
+  box-shadow: 0 -4px 16px rgba(0,0,0,0.08);
+}
+
+.footerInner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+/* marca / logo */
+.footerBrand {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1.2rem;
+  min-width: 220px;
+}
+.footerLogo {
+  border-radius: 10px;
+  object-fit: contain;
+}
+.footerTag {
+  font-size: 1.6rem;
+  margin: 0;
+  font-weight: 600;
+}
+.footerSmall {
+  margin: 0;
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+
+
+/* social */
+.footerSocial {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  min-width: 140px;
+  justify-content: flex-end;
+}
+.iconLink{
+  display: inline-flex;
+  width: 4.4rem;
+  height: 4.4rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 300px;
+  background: rgba(255,255,255,0.06);
+  transition: transform .15s ease, background .15s ease;
+  color: #ffffff;
+  text-decoration: none;
+}
+.iconLink:hover{
+  transform: translateY(-3px);
+  background: rgba(255,255,255,0.12);
+}
+
+/* bottom line */
+.footerBottom {
+  max-width: 1200px;
+  margin: 1.4rem auto 0;
+  text-align: center;
+  font-size: 1.4rem;
+  color: rgba(255,255,255,0.85);
+}
+
+/* ===== Responsive adjustments ===== */
 @media (max-width: 768px) {
   .footer {
-    flex-direction: column;   /* ✅ vira coluna no mobile */
-    align-items: center;
+    padding: 2.4rem 1.6rem;
   }
 
+  .footerInner {
+    flex-direction: column;   /* vira coluna no mobile */
+    align-items: center;
+    gap: 1.6rem;
+  }
+
+  .footerNav {
+    gap: 1.2rem;
+    justify-content: center;
+  }
+
+  .footerSocial {
+    justify-content: center;
+  }
+
+  /* já existia este bloco no seu css — preservei e ampliei */
   .gap {
     gap: 2rem;                /* antes era 160% */
     flex-direction: column;

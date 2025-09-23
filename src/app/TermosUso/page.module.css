@@ -1,6 +1,6 @@
 /* Wrapper simulando o body */
 .pageWrapper {
-  height: 10px;
+  min-height: 100vh;   /* altura mínima tela inteira */
   background-color: #ffffff;
   font-family: "Poppins", sans-serif;
   display: flex;
@@ -65,6 +65,16 @@
   flex-wrap: wrap;
 }
 
+.CardsItens2 {
+  margin-bottom: 2rem;
+    display: flex;
+  justify-content: space-around;
+ 
+  gap: 5.5rem;
+  padding: 3rem;
+  flex-wrap: wrap;
+}
+
 .Cards {
   background-color: #ffffff;
   width: 19rem;
@@ -91,6 +101,117 @@
   color: #3b3b3b;
   font-size: 26.7px;
   font-family: "Poppins";
+}
+
+
+.footer {
+    background-color: #4B8C8D;
+  color: #ffffff;
+  padding: 0.7rem;
+  margin-top: auto;   /* faz o rodapé ir para baixo */
+  box-shadow: 0 -4px 16px rgba(0,0,0,0.08);
+  width: 100%;
+}
+
+.footerInner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+/* marca / logo */
+.footerBrand {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1.2rem;
+  min-width: 220px;
+}
+.footerLogo {
+  border-radius: 10px;
+  object-fit: contain;
+}
+.footerTag {
+  font-size: 1.2rem;
+  margin: 0;
+  font-weight: 600;
+}
+.footerSmall {
+  margin: 0;
+  font-size: 1.0rem;
+  opacity: 0.9;
+}
+
+
+
+/* social */
+.footerSocial {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  min-width: 140px;
+  justify-content: flex-end;
+}
+.iconLink{
+  display: inline-flex;
+  width: 3.3rem;
+  height: 3.3rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 300px;
+  background: rgba(255,255,255,0.06);
+  transition: transform .15s ease, background .15s ease;
+  color: #ffffff;
+  text-decoration: none;
+}
+.iconLink:hover{
+  transform: translateY(-3px);
+  background: rgba(255,255,255,0.12);
+}
+
+/* bottom line */
+.footerBottom {
+  max-width: 1200px;
+  margin: 1.4rem auto 0;
+  text-align: center;
+  font-size: 1rem;
+  color: rgba(255,255,255,0.85);
+}
+
+/* ===== Responsive adjustments ===== */
+@media (max-width: 768px) {
+  .footer {
+    padding: 2.4rem 1.6rem;
+  }
+
+  .footerInner {
+    flex-direction: column;   /* vira coluna no mobile */
+    align-items: center;
+    gap: 1.6rem;
+  }
+
+  .footerNav {
+    gap: 1.2rem;
+    justify-content: center;
+  }
+
+  .footerSocial {
+    justify-content: center;
+  }
+
+  /* já existia este bloco no seu css — preservei e ampliei */
+  .gap {
+    gap: 2rem;                /* antes era 160% */
+    flex-direction: column;
+  }
+
+  .imagem {
+    justify-content: center;
+  }
 }
 
 
