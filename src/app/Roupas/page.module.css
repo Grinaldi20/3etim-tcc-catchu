@@ -43,7 +43,7 @@
   margin-right: 4rem;
 }
 
-.Icons :global(svg) {
+.Icons svg {
   height: 4.5rem;
   width: 4.5rem;
   margin-left: 1.5rem;
@@ -237,13 +237,13 @@
 .footer {
   background-color:#4B8C8D;
   color: #ffffff;
-  padding: 2rem;
-  margin-top: 12rem;
+  padding: 0.7rem;
+  margin-top: 10rem;
   box-shadow: 0 -4px 16px rgba(0,0,0,0.08);
 }
 
 .footerInner {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
