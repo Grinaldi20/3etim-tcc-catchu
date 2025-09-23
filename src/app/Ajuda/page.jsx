@@ -103,9 +103,11 @@ export default function Ajuda() {
             </div>
           </details>
 
-         <h2>Não encontrou sua dúvida? Nos conte o problema!</h2>
-         <button>Nos Conte</button>
+         <h2 className={styles.h2}>Não encontrou sua dúvida? Nos conte o problema!</h2>
 
+            <Link href="/Feedback">
+         <button className={styles.button}>Nos Conte</button>
+  </Link>
         </div>
 
       </div>

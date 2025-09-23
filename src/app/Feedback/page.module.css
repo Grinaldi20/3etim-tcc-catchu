@@ -1,6 +1,6 @@
 /* Wrapper simulando o body */
 .pageWrapper {
-  height: 10px;
+ min-height: 100vh; 
   background-color: #ffffff;
   font-family: "Poppins", sans-serif;
   display: flex;
@@ -25,6 +25,7 @@ object-fit: contain;
  margin-left: -70rem;
  width: 500px;
  height: 500px;
+ margin-bottom: 5rem;
 }
 
  .voltar {
@@ -78,7 +79,7 @@ object-fit: contain;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 1rem;
+  padding-top: 6.5rem;
 }
 
 /* FORMULÁRIO */
@@ -89,6 +90,7 @@ object-fit: contain;
   border-radius: 16px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   text-align: center;
+
 }
 
 .formTitle {
@@ -116,15 +118,20 @@ object-fit: contain;
   background-color: #f9f9f9;
   color: #000000;
   font-family: 'Roboto', sans-serif;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 4px rgba(0, 59, 23, 0.582);
   transition: border-color 0.3s ease;
   border: none;
+     transition: transform 0.3s;
 }
 
 .textarea:focus {
   outline: none;
   border: 2px solid #0E6567;
   background-color: #fff;
+}
+
+.textarea:hover{
+   transform: scale(1.02);
 }
 
 /* AVALIAÇÃO */
@@ -168,17 +175,132 @@ object-fit: contain;
   background-color: #0E6567;
   color: white;
   cursor: pointer;
-  width: 20rem;
+  width: 17rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
   margin-top: 1rem;
-  height: 40px;
+  height: 42px;
   font-family: "Arial", sans-serif;
   font-weight: bold;
+   transition: transform 0.3s;
 }
 
 .button:hover {
   background-color: white;
   border: 2px solid #0E6567;
   color: #0E6567;
+  transform: scale(1.10);
 }
+
+
+  .footer {
+    background-color: #4B8C8D;
+  color: #ffffff;
+  padding: 0.7rem;
+  margin-top: auto;   /* faz o rodapé ir para baixo */
+  box-shadow: 0 -4px 16px rgba(0,0,0,0.08);
+  width: 100%;
+}
+
+.footerInner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+/* marca / logo */
+.footerBrand {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1.2rem;
+  min-width: 220px;
+}
+.footerLogo {
+  border-radius: 10px;
+  object-fit: contain;
+}
+.footerTag {
+  font-size: 1.2rem;
+  margin: 0;
+  font-weight: 600;
+}
+.footerSmall {
+  margin: 0;
+  font-size: 1.0rem;
+  opacity: 0.9;
+}
+
+
+
+/* social */
+.footerSocial {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  min-width: 140px;
+  justify-content: flex-end;
+}
+.iconLink{
+  display: inline-flex;
+  width: 3.3rem;
+  height: 3.3rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 300px;
+  background: rgba(255,255,255,0.06);
+  transition: transform .15s ease, background .15s ease;
+  color: #ffffff;
+  text-decoration: none;
+}
+.iconLink:hover{
+  transform: translateY(-3px);
+  background: rgba(255,255,255,0.12);
+}
+
+/* bottom line */
+.footerBottom {
+  max-width: 1200px;
+  margin: 1.4rem auto 0;
+  text-align: center;
+  font-size: 1rem;
+  color: rgba(255,255,255,0.85);
+}
+
+/* ===== Responsive adjustments ===== */
+@media (max-width: 768px) {
+  .footer {
+    padding: 2.4rem 1.6rem;
+  }
+
+  .footerInner {
+    flex-direction: column;   /* vira coluna no mobile */
+    align-items: center;
+    gap: 1.6rem;
+  }
+
+  .footerNav {
+    gap: 1.2rem;
+    justify-content: center;
+  }
+
+  .footerSocial {
+    justify-content: center;
+  }
+
+  /* já existia este bloco no seu css — preservei e ampliei */
+  .gap {
+    gap: 2rem;                /* antes era 160% */
+    flex-direction: column;
+  }
+
+  .imagem {
+    justify-content: center;
+  }
+}
+
+
