@@ -74,7 +74,7 @@ export default function Carrinho() {
                  quality={100}
       />
       <div className={styles.itemInfo}>
-        <div className={styles.itemTitle}>Caderno rosa neon da Tilibra</div>
+        <div className={styles.itemTitle}>Caderno rosa Neon da Tilibra</div>
         <div className={styles.itemText}>Encontrada dia: 09/08/2024</div>
         <div className={styles.itemText}>Local: Refeitório</div>
         <div className={styles.itemText}>Classificação: Objetos gerais</div>

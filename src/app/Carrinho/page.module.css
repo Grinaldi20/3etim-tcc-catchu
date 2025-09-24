@@ -42,7 +42,12 @@
     font-size: 22px;
     cursor: pointer;
     color: white;
+    transition: transform 0.2s ease;
   }
+
+.backArrow :hover{
+    transform: scale(1.06);
+}
 
   .backArrow svg {
     width: 30px;
@@ -97,13 +102,13 @@
   background-color: #0E6567; 
   color: white;
   cursor: pointer;
-  width: 8rem;
+  width: 8.5rem;
   height: 2.5rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
   transition: all 0.3s ease;
   font-family: "Arial";
   font-size: 15px;
-  
+    transition: transform 0.2s ease;
 }
 
 .button:hover {
@@ -111,6 +116,7 @@
   background-color: white;
   border: 2px solid #0E6567; 
   color: #0E6567;
+  transform: scale(1.03);
 }
   
 .footer{
