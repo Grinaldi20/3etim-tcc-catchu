@@ -13,7 +13,7 @@ export default function CardCategoria({ obj, onClick }) {
 
             <div className={styles.linha}></div>
             <h3 className={styles.h3}>{obj.obj_descricao}</h3>
-            <button className={styles.button} onClick={() => onClick(obj)}>Saber Mais</button>
+            <button className={styles.button} onClick={() => onClick(obj)}>Resgatado</button>
         </div>
 
 

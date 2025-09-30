@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import CardCategoria from "@/components/categorias/card";
+import CardCategoria from "@/components/categorias/card2";
 import styles from "./page.module.css";
 import objetos from "@/mockup/objetos";
 
@@ -72,6 +72,10 @@ export default function ObjetosGerais() {
         </div>
 
         <div className={styles.CardsItens}>
+
+
+
+
         {
           objetos.map(item => <CardCategoria obj={item} onClick={() => abrirModal(item)} />)
         }
@@ -93,7 +97,7 @@ export default function ObjetosGerais() {
             <p><strong>Encontrada dia:</strong>{itemSelecionado.obj_data_publicacao}</p>
             <p><strong>Local:</strong>{itemSelecionado.obj_local_encontrado}</p>
             <p><strong>Classificação:</strong>{itemSelecionado.obj_status}</p>
-            <button>Reservar</button>
+            <h2>Já Foi Resgatado</h2>
           </div>
         </div>
       )}

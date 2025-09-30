@@ -43,7 +43,7 @@ export default function Carrinho() {
         <div className={styles.itemText}>Encontrada dia: 09/08/2024</div>
         <div className={styles.itemText}>Local: Refeitório</div>
         <div className={styles.itemText}>Classificação: Objetos gerais</div>
-        <button className={styles.button}>Reservado</button>
+        <button className={styles.button}>Excluir</button>
       </div>
     </div>
     
@@ -60,7 +60,7 @@ export default function Carrinho() {
         <div className={styles.itemText}>Encontrada dia: 09/08/2024</div>
         <div className={styles.itemText}>Local: Refeitório</div>
         <div className={styles.itemText}>Classificação: Objetos gerais</div>
-        <button className={styles.button}>Reservado</button>
+        <button className={styles.button}>Excluir</button>
       </div>
     </div>
 
@@ -78,7 +78,7 @@ export default function Carrinho() {
         <div className={styles.itemText}>Encontrada dia: 09/08/2024</div>
         <div className={styles.itemText}>Local: Refeitório</div>
         <div className={styles.itemText}>Classificação: Objetos gerais</div>
-        <button className={styles.button}>Reservado</button>
+        <button className={styles.button}>Excluir</button>
       </div>
     </div>
   </div>
