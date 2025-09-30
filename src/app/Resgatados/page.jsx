@@ -7,7 +7,7 @@ import CardCategoria from "@/components/categorias/card";
 import styles from "./page.module.css";
 import objetos from "@/mockup/objetos";
 
-export default function Resgatados() {
+export default function ObjetosGerais() {
   const [modalAberto, setModalAberto] = useState(false);
   const [itemSelecionado, setItemSelecionado] = useState(
     {
@@ -82,7 +82,7 @@ export default function Resgatados() {
       {modalAberto && (
         <div className={styles.modal}>
           <div className={styles.modalContent}>
-            <div className={styles.fechar} onClick={fecharModal}  >
+             <div className={styles.fechar} onClick={fecharModal}  >
      <svg fill="#0E6567" width="256px" height="256px" viewBox="0 0 1024.00 1024.00" xmlns="http://www.w3.org/2000/svg" 
      stroke="#0E6567" stroke-width="0.01024"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier"
       stroke-linecap="round" stroke-linejoin="round" stroke="#0E6567" stroke-width="26.624000000000002"></g><g 
@@ -99,12 +99,9 @@ export default function Resgatados() {
       )}
      
 
-    
-     
-     
     </main>
 
- <footer className={styles.footer}>
+  <footer className={styles.footer}>
         <div className={styles.footerInner}>
           <div className={styles.footerBrand}>  
             <Link href="/">
@@ -151,6 +148,7 @@ export default function Resgatados() {
           <p>© {new Date().getFullYear()} SeuProjeto. Todos os direitos reservados.</p>
         </div>
       </footer>
+
 
 
     </div>
