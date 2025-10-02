@@ -11,7 +11,13 @@
     padding: 15px;
     border-radius: 20px;
     margin-bottom: 5rem;
+     transition: transform 1s;
 }
+
+.Cards:hover{
+      transform: scale(1.05);
+}
+
 
 .h3 {
     margin-bottom: 1.5rem;
@@ -37,6 +43,7 @@
     transition: all 0.3s ease;
     font-family: "Arial";
     font-size: 18px;
+     transition: transform 1s;
 }
 
 .button:hover {
@@ -44,6 +51,7 @@
     background-color: white;
     border: 3px solid #0E6567;
     color: #0E6567;
+      transform: scale(1.05);
 }
 
 
