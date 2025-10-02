@@ -35,17 +35,25 @@
 }
 
 .Icons {
-  margin-right: 4rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-right: 1.5rem;
 }
 
 .Icons :global(svg) {
-  height: 4.5rem;
-  width: 4.5rem;
-  margin-left: 1.5rem;
+  height: 5.5rem;
+  width: 5.5rem;
   color: #ffffff;
   cursor: pointer;
+  transition: transform 0.3s;
+  /* tira o transform daqui */
 }
 
+/* efeito só quando passar o mouse */
+.Icons :global(svg):hover {
+  transform: scale(1.05);
+}
 .centro{
     text-align: center;
     margin-bottom: 8rem;

@@ -24,8 +24,8 @@ export default function Dados() {
           <Image
             className={styles.ImgMaior}
             src="/logo1.png"
-            width={50}
-            height={50}
+            width={60}
+            height={60}
             alt="Logo Maior"
             quality={100}
           />

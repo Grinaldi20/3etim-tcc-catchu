@@ -48,10 +48,12 @@
 .Pesquisa input::placeholder {
   color: white;
 }
+
 .Icons {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
+
 }
 
 .Icons :global(svg) {
@@ -67,7 +69,6 @@
 .Icons :global(svg):hover {
   transform: scale(1.05);
 }
-
 .titulo {
   text-align: center;
   font-size: 3rem;
@@ -275,27 +276,6 @@
   margin-bottom: 1rem;
 }
 
-.button {
-  border-radius: 12px;
-  border: 2px solid white; 
-  background-color: #0E6567; 
-  color: white;
-  cursor: pointer;
-  width: 15rem;
-  height: 3.5rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
-  transition: all 0.3s ease;
-  font-family: "Arial";
-  font-size: 18px;
-  
-}
-
-.button:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); 
-  background-color: white;
-  border: 2px solid #0E6567; 
-  color: #0E6567;
-}
 
 
 .CardsItens .Cards img{

@@ -34,7 +34,7 @@
 
 .button {
     border-radius: 16px;
-    border: 2px solid white;
+    border: 3px solid white;
     padding: 10px 20px;
     background-color: #0E6567;
     color: white;
@@ -44,16 +44,18 @@
     transition: all 0.3s ease;
     display: block;
     margin: 1rem auto 0;
-    height: 40px;
+    height: 50px;
     font-family: "Arial";
     font-weight: bold;
+      transition: transform 0.5s;
 }
 
 .button:hover {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
     background-color: white;
-    border: 2px solid #0E6567;
+    border: 3px solid #0E6567;
     color: #0E6567;
+     transform: scale(1.03);
 }
 
 .junto {

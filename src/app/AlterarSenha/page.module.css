@@ -7,7 +7,7 @@
 }
 
 .form {
-    position: relative; 
+    position: relative;
     background-color: #fff;
     padding: 3rem;
     width: 650px;
@@ -21,9 +21,11 @@
     margin-bottom: 3.5rem;
     margin-top: -3rem;
     background-color: #4B8C8D;
-    width: calc(100% + 6rem); /* ocupa a largura + padding do form */
+    width: calc(100% + 6rem);
+    /* ocupa a largura + padding do form */
     height: 65px;
-    margin-left: -3rem; /* "anula" o padding lateral do form */
+    margin-left: -3rem;
+    /* "anula" o padding lateral do form */
     border-radius: 0.9rem 0.9rem 0 0;
     display: flex;
     align-items: center;
@@ -32,26 +34,28 @@
 
 .button {
     border-radius: 16px;
-    border: 2px solid white;
+    border: 3px solid white;
     padding: 10px 20px;
     background-color: #0E6567;
     color: white;
     cursor: pointer;
-    width: 20rem;
+    width: 16rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
     display: block;
     margin: 1rem auto 0;
-    height: 55px;
+    height: 50px;
     font-family: "Arial";
     font-weight: bold;
+     transition: transform 0.5s;
 }
 
 .button:hover {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
     background-color: white;
-    border: 2px solid #0E6567;
+    border: 3px solid #0E6567;
     color: #0E6567;
+     transform: scale(1.04);
 }
 
 .junto {
@@ -84,21 +88,21 @@
 
 .backArrow svg {
     width: 30px;
-    height: 20px;
+    height: 30px;
 }
 
 
-.formGroup  {
+.formGroup {
     display: flex;
     align-items: center;
     border-bottom: 2px solid #3a7c7b;
     margin: 20px 0;
-     color: #0E6567;
+    color: #0E6567;
     padding: 5px;
-     margin-bottom: 3.5rem;
+    margin-bottom: 3.5rem;
 }
 
-.formGroup  input {
+.formGroup input {
     border: none;
     outline: none;
     color: #000000;
@@ -107,17 +111,17 @@
     transition: transform 0.2s ease;
 }
 
-.formGroup  input:focus {
+.formGroup input:focus {
     transform: scale(1.05);
     outline: none;
     background-color: #ffffff;
 }
 
-.formGroup  .icon {
+.formGroup .icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 10px ;  
+    margin-right: 10px;
 
 }
 
@@ -126,11 +130,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 3px ;  
+    margin-right: 3px;
 }
 
 
-.formGroup2  {
+.formGroup2 {
     display: flex;
     align-items: center;
     border-bottom: 2px solid #3a7c7b;
@@ -141,41 +145,42 @@
 }
 
 
-.formGroup2  input {
+.formGroup2 input {
     border: none;
     outline: none;
     color: #000000;
     font-size: 1rem;
     flex: 1;
     transition: transform 0.2s ease;
+    
 }
 
-.formGroup2  input:focus {
+.formGroup2 input:focus {
     transform: scale(1.05);
     outline: none;
     background-color: #ffffff;
 }
 
-.icon > svg {
+.icon>svg {
     color: #0E6567;
-    width: 40px;  
+    width: 40px;
     height: 40px;
-    
+
 }
 
 
 .input::placeholder {
     font-size: 2rem;
     font-family: "Roboto";
-    
-   
+
+
 }
 
-.formGroup2  .icon {
+.formGroup2 .icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 10px ;  
+    margin-right: 10px;
 
 }
 
@@ -184,19 +189,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 3px ;  
+    margin-right: 3px;
 }
 
-.icon2 > svg {
+.icon2>svg {
     color: #0E6567;
-    width: 40px;  
+    width: 40px;
     height: 40px;
 }
 
 .span {
-  color: #0E6567;
-  font-size: 0.875rem;
-  text-align: center;
-  margin-left: 155px;
-  margin-top: -2rem;
+    color: #0E6567;
+    font-size: 0.875rem;
+    text-align: center;
+    margin-left: 155px;
+    margin-top: -2rem;
 }
