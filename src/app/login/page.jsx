@@ -10,8 +10,8 @@ export default function Cadastro() {
 
         <Image className={styles.ImgMaior}
           src="/logo1.png"
-          width={650}
-          height={450}
+          width={120}
+          height={100}
           alt="Logo Maior"
           quality={100}
         />

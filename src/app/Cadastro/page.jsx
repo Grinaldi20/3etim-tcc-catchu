@@ -9,8 +9,8 @@ export default function Cadastro() {
 
         <Image className={styles.ImgMaior}
           src="/logo1.png"
-          width={500}
-          height={380}
+          width={150}
+          height={150}
           alt="Logo Maior"
           quality={100}
         />
@@ -19,14 +19,14 @@ export default function Cadastro() {
 
         <h2 className={styles.subtitulo} >Bem-vindo de volta</h2>
         <h3 className={styles.texto} >Acesse sua conta agora</h3>
-        <a href="/Carrinho">
+        <a href="/login">
 
           <button className={styles.button2}>Entrar</button>
         </a>
         <Image className={styles.ImgMenor}
           src="/logo2.png"
-          width={500}
-          height={380}
+          width={400}
+          height={400}
           alt="Logo Menor"
           quality={100}
         />
