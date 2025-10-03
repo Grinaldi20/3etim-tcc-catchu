@@ -1,17 +1,12 @@
-
 .pageWrapper {
-  min-height: 100vh;   /* altura mínima tela inteira */
-  background-color: #ffffff;
+  min-height: 100vh;
   font-family: "Poppins", sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: 0;
 }
 
-.main{
-    font-family: "Poppins";
+.main {
+  padding-top: 100px; /* garante que o conteúdo não fique atrás do header */
 }
-
 
 .topoFeedback {
   width: 100%;
@@ -20,8 +15,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  
+  padding: 0 2rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  position:absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
 .logoFeedback {
@@ -30,31 +30,31 @@ object-fit: contain;
 }
 
  .voltar {
-    font-size: 25px;
-    color: #ffffff;
-    cursor: pointer;
-    margin-right: 3rem;
-    margin-top: 0.5rem;
-     transition: transform 0.3s;
-  }
+  font-size: 22px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
 
-  .voltar:hover{
-     transform: scale(1.10);
-  }
+.voltar:hover {
+  transform: scale(1.1);
+}
 
-  .voltar svg{
-    width: 40px;
-    height: 40px;
-  }
+.voltar svg {
+  width: 34px;
+  height: 34px;
+}
 
   .a{
     text-decoration: none;
   }
 
 
+
+
 .tituloContainer {
   text-align: center;
-  margin-top: -0rem;
+  margin-top: -2rem;
 }
 
 .titulo {
@@ -280,6 +280,150 @@ object-fit: contain;
   font-size: 1rem;
   color: rgba(255,255,255,0.85);
 }
+
+
+/* ======= ESTILO GLOBAL DA PÁGINA SOBRE ======= */
+
+.pageWrapper {
+
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  padding: 2rem;
+}
+
+/* ======= TÍTULOS ======= */
+.sectionTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  color: #0E6567;
+  margin-bottom: 1rem;
+}
+
+.sectionTitle::after {
+  content: "";
+  width: 80px;
+  height: 4px;
+  background: #0E6567;
+  display: block;
+  margin: 0.5rem auto 0;
+  border-radius: 4px;
+}
+
+/* ======= PARÁGRAFOS ======= */
+.sectionText {
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #475569;
+  text-align: center;
+}
+
+
+/* ======= LINHA DO TEMPO ======= */
+.timeline {
+  position: relative;
+  border-left: 4px solid #4B8C8D;
+  margin: 2rem auto;
+  padding-left: 2rem;
+  max-width: 700px;
+}
+
+.timelineItem {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.timelineItem::before {
+  content: "";
+  position: absolute;
+  left: -38px;
+  top: 6px;
+  width: 18px;
+  height: 18px;
+  background: #4B8C8D;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+}
+
+/* ======= EQUIPE ======= */
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+  margin-top: 2rem;
+  justify-content: center;
+}
+
+.teamCard {
+  background: #ffffff;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+}
+
+.teamCard:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
+}
+
+.teamCard img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+
+.teamCardContent {
+  padding: 1rem;
+}
+
+.teamName {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.3rem;
+}
+
+.teamRole {
+  color: #0E6567;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.teamDesc {
+  font-size: 0.95rem;
+  color: #475569;
+  line-height: 1.5;
+}
+
+.display {
+  display: flex;
+  gap: 5rem
+}
+
+.centroCards{
+  align-items: center;
+}
+
+/* ======= RESPONSIVIDADE ======= */
+@media (max-width: 640px) {
+  .sectionTitle {
+    font-size: 2rem;
+  }
+
+  .sectionText {
+    font-size: 1rem;
+  }
+}
+
 
 /* ===== Responsive adjustments ===== */
 @media (max-width: 768px) {
