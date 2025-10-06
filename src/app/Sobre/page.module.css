@@ -5,7 +5,12 @@
 }
 
 .main {
-  padding-top: 100px; /* garante que o conteúdo não fique atrás do header */
+  padding-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* mantém os cards em coluna, se for um só */
+  min-height: calc(100vh - 100px); 
 }
 
 .topoFeedback {
@@ -328,6 +333,7 @@ object-fit: contain;
   margin: 2rem auto;
   padding-left: 2rem;
   max-width: 700px;
+  
 }
 
 .timelineItem {
@@ -406,11 +412,21 @@ object-fit: contain;
 
 .display {
   display: flex;
-  gap: 5rem
+  gap: 5rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  
 }
 
 .centroCards{
   align-items: center;
+  display: flex;
+  justify-content: center;  /* centraliza horizontalmente */
+  align-items: center;      /* centraliza verticalmente */
+  flex-wrap: wrap;          /* quebra linha se tiver vários cards */
+  gap: 2rem;                /* espaçamento entre os cards */   
 }
 
 /* ======= RESPONSIVIDADE ======= */
