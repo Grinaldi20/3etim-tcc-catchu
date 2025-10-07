@@ -47,32 +47,14 @@ export default function Sobre() {
   <div className={styles.pageWrapper}>
       <h1 className={styles.sectionTitle}>Sobre Nós</h1>
       <p className={styles.sectionText}>
-        O <strong>Achados & Perdidos Escolar</strong> é uma plataforma criada em <strong>2025</strong> 
-        como parte do nosso <strong>TCC</strong>, com o objetivo de facilitar a recuperação de 
-        objetos perdidos no ambiente escolar.
+        O Achados & Perdidos Escolar é uma plataforma desenvolvida em 2025 como parte do nosso Trabalho de Conclusão de Curso (TCC), criada com o propósito de modernizar e simplificar o processo de recuperação de objetos perdidos no ambiente escolar.
+
+Por meio de uma interface intuitiva e acessível, o sistema permite que alunos, professores e funcionários cadastrem e localizem pertences extraviados com agilidade, reduzindo o tempo de busca e promovendo um ambiente mais organizado, seguro e colaborativo.
+
+Além disso, o projeto reflete nosso compromisso com a inovação tecnológica e a cidadania digital, mostrando como soluções simples podem transformar o dia a dia escolar e incentivar o senso de responsabilidade entre os usuários.
       </p>
 
-      {/* Linha do tempo */}
-      <div className={styles.timeline}>
-        <div className={styles.timelineItem}>
-          <h3>Início da Ideia</h3>
-          <p>No começo de 2025, surgiu a proposta...</p>
-        </div>
-        <div className={styles.timelineItem}>
-          <h3>Formação da Equipe</h3>
-          <p>Sete integrantes se reuniram...</p>
-        </div>
-        <div className={styles.timelineItem}>
-          <h3>Trabalho de Conclusão de Curso</h3>
-          <p>O projeto foi desenvolvido como TCC...</p>
-        </div>
-        <div className={styles.timelineItem}>
-          <h3>Visão de Futuro</h3>
-          <p>Expandir para outras instituições...</p>
-        </div>
-      </div>
-
-      {/* Equipe */}
+    
 
 <div className={styles.centroCards}>
 
@@ -81,9 +63,9 @@ export default function Sobre() {
  
       <div className={styles.teamGrid}>
         <div className={styles.teamCard}>
-          <img src="/logo1.png" alt="Fulano da Silva" />
+          <img src="/logo1.png" alt="Murilo Grinaldi" />
           <div className={styles.teamCardContent}>
-            <h3 className={styles.teamName}>Fulano da Silva</h3>
+            <h3 className={styles.teamName}>Murilo Grinaldi</h3>
             <p className={styles.teamRole}>Front-end</p>
             <p className={styles.teamDesc}>
               Responsável pela interface do usuário e experiência visual.
@@ -95,9 +77,9 @@ export default function Sobre() {
 
    <div className={styles.teamGrid}>
         <div className={styles.teamCard}>
-          <img src="/logo1.png" alt="Fulano da Silva" />
+          <img src="/Pedro.png" alt="Pedro Martins" />
           <div className={styles.teamCardContent}>
-            <h3 className={styles.teamName}>Fulano da Silva</h3>
+            <h3 className={styles.teamName}>Pedro Martins</h3>
             <p className={styles.teamRole}>Front-end</p>
             <p className={styles.teamDesc}>
               Responsável pela interface do usuário e experiência visual.
@@ -109,12 +91,12 @@ export default function Sobre() {
 
        <div className={styles.teamGrid}>
         <div className={styles.teamCard}>
-          <img src="/logo1.png" alt="Fulano da Silva" />
+          <img src="/Thiago.png" alt="Thiago Sampaio" />
           <div className={styles.teamCardContent}>
-            <h3 className={styles.teamName}>Fulano da Silva</h3>
-            <p className={styles.teamRole}>Front-end</p>
+            <h3 className={styles.teamName}>Thiago Sampaio</h3>
+            <p className={styles.teamRole}>FullStack</p>
             <p className={styles.teamDesc}>
-              Responsável pela interface do usuário e experiência visual.
+              Responsável pela interface e o Back-end.
             </p>
           </div>
         </div>
@@ -124,12 +106,12 @@ export default function Sobre() {
  <div className={styles.display}>
        <div className={styles.teamGrid}>
         <div className={styles.teamCard}>
-          <img src="/logo1.png" alt="Fulano da Silva" />
+          <img src="/logo1.png" alt="Caiani" />
           <div className={styles.teamCardContent}>
-            <h3 className={styles.teamName}>Fulano da Silva</h3>
-            <p className={styles.teamRole}>Front-end</p>
+            <h3 className={styles.teamName}>Caiani</h3>
+            <p className={styles.teamRole}>Banco de Dados</p>
             <p className={styles.teamDesc}>
-              Responsável pela interface do usuário e experiência visual.
+              Responsável pelo Banco onde fica todas informações.
             </p>
           </div>
         </div>
@@ -138,12 +120,12 @@ export default function Sobre() {
 
        <div className={styles.teamGrid}>
         <div className={styles.teamCard}>
-          <img src="/logo1.png" alt="Fulano da Silva" />
+          <img src="/Luis.png" alt="Luis Otavio" />
           <div className={styles.teamCardContent}>
-            <h3 className={styles.teamName}>Fulano da Silva</h3>
-            <p className={styles.teamRole}>Front-end</p>
+            <h3 className={styles.teamName}>Luis Otavio</h3>
+            <p className={styles.teamRole}>Documentação</p>
             <p className={styles.teamDesc}>
-              Responsável pela interface do usuário e experiência visual.
+              Responsável pela Documentação do TCC
             </p>
           </div>
         </div>
@@ -152,12 +134,12 @@ export default function Sobre() {
 
        <div className={styles.teamGrid}>
         <div className={styles.teamCard}>
-          <img src="/logo1.png" alt="Fulano da Silva" />
+          <img src="/logo1.png" alt="João Vitor" />
           <div className={styles.teamCardContent}>
-            <h3 className={styles.teamName}>Fulano da Silva</h3>
-            <p className={styles.teamRole}>Front-end</p>
+            <h3 className={styles.teamName}>João Vitor</h3>
+            <p className={styles.teamRole}>Documentação</p>
             <p className={styles.teamDesc}>
-              Responsável pela interface do usuário e experiência visual.
+              Responsável pela Documentação do TCC.
             </p>
           </div>
         </div>
@@ -167,12 +149,12 @@ export default function Sobre() {
  <div className={styles.display}>
        <div className={styles.teamGrid}>
         <div className={styles.teamCard}>
-          <img src="/logo1.png" alt="Fulano da Silva" />
+          <img src="/logo1.png" alt="Thiago Paci" />
           <div className={styles.teamCardContent}>
-            <h3 className={styles.teamName}>Fulano da Silva</h3>
-            <p className={styles.teamRole}>Front-end</p>
+            <h3 className={styles.teamName}>Thiago Paci</h3>
+            <p className={styles.teamRole}>Apoio Moral</p>
             <p className={styles.teamDesc}>
-              Responsável pela interface do usuário e experiência visual.
+              Responsável por incentivar a equipe.
             </p>
           </div>
         </div>
