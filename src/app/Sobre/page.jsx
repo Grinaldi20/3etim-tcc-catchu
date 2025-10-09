@@ -4,6 +4,37 @@ import Link from "next/link";
 import styles from './page.module.css';
 
 export default function Sobre() {
+ const [modalAberto, setModalAberto] = useState(false);
+  const [itemSelecionado, setItemSelecionado] = useState(
+    {
+      "obj_id": 0,
+      "categ_id": 0,
+      "usu_id": 0,
+      "obj_descricao": "",
+      "obj_foto": "",
+      "obj_local_encontrado": "",
+      "obj_data_publicacao": "",
+      "obj_status": "",
+      "obj_encontrado": 0
+    }
+  );
+
+  function abrirModal(item) {
+    setItemSelecionado(item);
+    setModalAberto(true);
+  }
+
+  function fecharModal() {
+    setModalAberto(false);
+  }
+
+
+  // console.log(objetos)
+
+
+
+
+
   return (
     <main className={styles.main}>
       <Head>
@@ -106,7 +137,7 @@ Além disso, o projeto reflete nosso compromisso com a inovação tecnológica e
  <div className={styles.display}>
        <div className={styles.teamGrid}>
         <div className={styles.teamCard}>
-          <img src="/logo1.png" alt="Caiani" />
+          <img src="/caiani.png" alt="Caiani" />
           <div className={styles.teamCardContent}>
             <h3 className={styles.teamName}>Caiani</h3>
             <p className={styles.teamRole}>Banco de Dados</p>
@@ -149,7 +180,7 @@ Além disso, o projeto reflete nosso compromisso com a inovação tecnológica e
  <div className={styles.display}>
        <div className={styles.teamGrid}>
         <div className={styles.teamCard}>
-          <img src="/logo1.png" alt="Thiago Paci" />
+          <img src="/paci.png" alt="Thiago Paci" />
           <div className={styles.teamCardContent}>
             <h3 className={styles.teamName}>Thiago Paci</h3>
             <p className={styles.teamRole}>Apoio Moral</p>
