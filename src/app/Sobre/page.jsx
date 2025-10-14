@@ -1,21 +1,20 @@
+"use client";
+
+import { useState } from "react";
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from "next/link";
 import styles from './page.module.css';
+import objetos from "@/sobre/descricao.js";
 
 export default function Sobre() {
  const [modalAberto, setModalAberto] = useState(false);
   const [itemSelecionado, setItemSelecionado] = useState(
     {
-      "obj_id": 0,
-      "categ_id": 0,
-      "usu_id": 0,
-      "obj_descricao": "",
-      "obj_foto": "",
-      "obj_local_encontrado": "",
-      "obj_data_publicacao": "",
-      "obj_status": "",
-      "obj_encontrado": 0
+     "desc_nome": "",
+      "desc_foto": "",
+      "desc_sobre":  "" ,
+                 
     }
   );
 
@@ -91,6 +90,33 @@ Além disso, o projeto reflete nosso compromisso com a inovação tecnológica e
 
           <h2 className={styles.sectionTitle}>Nossa Equipe</h2>
       <div className={styles.display}>
+
+           {
+          objetos.map(item => <CardCategoria obj={item} onClick={() => abrirModal(item)} />)
+        }
+
+  
+
+      {/* Modal */}
+      {modalAberto && (
+        <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            <div className={styles.fechar} onClick={fecharModal}  >
+              <svg fill="#0E6567" width="256px" height="256px" viewBox="0 0 1024.00 1024.00" xmlns="http://www.w3.org/2000/svg"
+                stroke="#0E6567" stroke-width="0.01024"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round" stroke-linejoin="round" stroke="#0E6567" stroke-width="26.624000000000002"></g><g
+                    id="SVGRepo_iconCarrier"><path d="M604.7 759.2l61.8-61.8L481.1 512l185.4-185.4-61.8-61.8L357.5 512z"></path></g></svg>
+            </div>
+            <h1 className={styles.tituloSecao}>{itemSelecionado.obj_descricao}</h1>
+            <Image src={itemSelecionado.obj_foto} alt={itemSelecionado.obj_descricao} width={250} height={250} />
+            <p><strong>Encontrada dia:</strong>{itemSelecionado.obj_data_publicacao}</p>
+            <p><strong>Local:</strong>{itemSelecionado.obj_local_encontrado}</p>
+            <p><strong>Classificação:</strong>{itemSelecionado.obj_status}</p>
+            <button>Reservar</button>
+          </div>
+        </div>
+      )}
+
  
       <div className={styles.teamGrid}>
         <div className={styles.teamCard}>
