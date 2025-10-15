@@ -1,0 +1,84 @@
+
+.teamCard {
+  background: #ffffff;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+}
+
+.teamCard:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
+}
+
+.teamCard img {
+  width: 300px;
+  height: 280px;
+  object-fit: cover;
+}
+
+
+.teamCardContent {
+  padding: 1rem;
+}
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+  margin-top: 2rem;
+  justify-content: center;
+}
+
+
+
+.teamCardContent {
+  padding: 1rem;
+}
+
+.teamName {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.3rem;
+}
+
+.teamRole {
+  color: #0E6567;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.teamDesc {
+  font-size: 0.95rem;
+  color: #131313;
+  line-height: 1.5;
+}
+
+.button {
+    border-radius: 16px;
+    border: 3px solid white;
+    background-color: #0E6567;
+    color: white;
+    cursor: pointer;
+    width: 7rem;
+    height: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    font-family: "Arial";
+    font-size: 18px;
+     transition: transform 1s;
+}
+
+.button:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    background-color: white;
+    border: 3px solid #0E6567;
+    color: #0E6567;
+      transform: scale(1.05);
+}

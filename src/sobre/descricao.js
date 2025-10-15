@@ -5,41 +5,66 @@ import luis from '../../public/descricao/luis.png';
 import pedro from '../../public/descricao/Pedro.png';
 
 const descricao = [
-        {
-            "desc_nome": "Thiago Sampaio",
-            "desc_foto": thiago,
-            "desc_sobre":  "fullstack" ,
+
+
+    {
+            "desc_foto": "",
+             "desc_nome": "Murilo Grinaldi",
+             "desc_espec": "Fullstack",
+             "desc_func":  "Responsável pela interface do usuário e experiência visual." ,
+               "desc_sobre": ""
              
         },
         {
+             "desc_foto": thiago,
              "desc_nome": "Thiago Sampaio",
-            "desc_foto": caiani,
-            "desc_sobre":  "fullstack" ,
+             "desc_espec": "Fullstack",
+             "desc_func":  "Responsável pela interface e o Back-end." ,
+              "desc_sobre": ""
+             
         },
         {
-            "desc_nome": "Thiago Sampaio",
-            "desc_foto": paci,
-            "desc_sobre":  "fullstack" ,
+           "desc_foto": caiani,
+             "desc_nome": "Caiani",
+             "desc_espec": "Banco de Dados",
+             "desc_func":  "Responsável pelo Banco onde fica todas informações." ,
+               "desc_sobre": ""
+             
         },
+
         {
-            "desc_nome": "Thiago Sampaio",
-            "desc_foto": luis,
-            "desc_sobre":  "fullstack" ,
+           "desc_foto": luis,
+             "desc_nome": "Luis Otavio",
+             "desc_espec": "Documentação",
+             "desc_func":  "Responsável pela Documentação do TCC." ,
+               "desc_sobre": ""
+             
         },
           {
-            "desc_nome": "Thiago Sampaio",
-            "desc_foto": pedro,
-            "desc_sobre":  "fullstack" ,
+           "desc_foto": pedro,
+             "desc_nome": "Pedro Martins",
+             "desc_espec": "Front-end",
+             "desc_func":  "Responsável pela interface do usuário e experiência visual." ,
+               "desc_sobre": "Sou desenvolvedor front-end de Tupã, estudante da ETEC Massuyuki Kawano.Atualmente curso o 3º ano do Ensino Médio e me dedico à criação de interfaces modernas e funcionais. "
+             
+        },
+      
+        
+        {
+             "desc_foto": paci,
+             "desc_nome": "Thiago Paci",
+             "desc_espec": "Apoio Moral",
+             "desc_func":  "Responsável por incentivar a equipe no desenvolvimento." ,
+               "desc_sobre": ""
+             
         },
           {
-            "desc_nome": "Thiago Sampaio",
-            "desc_foto": thiago,
-            "desc_sobre":  "fullstack" ,
-        },
-          {
-            "desc_nome": "Thiago Sampaio",
-            "desc_foto": thiago,
-            "desc_sobre":  "fullstack" ,
+            "desc_foto": "",
+             "desc_nome": "João Vitor",
+             "desc_espec": "Documentação",
+             "desc_func":  "Responsável pela Documentação do TCC" ,
+               "desc_sobre": ""
+             
         },
 ];
 

@@ -5,15 +5,18 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from "next/link";
 import styles from './page.module.css';
-import objetos from "@/sobre/descricao.js";
+
+import CardSobre from "@/components/categorias/card3";
+import descricao from "@/sobre/descricao";
 
 export default function Sobre() {
  const [modalAberto, setModalAberto] = useState(false);
   const [itemSelecionado, setItemSelecionado] = useState(
     {
-     "desc_nome": "",
-      "desc_foto": "",
-      "desc_sobre":  "" ,
+             "desc_foto": "",
+             "desc_nome": "",
+             "desc_espec": "",
+             "desc_func":  "" ,
                  
     }
   );
@@ -86,142 +89,47 @@ Além disso, o projeto reflete nosso compromisso com a inovação tecnológica e
 
     
 
-<div className={styles.centroCards}>
+
 
           <h2 className={styles.sectionTitle}>Nossa Equipe</h2>
-      <div className={styles.display}>
-
+     
+<div className={styles.teamGrid}>
            {
-          objetos.map(item => <CardCategoria obj={item} onClick={() => abrirModal(item)} />)
+          descricao.map(item => <CardSobre desc={item} onClick={() => abrirModal(item)} />)
         }
-
+</div>
   
 
       {/* Modal */}
-      {modalAberto && (
-        <div className={styles.modal}>
-          <div className={styles.modalContent}>
-            <div className={styles.fechar} onClick={fecharModal}  >
-              <svg fill="#0E6567" width="256px" height="256px" viewBox="0 0 1024.00 1024.00" xmlns="http://www.w3.org/2000/svg"
-                stroke="#0E6567" stroke-width="0.01024"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier"
-                  stroke-linecap="round" stroke-linejoin="round" stroke="#0E6567" stroke-width="26.624000000000002"></g><g
-                    id="SVGRepo_iconCarrier"><path d="M604.7 759.2l61.8-61.8L481.1 512l185.4-185.4-61.8-61.8L357.5 512z"></path></g></svg>
-            </div>
-            <h1 className={styles.tituloSecao}>{itemSelecionado.obj_descricao}</h1>
-            <Image src={itemSelecionado.obj_foto} alt={itemSelecionado.obj_descricao} width={250} height={250} />
-            <p><strong>Encontrada dia:</strong>{itemSelecionado.obj_data_publicacao}</p>
-            <p><strong>Local:</strong>{itemSelecionado.obj_local_encontrado}</p>
-            <p><strong>Classificação:</strong>{itemSelecionado.obj_status}</p>
-            <button>Reservar</button>
-          </div>
-        </div>
-      )}
+{modalAberto && (
+  <div className={styles.modalOverlay}>
+    <div className={styles.modalBox}>
+      <button className={styles.closeBtn} onClick={fecharModal}>
+        &times;
+      </button>
 
- 
-      <div className={styles.teamGrid}>
-        <div className={styles.teamCard}>
-          <img src="/logo1.png" alt="Murilo Grinaldi" />
-          <div className={styles.teamCardContent}>
-            <h3 className={styles.teamName}>Murilo Grinaldi</h3>
-            <p className={styles.teamRole}>Front-end</p>
-            <p className={styles.teamDesc}>
-              Responsável pela interface do usuário e experiência visual.
-            </p>
-          </div>
-        </div>
-        {/* Adicione os outros integrantes aqui */}
+      <div className={styles.modalHeader}>
+        <Image
+          src={itemSelecionado.desc_foto}
+          alt={itemSelecionado.desc_nome}
+          width={150}
+          height={150}
+          className={styles.modalImage}
+        />
+        <h1 className={styles.modalName}>{itemSelecionado.desc_nome}</h1>
+        <p className={styles.modalCargo}>Desenvolvedor Front-End</p>
       </div>
 
-   <div className={styles.teamGrid}>
-        <div className={styles.teamCard}>
-          <img src="/Pedro.png" alt="Pedro Martins" />
-          <div className={styles.teamCardContent}>
-            <h3 className={styles.teamName}>Pedro Martins</h3>
-            <p className={styles.teamRole}>Front-end</p>
-            <p className={styles.teamDesc}>
-              Responsável pela interface do usuário e experiência visual.
-            </p>
-          </div>
-        </div>
-        {/* Adicione os outros integrantes aqui */}
+      <div className={styles.modalBody}>
+        <p>{itemSelecionado.desc_sobre}</p>
       </div>
+    </div>
+  </div>
+)}
 
-       <div className={styles.teamGrid}>
-        <div className={styles.teamCard}>
-          <img src="/Thiago.png" alt="Thiago Sampaio" />
-          <div className={styles.teamCardContent}>
-            <h3 className={styles.teamName}>Thiago Sampaio</h3>
-            <p className={styles.teamRole}>FullStack</p>
-            <p className={styles.teamDesc}>
-              Responsável pela interface e o Back-end.
-            </p>
-          </div>
-        </div>
-        {/* Adicione os outros integrantes aqui */}
-      </div>
-</div>
- <div className={styles.display}>
-       <div className={styles.teamGrid}>
-        <div className={styles.teamCard}>
-          <img src="/caiani.png" alt="Caiani" />
-          <div className={styles.teamCardContent}>
-            <h3 className={styles.teamName}>Caiani</h3>
-            <p className={styles.teamRole}>Banco de Dados</p>
-            <p className={styles.teamDesc}>
-              Responsável pelo Banco onde fica todas informações.
-            </p>
-          </div>
-        </div>
-        {/* Adicione os outros integrantes aqui */}
-      </div>
-
-       <div className={styles.teamGrid}>
-        <div className={styles.teamCard}>
-          <img src="/Luis.png" alt="Luis Otavio" />
-          <div className={styles.teamCardContent}>
-            <h3 className={styles.teamName}>Luis Otavio</h3>
-            <p className={styles.teamRole}>Documentação</p>
-            <p className={styles.teamDesc}>
-              Responsável pela Documentação do TCC
-            </p>
-          </div>
-        </div>
-        {/* Adicione os outros integrantes aqui */}
-      </div>
-
-       <div className={styles.teamGrid}>
-        <div className={styles.teamCard}>
-          <img src="/logo1.png" alt="João Vitor" />
-          <div className={styles.teamCardContent}>
-            <h3 className={styles.teamName}>João Vitor</h3>
-            <p className={styles.teamRole}>Documentação</p>
-            <p className={styles.teamDesc}>
-              Responsável pela Documentação do TCC.
-            </p>
-          </div>
-        </div>
-        {/* Adicione os outros integrantes aqui */}
-      </div>
-      </div>
- <div className={styles.display}>
-       <div className={styles.teamGrid}>
-        <div className={styles.teamCard}>
-          <img src="/paci.png" alt="Thiago Paci" />
-          <div className={styles.teamCardContent}>
-            <h3 className={styles.teamName}>Thiago Paci</h3>
-            <p className={styles.teamRole}>Apoio Moral</p>
-            <p className={styles.teamDesc}>
-              Responsável por incentivar a equipe.
-            </p>
-          </div>
-        </div>
-        {/* Adicione os outros integrantes aqui */}
-      </div>
+   
 
 
-</div>
-
-</div>
     </div>
 
 
