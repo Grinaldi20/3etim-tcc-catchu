@@ -305,4 +305,60 @@ body {
   }
 }
 
+
+.footerSocial {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.iconLink {
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.iconLink:hover {
+  transform: scale(1.2);
+}
+
+
+.whatsappMenu {
+  position: relative;
+  bottom: 50px; /* ajusta a distância em relação ao botão */
+  left: 15%;     /* centraliza em relação ao botão */
+  transform: translateX(-50%); /* centraliza corretamente */
+  background-color: #4B8C8D;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  z-index: 10;
+  animation: fadeIn 0.2s ease-in-out;
+}
+.whatsappMenu a {
+  color: white;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.whatsappMenu a:hover {
+  background-color: #7cc1c2;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
  
