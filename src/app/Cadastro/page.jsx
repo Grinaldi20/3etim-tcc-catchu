@@ -1,13 +1,57 @@
+"use client";
 import Image from "next/image";
 import styles from "./page.module.css";
+import { useState } from "react";
 import Link from "next/link";
+
 export default function Cadastro() {
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [confirmarSenha, setConfirmarSenha] = useState("");
+  const [mostrarSenha, setMostrarSenha] = useState(false);
+  const [mostrarConfirmar, setMostrarConfirmar] = useState(false);
+  const [erros, setErros] = useState({});
+  const [mensagemSucesso, setMensagemSucesso] = useState("");
+
+  const validarEmail = (email) => {
+    const regex =
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return regex.test(email);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const novosErros = {};
+
+    if (!nome.trim()) novosErros.nome = "O nome é obrigatório.";
+    if (!email.trim()) novosErros.email = "O e-mail é obrigatório.";
+    else if (!validarEmail(email))
+      novosErros.email = "E-mail inválido. Ex: exemplo@gmail.com";
+    if (!senha) novosErros.senha = "A senha é obrigatória.";
+    else if (senha.length < 6)
+      novosErros.senha = "A senha deve ter pelo menos 6 caracteres.";
+    if (confirmarSenha !== senha)
+      novosErros.confirmarSenha = "As senhas não coincidem.";
+
+    setErros(novosErros);
+
+    if (Object.keys(novosErros).length === 0) {
+      setMensagemSucesso("Cadastro realizado com sucesso!");
+      console.log({ nome, email, senha });
+      setNome("");
+      setEmail("");
+      setSenha("");
+      setConfirmarSenha("");
+      setTimeout(() => setMensagemSucesso(""), 3000);
+    }
+  };
+
   return (
-    <main className={styles.main} >
-
+    <main className={styles.main}>
       <div className={styles.lado}>
-
-        <Image className={styles.ImgMaior}
+        <Image
+          className={styles.ImgMaior}
           src="/logo1.png"
           width={150}
           height={150}
@@ -15,27 +59,26 @@ export default function Cadastro() {
           quality={100}
         />
 
-
-
-        <h2 className={styles.subtitulo} >Bem-vindo de volta</h2>
-        <h3 className={styles.texto} >Acesse sua conta agora</h3>
-        <a href="/login">
-
+        <h2 className={styles.subtitulo}>Bem-vindo de volta</h2>
+        <h3 className={styles.texto}>Acesse sua conta agora</h3>
+        <Link href="/login">
           <button className={styles.button2}>Entrar</button>
-        </a>
-        <Image className={styles.ImgMenor}
+        </Link>
+
+        <Image
+          className={styles.ImgMenor}
           src="/logo2.png"
           width={400}
           height={400}
           alt="Logo Menor"
           quality={100}
         />
-
       </div>
 
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <h1 className={styles.titulo}>CRIAR SUA CONTA</h1>
 
+        {/* Nome */}
         <div className={styles.formGroup}>
           <div className={styles.icon}>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
@@ -43,46 +86,84 @@ export default function Cadastro() {
               <path fillRule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5" />
             </svg>
           </div>
-          <input type="text" className={styles.linhaInput} placeholder="Nome" />
+          <input
+            type="text"
+            placeholder="Nome"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+          />
         </div>
+        {erros.nome && <p className={styles.erro}>{erros.nome}</p>}
 
-
+        {/* Email */}
         <div className={styles.formGroup}>
           <div className={styles.icon}>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
               <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z" />
             </svg>
           </div>
-          <input type="email" className={styles.linhaInput} placeholder="Email" />
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
+        {erros.email && <p className={styles.erro}>{erros.email}</p>}
 
-
+        {/* Senha */}
         <div className={styles.formGroup}>
           <div className={styles.icon}>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-              <path fillRule="evenodd" d="M8 0a4 4 0 0 1 4 4v2.05a2.5 2.5 0 0 1 2 2.45v5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 13.5v-5a2.5 2.5 0 0 1 2-2.45V4a4 4 0 0 1 4-4M4.5 7A1.5 1.5 0 0 0 3 8.5v5A1.5 1.5 0 0 0 4.5 15h7a1.5 1.5 0 0 0 1.5-1.5v-5A1.5 1.5 0 0 0 11.5 7zM8 1a3 3 0 0 0-3 3v2h6V4a3 3 0 0 0-3-3" />
+              <path fillRule="evenodd" d="M8 0a4 4 0 0 1 4 4v2.05a2.5 2.5 0 0 1 2 2.45v5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 13.5v-5a2.5 2.5 0 0 1 2-2.45V4a4 4 0 0 1 4-4M4.5 7A1.5 1.5 0 0 0 3 8.5v5A1.5 1.5 0 0 0 4.5 15h7a1.5 1.5 0 0 0 1.5-1.5v-5A1.5 1.5 0 0 0 11.5 7zM8 1a3 3 0 0 0-3 3v2h6V4a3 3 0 0 0-3-3"/>
             </svg>
           </div>
-          <input type="password" className={styles.linhaInput} placeholder="Senha" />
+          <input
+            type={mostrarSenha ? "text" : "password"}
+            placeholder="Senha"
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+          />
+          <button
+            type="button"
+            onClick={() => setMostrarSenha(!mostrarSenha)}
+            className={styles.toggleSenha}
+          >
+            {mostrarSenha ? "🙈" : "👁️"}
+          </button>
         </div>
+        {erros.senha && <p className={styles.erro}>{erros.senha}</p>}
 
-
+        {/* Confirmar Senha */}
         <div className={styles.formGroup}>
           <div className={styles.icon}>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-              <path fillRule="evenodd" d="M8 0a4 4 0 0 1 4 4v2.05a2.5 2.5 0 0 1 2 2.45v5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 13.5v-5a2.5 2.5 0 0 1 2-2.45V4a4 4 0 0 1 4-4M4.5 7A1.5 1.5 0 0 0 3 8.5v5A1.5 1.5 0 0 0 4.5 15h7a1.5 1.5 0 0 0 1.5-1.5v-5A1.5 1.5 0 0 0 11.5 7zM8 1a3 3 0 0 0-3 3v2h6V4a3 3 0 0 0-3-3" />
+              <path fillRule="evenodd" d="M8 0a4 4 0 0 1 4 4v2.05a2.5 2.5 0 0 1 2 2.45v5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 13.5v-5a2.5 2.5 0 0 1 2-2.45V4a4 4 0 0 1 4-4M4.5 7A1.5 1.5 0 0 0 3 8.5v5A1.5 1.5 0 0 0 4.5 15h7a1.5 1.5 0 0 0 1.5-1.5v-5A1.5 1.5 0 0 0 11.5 7zM8 1a3 3 0 0 0-3 3v2h6V4a3 3 0 0 0-3-3"/>
             </svg>
           </div>
-          <input type="password" className={styles.linhaInput} placeholder="Confirmar Senha" />
+          <input
+            type={mostrarConfirmar ? "text" : "password"}
+            placeholder="Confirmar Senha"
+            value={confirmarSenha}
+            onChange={(e) => setConfirmarSenha(e.target.value)}
+          />
+          <button
+            type="button"
+            onClick={() => setMostrarConfirmar(!mostrarConfirmar)}
+            className={styles.toggleSenha}
+          >
+            {mostrarConfirmar ? "🙈" : "👁️"}
+          </button>
         </div>
+        {erros.confirmarSenha && <p className={styles.erro}>{erros.confirmarSenha}</p>}
 
-
-
-
-        <button className={styles.button} >
+        <button type="submit" className={styles.button}>
           Cadastrar
         </button>
 
+        {mensagemSucesso && (
+          <p className={styles.sucesso}>{mensagemSucesso}</p>
+        )}
       </form>
     </main>
   );

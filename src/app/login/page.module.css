@@ -133,6 +133,7 @@
     flex: 1;
     /* Animação no foco dos inputs da form-group */
     transition: transform 0.2s ease;
+    background-color: #fff;
 }
 
 .formGroup  input:focus {
@@ -191,4 +192,32 @@
 
 .spam:hover{
      transform: scale(1.05);
+}
+
+.toggleSenha {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #4B8C8D;
+  margin-left: 8px;
+  transition: transform 0.2s ease;
+}
+
+.toggleSenha:hover {
+  transform: scale(1.1);
+}
+
+.erro {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: -1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.sucesso {
+  color: green;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 1rem;
 }
