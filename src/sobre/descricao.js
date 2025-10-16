@@ -45,7 +45,7 @@ const descricao = [
              "desc_nome": "Pedro Martins",
              "desc_espec": "Front-end",
              "desc_func":  "Responsável pela interface do usuário e experiência visual." ,
-               "desc_sobre": "Sou desenvolvedor front-end de Tupã, estudante da ETEC Massuyuki Kawano.Atualmente curso o 3º ano do Ensino Médio e me dedico à criação de interfaces modernas e funcionais. "
+               "desc_sobre": "Sou desenvolvedor Front-End de Tupã e estudante da ETEC Massuyuki Kawano. Atualmente curso o 3º ano do Ensino Médio com foco em Desenvolvimento de Sistemas. Tenho interesse em criar interfaces modernas, funcionais e voltadas à boa experiência do usuário. "
              
         },
       

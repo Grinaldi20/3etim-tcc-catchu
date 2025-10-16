@@ -112,8 +112,8 @@ Além disso, o projeto reflete nosso compromisso com a inovação tecnológica e
         <Image
           src={itemSelecionado.desc_foto}
           alt={itemSelecionado.desc_nome}
-          width={150}
-          height={150}
+          width={250}
+          height={250}
           className={styles.modalImage}
         />
         <h1 className={styles.modalName}>{itemSelecionado.desc_nome}</h1>
