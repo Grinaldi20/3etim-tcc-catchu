@@ -159,11 +159,26 @@
     font-size: 2rem;
 }
 
-.CardsCarrocel{
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 5rem;
+.CardsCarrocel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+  overflow-x: auto;          /* permite rolagem por toque/mouse */
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  padding: 1rem;
+  scrollbar-width: none;     /* esconde barra no mobile */
+  -ms-overflow-style: none;  /* compatibilidade IE */
+}
 
+.CardsCarrocel::-webkit-scrollbar {
+  display: none;             /* esconde barra no mobile */
+}
+
+.CardsCarrocel > * {
+  flex: 0 0 auto;
+  min-width: 15rem;          /* largura de cada card */
 }
 
 .CardsCarrocel svg{
@@ -456,6 +471,26 @@
   color: rgba(255,255,255,0.85);
 }
 
+
+@media (min-width: 1024px) {
+  .CardsCarrocel {
+    scrollbar-width: thin;
+    scrollbar-color: #0E6567 #cfcfcf;
+    justify-content: center;
+    gap: 10rem;
+  }
+
+  .CardsCarrocel::-webkit-scrollbar {
+    display: block;
+    height: 8px;
+  }
+
+  .CardsCarrocel::-webkit-scrollbar-thumb {
+    background-color: #0E6567;
+    border-radius: 10px;
+  }
+}
+
 /* ===== Responsive adjustments ===== */
 @media (max-width: 768px) {
   .footer {
@@ -485,5 +520,20 @@
 
   .imagem {
     justify-content: center;
+  }
+
+  .CardsCarrocel {
+    scrollbar-width: thin;               /* mostra barra fina */
+    scrollbar-color: #0E6567 #cfcfcf;
+  }
+
+  .CardsCarrocel::-webkit-scrollbar {
+    display: block;
+    height: 8px;
+  }
+
+  .CardsCarrocel::-webkit-scrollbar-thumb {
+    background-color: #0E6567;
+    border-radius: 10px;
   }
 }

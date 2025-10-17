@@ -86,7 +86,7 @@ export default function Categorias() {
 
         <div className={styles.CardsCarrocel}>
 
-          <button className={styles.prev}>←</button>
+          
           <a href="/MaterialEscolar">
             <div className={styles.MaterialEscolar}>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
@@ -132,7 +132,7 @@ export default function Categorias() {
               <h2 className={styles.h2}>Resgatados</h2>
             </div>
           </a>
-          <button className={styles.next}>→</button>
+         
         </div>
       </div>
 
