@@ -444,7 +444,7 @@ object-fit: contain;
   width: 3rem;
   height: 100%;
   background-color: #0E6567;
-  background-color: linear-gradient(to right, #0E6567 10%, #fff 90%);
+  background: linear-gradient(to bottom, #0E6567, #38B2AC);
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
 }
