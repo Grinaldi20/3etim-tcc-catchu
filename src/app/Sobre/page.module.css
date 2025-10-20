@@ -441,13 +441,17 @@ object-fit: contain;
   position: absolute;
   top: 0;
   left: 0;
-  width: 3rem;
+  width: 4rem; /* um pouquinho mais larga pra o gradiente respirar */
   height: 100%;
-  background-color: #0E6567;
-  background-color: linear-gradient(to right, #0E6567 10%, #fff 90%);
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
+background: linear-gradient(
+  to right,
+  #0E6567 0%,     /* Começa com o verde principal */
+  #0e6667b6 40%,    /* O verde ocupa 50% do espaço */
+  #ffffff 100%    /* Transiciona suavemente para o branco nos 50% restantes */
+);
+  z-index: 1;
 }
+
 
 .closeBtn {
   position: absolute;
@@ -497,19 +501,70 @@ object-fit: contain;
 }
 
 .modalBody {
-  text-align: center;
-  color: #222;
-  font-size: 15px;
-  line-height: 1.5;
+  text-align: justify;          /* Justifica o texto */
+  text-justify: inter-word;     /* Espaçamento entre palavras */
+  line-height: 1.4;             /* Altura confortável */
+  color: #333;                  /* Cor legível */
+  font-size: 0.95rem;           /* Tamanho equilibrado */
+  margin-top: -1rem;           /* Subiu o texto (antes era 1rem) */
+  padding: 0 2rem 1rem 3rem;    /* move o texto um pouco pra direita */
   font-family: "Poppins", sans-serif;
-  z-index: 2;
+  max-width: 90%;               /* mantém o texto dentro do modal */
 }
+
 
 .modalBody p {
 
   font-size: 17px;
   font-weight: 200;
 }
+
+.whatsappMenu {
+  position: absolute;
+  top: 40%; /* sobe um pouco */
+  left: 120%; /* um pouco mais à direita */
+  transform: translateY(-50%);
+  background-color: #4B8C8D;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s ease;
+}
+
+.whatsappMenu a {
+  color: white;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.whatsappMenu a:hover {
+  background-color: #7cc1c2;
+}
+/* quando ativo */
+.whatsappMenu.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(10px, -50%); /* movimento suave lateral */
+}
+
+.whatsappMenu a {
+  color: white;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.whatsappMenu a:hover {
+  background-color: #7cc1c2;
+}
+
 
 @keyframes fadeIn {
   from {

@@ -187,6 +187,53 @@
   color: rgba(255,255,255,0.85);
 }
 
+.whatsappMenu {
+  position: absolute;
+  top: 40%; /* sobe um pouco */
+  left: 120%; /* um pouco mais à direita */
+  transform: translateY(-50%);
+  background-color: #4B8C8D;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s ease;
+}
+
+.whatsappMenu a {
+  color: white;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.whatsappMenu a:hover {
+  background-color: #7cc1c2;
+}
+/* quando ativo */
+.whatsappMenu.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(10px, -50%); /* movimento suave lateral */
+}
+
+.whatsappMenu a {
+  color: white;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.whatsappMenu a:hover {
+  background-color: #7cc1c2;
+}
+
+
 /* ===== Responsive adjustments ===== */
 @media (max-width: 768px) {
   .footer {
