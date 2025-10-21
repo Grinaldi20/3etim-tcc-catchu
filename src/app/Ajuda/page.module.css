@@ -257,8 +257,8 @@ object-fit: contain;
 }
 .iconLink{
   display: inline-flex;
-  width: 3.3rem;
-  height: 3.3rem;
+  width: 4rem;
+  height: 4rem;
   align-items: center;
   justify-content: center;
   border-radius: 300px;
@@ -266,6 +266,7 @@ object-fit: contain;
   transition: transform .15s ease, background .15s ease;
   color: #ffffff;
   text-decoration: none;
+
 }
 .iconLink:hover{
   transform: translateY(-3px);
@@ -296,6 +297,7 @@ object-fit: contain;
   opacity: 0;
   pointer-events: none;
   transition: all 0.25s ease;
+  font-size: 18px;
 }
 
 .whatsappMenu a {

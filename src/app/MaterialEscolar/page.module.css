@@ -262,6 +262,7 @@
   opacity: 0;
   pointer-events: none;
   transition: all 0.25s ease;
+  font-size: 18px;
 }
 
 .whatsappMenu a {
@@ -371,8 +372,8 @@
 }
 .iconLink{
   display: inline-flex;
-  width: 4.4rem;
-  height: 4.4rem;
+  width: 5rem;
+  height: 5rem;
   align-items: center;
   justify-content: center;
   border-radius: 300px;
