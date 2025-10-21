@@ -319,26 +319,26 @@ object-fit: contain;
 /* ======= PARÁGRAFOS ======= */
 .sectionText {
   max-width: 800px;
-  margin: 0 auto 2rem;
+  margin: 0 auto 2rem;    /* centraliza o bloco horizontalmente */
   font-size: 1.1rem;
   line-height: 1.7;
-  color: #19191a;
-  text-align: center;
+  color: #000;            /* texto preto */
+  text-align: justify;    /* alinha o texto nas duas margens */
 }
 
 
 /* ======= LINHA DO TEMPO ======= */
 
-/* ======= EQUIPE ======= */
 .teamGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-  gap: 12rem;
+  grid-template-columns: repeat(3, 1fr); /* ✅ 3 colunas fixas */
+  gap: 2rem; /* espaço entre os cards */
   justify-items: center;
-  margin-top: 2rem;
-  justify-content: center;
   align-items: center;
+  margin-top: 2rem;
 }
+
+
 
 .teamCard {
   background: #ffffff;
@@ -396,14 +396,15 @@ object-fit: contain;
   
 }
 
-.centroCards{
+.centroCards {
   align-items: center;
   display: flex;
-  justify-content: center;  /* centraliza horizontalmente */
-  align-items: center;      /* centraliza verticalmente */
-  flex-wrap: wrap;          /* quebra linha se tiver vários cards */
-  gap: 2rem;                /* espaçamento entre os cards */   
+  justify-content: center;  
+  align-items: center;      
+  flex-wrap: wrap;          
+  gap: 1rem;  /* diminui o espaçamento entre os cards */
 }
+
 
 .modalOverlay {
   position: fixed;
@@ -441,15 +442,9 @@ object-fit: contain;
   position: absolute;
   top: 0;
   left: 0;
-  width: 4rem; /* um pouquinho mais larga pra o gradiente respirar */
+  width: 2rem; /* um pouquinho mais larga pra o gradiente respirar */
   height: 100%;
-background: linear-gradient(
-  to right,
-  #0E6567 0%,     /* Começa com o verde principal */
-  #0e6667b6 40%,    /* O verde ocupa 50% do espaço */
-  #ffffff 100%    /* Transiciona suavemente para o branco nos 50% restantes */
-);
-  z-index: 1;
+background-color: #0E6567;
 }
 
 

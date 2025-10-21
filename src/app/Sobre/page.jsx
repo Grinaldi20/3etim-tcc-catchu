@@ -90,7 +90,7 @@ export default function Sobre() {
         </div>
 
   <div className={styles.pageWrapper}>
-      <h1 className={styles.sectionTitle}>Sobre Nós</h1>
+      
       <p className={styles.sectionText}>
         O Achados & Perdidos Escolar é uma plataforma desenvolvida em 2025 como parte do nosso Trabalho de Conclusão de Curso (TCC), criada com o propósito de modernizar e simplificar o processo de recuperação de objetos perdidos no ambiente escolar.
 
