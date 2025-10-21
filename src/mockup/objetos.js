@@ -23,7 +23,7 @@ const objetos = [
 			"obj_foto": timao3,
 			"obj_local_encontrado": "Biblioteca",
 			"obj_data_publicacao": "2025-03-18T03:00:00.000Z",
-			"obj_status": "Perdido",
+			"obj_status": "Achado",
 			"obj_encontrado": 0
 		},
 		{
