@@ -137,7 +137,7 @@ export default function MaterialEscolar() {
               <p>
                 <strong>Classificação:</strong> {itemSelecionado.obj_status}
               </p>
-          
+
             </div>
           </div>
         )}
@@ -209,9 +209,8 @@ export default function MaterialEscolar() {
 
                 {menuVisible && (
                   <div
-                    className={`${styles.whatsappMenu} ${
-                      menuVisible ? styles.active : ""
-                    }`}
+                    className={`${styles.whatsappMenu} ${menuVisible ? styles.active : ""
+                      }`}
                   >
                     <a
                       href="https://wa.me/5514998988678"

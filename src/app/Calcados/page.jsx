@@ -209,9 +209,8 @@ export default function MaterialEscolar() {
 
                 {menuVisible && (
                   <div
-                    className={`${styles.whatsappMenu} ${
-                      menuVisible ? styles.active : ""
-                    }`}
+                    className={`${styles.whatsappMenu} ${menuVisible ? styles.active : ""
+                      }`}
                   >
                     <a
                       href="https://wa.me/5514998988678"
