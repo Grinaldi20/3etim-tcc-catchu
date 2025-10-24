@@ -337,6 +337,7 @@
   pointer-events: none;
   transition: all 0.25s ease;
   font-size: 18px;
+  font-family: 'Arial';
 }
 
 .whatsappMenu a {
