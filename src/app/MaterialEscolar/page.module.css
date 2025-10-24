@@ -247,6 +247,64 @@
   color: #0E6567;
 }
 
+.whatsappMenu {
+  position: absolute;
+  top: 40%; /* sobe um pouco */
+  left: 120%; /* um pouco mais à direita */
+  transform: translateY(-50%);
+  background-color: #4B8C8D;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s ease;
+  font-size: 18px;
+}
+
+.whatsappMenu a {
+  color: white;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.whatsappMenu a:hover {
+  background-color: #7cc1c2;
+}
+/* quando ativo */
+.whatsappMenu.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(10px, -50%); /* movimento suave lateral */
+}
+
+.whatsappMenu a {
+  color: white;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.whatsappMenu a:hover {
+  background-color: #7cc1c2;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    
+  }
+}
+
 
 @media (max-width: 1806px) {
 
@@ -314,8 +372,8 @@
 }
 .iconLink{
   display: inline-flex;
-  width: 4.4rem;
-  height: 4.4rem;
+  width: 5rem;
+  height: 5rem;
   align-items: center;
   justify-content: center;
   border-radius: 300px;

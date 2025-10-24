@@ -262,8 +262,8 @@ object-fit: contain;
 }
 .iconLink{
   display: inline-flex;
-  width: 3.3rem;
-  height: 3.3rem;
+  width: 4rem;
+  height: 4rem;
   align-items: center;
   justify-content: center;
   border-radius: 300px;
@@ -319,26 +319,26 @@ object-fit: contain;
 /* ======= PARÁGRAFOS ======= */
 .sectionText {
   max-width: 800px;
-  margin: 0 auto 2rem;
+  margin: 0 auto 2rem;    /* centraliza o bloco horizontalmente */
   font-size: 1.1rem;
   line-height: 1.7;
-  color: #19191a;
-  text-align: center;
+  color: #000;            /* texto preto */
+  text-align: justify;    /* alinha o texto nas duas margens */
 }
 
 
 /* ======= LINHA DO TEMPO ======= */
 
-/* ======= EQUIPE ======= */
 .teamGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-  gap: 12rem;
+  grid-template-columns: repeat(3, 1fr); /* ✅ 3 colunas fixas */
+  gap: 2rem; /* espaço entre os cards */
   justify-items: center;
-  margin-top: 2rem;
-  justify-content: center;
   align-items: center;
+  margin-top: 2rem;
 }
+
+
 
 .teamCard {
   background: #ffffff;
@@ -396,14 +396,15 @@ object-fit: contain;
   
 }
 
-.centroCards{
+.centroCards {
   align-items: center;
   display: flex;
-  justify-content: center;  /* centraliza horizontalmente */
-  align-items: center;      /* centraliza verticalmente */
-  flex-wrap: wrap;          /* quebra linha se tiver vários cards */
-  gap: 2rem;                /* espaçamento entre os cards */   
+  justify-content: center;  
+  align-items: center;      
+  flex-wrap: wrap;          
+  gap: 1rem;  /* diminui o espaçamento entre os cards */
 }
+
 
 .modalOverlay {
   position: fixed;
@@ -441,13 +442,11 @@ object-fit: contain;
   position: absolute;
   top: 0;
   left: 0;
-  width: 3rem;
+  width: 2rem; /* um pouquinho mais larga pra o gradiente respirar */
   height: 100%;
-  background-color: #0E6567;
-  background-color: linear-gradient(to right, #0E6567 10%, #fff 90%);
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
+background-color: #0E6567;
 }
+
 
 .closeBtn {
   position: absolute;
@@ -497,19 +496,71 @@ object-fit: contain;
 }
 
 .modalBody {
-  text-align: center;
-  color: #222;
-  font-size: 15px;
-  line-height: 1.5;
+  text-align: justify;          /* Justifica o texto */
+  text-justify: inter-word;     /* Espaçamento entre palavras */
+  line-height: 1.4;             /* Altura confortável */
+  color: #333;                  /* Cor legível */
+  font-size: 0.95rem;           /* Tamanho equilibrado */
+  margin-top: -1rem;           /* Subiu o texto (antes era 1rem) */
+  padding: 0 2rem 1rem 3rem;    /* move o texto um pouco pra direita */
   font-family: "Poppins", sans-serif;
-  z-index: 2;
+  max-width: 90%;               /* mantém o texto dentro do modal */
 }
+
 
 .modalBody p {
 
   font-size: 17px;
   font-weight: 200;
 }
+
+.whatsappMenu {
+  position: absolute;
+  top: 40%; /* sobe um pouco */
+  left: 120%; /* um pouco mais à direita */
+  transform: translateY(-50%);
+  background-color: #4B8C8D;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s ease;
+  font-size: 18px;
+}
+
+.whatsappMenu a {
+  color: white;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.whatsappMenu a:hover {
+  background-color: #7cc1c2;
+}
+/* quando ativo */
+.whatsappMenu.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(10px, -50%); /* movimento suave lateral */
+}
+
+.whatsappMenu a {
+  color: white;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.whatsappMenu a:hover {
+  background-color: #7cc1c2;
+}
+
 
 @keyframes fadeIn {
   from {

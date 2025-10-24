@@ -1,13 +1,18 @@
 "use client";
 
+import { useEffect } from "react";
 import Head from 'next/head';
 import Image from 'next/image';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import styles from './page.module.css';
 import Link from "next/link";
 
 export default function TelaPrincipal() {
+  // ✅ Corrigido: importa o JS do Bootstrap apenas no lado do cliente
+  useEffect(() => {
+    import('bootstrap/dist/js/bootstrap.bundle.min.js');
+  }, []);
+
   return (
     <div>
       <header className={styles.header}>
@@ -33,15 +38,12 @@ export default function TelaPrincipal() {
       </header>
 
       <main>
-
         <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel">
           <div className="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
           </div>
-
-
 
           <div className="carousel-inner" style={{ height: "auto", maxHeight: "40vh" }}>
             <div className="carousel-item active">
@@ -55,7 +57,6 @@ export default function TelaPrincipal() {
             </div>
           </div>
 
-
           <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
             <span className={`carousel-control-prev-icon ${styles.carroselControlPrevIcon}`} aria-hidden="true"></span>
             <span className="visually-hidden">Anterior</span>
@@ -66,15 +67,11 @@ export default function TelaPrincipal() {
           </button>
         </div>
 
-
         <div className={styles.Cards}>
           <a href="/PoliticaRetirada">
-
-
             <div className={styles.PoliticaRetirada}>
               <p>Política de Retirada</p>
               <Image className={styles.imagem} src="/retirada.png" alt="Pertences" width={200} height={150} quality={100} />
-
             </div>
           </a>
 
@@ -86,14 +83,11 @@ export default function TelaPrincipal() {
           </a>
 
           <a href="/AchouAlgo">
-
-
             <div className={styles.AchouAlgo}>
               <p>Achou Algo?</p>
               <Image className={styles.imagem} src="/algo.png" alt="Achou algo" width={200} height={150} quality={100} />
             </div>
           </a>
-
         </div>
       </main>
     </div>
