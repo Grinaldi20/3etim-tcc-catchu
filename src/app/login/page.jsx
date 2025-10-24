@@ -15,7 +15,7 @@ export default function Login() {
   // Regex básica para validar email
   const validarEmail = (email) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const novosErros = {};
 
@@ -28,15 +28,41 @@ export default function Login() {
     setErros(novosErros);
 
     if (Object.keys(novosErros).length === 0) {
-      setMensagemSucesso("Login realizado com sucesso!");
-      console.log({ nome, email, senha });
+      try {
+        const url = `http://localhost:3333/login?email=${encodeURIComponent(email)}&senha=${encodeURIComponent(senha)}`;
+        const res = await fetch(url);
+        const json = await res.json();
 
-      // limpa campos
-      setNome("");
-      setEmail("");
-      setSenha("");
+        if (!res.ok || !json.sucesso) {
+          // mostra mensagem de erro retornada pela API
+          setErros({ api: json.mensagem || 'Login inválido.' });
+          setMensagemSucesso("");
+          return;
+        }
 
-      setTimeout(() => setMensagemSucesso(""), 3000);
+        // API retorna uma lista em dados; pegamos o primeiro item
+        const usuario = Array.isArray(json.dados) ? json.dados[0] : json.dados;
+
+        if (usuario) {
+          // armazena informações retornadas pela API
+          localStorage.setItem('usuario', JSON.stringify(usuario));
+        }
+
+        setMensagemSucesso("Login realizado com sucesso!");
+        console.log({ nome, email, senha, usuario });
+
+        // limpa campos
+        setNome("");
+        setEmail("");
+        setSenha("");
+        setErros({});
+
+        setTimeout(() => setMensagemSucesso(""), 3000);
+      } catch (error) {
+        setErros({ api: 'Erro de conexão. Tente novamente.' });
+        setMensagemSucesso("");
+        console.error('Erro ao chamar API de login:', error);
+      }
     }
   };
 
@@ -136,6 +162,8 @@ export default function Login() {
         <button type="submit" className={styles.button}>
           Entrar
         </button>
+
+        {erros.api && <p className={styles.erro}>{erros.api}</p>}
 
         {mensagemSucesso && <p className={styles.sucesso}>{mensagemSucesso}</p>}
       </form>
