@@ -3,8 +3,10 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Cadastro() {
+  const router = useRouter();
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -13,6 +15,7 @@ export default function Cadastro() {
   const [mostrarConfirmar, setMostrarConfirmar] = useState(false);
   const [erros, setErros] = useState({});
   const [mensagemSucesso, setMensagemSucesso] = useState("");
+  const [carregando, setCarregando] = useState(false);
 
   const validarEmail = (email) => {
     const regex =
@@ -20,7 +23,7 @@ export default function Cadastro() {
     return regex.test(email);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const novosErros = {};
 
@@ -35,15 +38,64 @@ export default function Cadastro() {
       novosErros.confirmarSenha = "As senhas não coincidem.";
 
     setErros(novosErros);
+    if (Object.keys(novosErros).length !== 0) return;
 
-    if (Object.keys(novosErros).length === 0) {
-      setMensagemSucesso("Cadastro realizado com sucesso!");
-      console.log({ nome, email, senha });
+    setCarregando(true);
+    try {
+      const API =
+        (process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3333").replace(
+          /\/$/,
+          ""
+        );
+      const url = `${API}/usuarios`;
+
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        mode: "cors",
+        body: JSON.stringify({
+          usu_nome: nome,
+          usu_email: email,
+          usu_senha: senha,
+          usu_data_cadastro: new Date().toISOString(),
+        }),
+      });
+
+      let json;
+      try {
+        json = await res.json();
+      } catch (err) {
+        throw new Error(`Resposta inválida do servidor (status ${res.status})`);
+      }
+
+      if (!res.ok || !json.sucesso) {
+        setErros({
+          api: json && json.mensagem
+            ? json.mensagem
+            : `Erro ao cadastrar (status ${res.status}).`,
+        });
+        setMensagemSucesso("");
+        setCarregando(false);
+        return;
+      }
+
+      setMensagemSucesso(json.mensagem || "Cadastro realizado com sucesso!");
+      setErros({});
       setNome("");
       setEmail("");
       setSenha("");
       setConfirmarSenha("");
-      setTimeout(() => setMensagemSucesso(""), 3000);
+
+      setTimeout(() => {
+        setMensagemSucesso("");
+        router.push("/login");
+      }, 1500);
+    } catch (error) {
+      console.error("Erro ao chamar API de cadastro:", error);
+      setErros({ api: "Erro de conexão. Verifique backend/CORS." });
+      setMensagemSucesso("");
+    } finally {
+      setCarregando(false);
     }
   };
 
@@ -157,13 +209,13 @@ export default function Cadastro() {
         </div>
         {erros.confirmarSenha && <p className={styles.erro}>{erros.confirmarSenha}</p>}
 
-        <button type="submit" className={styles.button}>
-          Cadastrar
+        <button type="submit" className={styles.button} disabled={carregando}>
+          {carregando ? "Cadastrando..." : "Cadastrar"}
         </button>
 
-        {mensagemSucesso && (
-          <p className={styles.sucesso}>{mensagemSucesso}</p>
-        )}
+        {erros.api && <p className={styles.erro}>{erros.api}</p>}
+
+        {mensagemSucesso && <p className={styles.sucesso}>{mensagemSucesso}</p>}
       </form>
     </main>
   );
