@@ -36,6 +36,11 @@ export default function Configuracao() {
 
         </Link>
 
+
+    <Link href="http://localhost:3000">
+
+         
+       
         <div className={styles.backArrow}>
 
           <svg
@@ -54,6 +59,7 @@ export default function Configuracao() {
           </svg>
 
         </div>
+            </Link>
 
       </header>
       <div className={styles.tituloContainer}>

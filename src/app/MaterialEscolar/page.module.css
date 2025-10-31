@@ -321,11 +321,15 @@
 
 
 .footer {
-  background-color:#4B8C8D;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #4B8C8D;
   color: #ffffff;
   padding: 0.7rem;
-  margin-top: 10rem;
   box-shadow: 0 -4px 16px rgba(0,0,0,0.08);
+  z-index: 1000;
 }
 
 .footerInner {
@@ -337,6 +341,7 @@
   gap: 2rem;
   flex-wrap: wrap;
 }
+
 
 /* marca / logo */
 .footerBrand {
@@ -396,6 +401,31 @@
   font-size: 1.4rem;
   color: rgba(255,255,255,0.85);
 }
+.iconLink{
+  display: inline-flex;
+  width: 5rem;
+  height: 5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 300px;
+  background: rgba(255,255,255,0.06);
+  transition: transform .15s ease, background .15s ease;
+  color: #ffffff;
+  text-decoration: none;
+}
+.iconLink:hover{
+  transform: translateY(-3px);
+  background: rgba(255,255,255,0.12);
+}
+
+/* bottom line */
+.footerBottom {
+  max-width: 1200px;
+  margin: 1.4rem auto 0;
+  text-align: center;
+  font-size: 1.4rem;
+  color: rgba(255,255,255,0.85);
+}
 
 /* ===== Responsive adjustments ===== */
 @media (max-width: 768px) {
@@ -426,5 +456,24 @@
 
   .imagem {
     justify-content: center;
+  }
+}
+
+@media (min-width: 1024px) {
+  .CardsCarrocel {
+    scrollbar-width: thin;
+    scrollbar-color: #0E6567 #cfcfcf;
+    justify-content: center;
+    gap: 10rem;
+  }
+
+  .CardsCarrocel::-webkit-scrollbar {
+    display: block;
+    height: 8px;
+  }
+
+  .CardsCarrocel::-webkit-scrollbar-thumb {
+    background-color: #0E6567;
+    border-radius: 10px;
   }
 }

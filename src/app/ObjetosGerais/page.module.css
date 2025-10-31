@@ -245,11 +245,15 @@
 
 
 .footer {
-  background-color:#4B8C8D;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #4B8C8D;
   color: #ffffff;
   padding: 0.7rem;
-  margin-top: 10rem;
   box-shadow: 0 -4px 16px rgba(0,0,0,0.08);
+  z-index: 1000;
 }
 
 .footerInner {
