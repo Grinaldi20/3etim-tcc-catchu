@@ -146,4 +146,4 @@ export default function Cadastro() {
       </form>
     </main>
   );
-}S
+}
