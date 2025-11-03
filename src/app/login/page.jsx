@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function Login() {
-  const [nome, setNome] = useState("");
+ 
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [mostrarSenha, setMostrarSenha] = useState(false);
@@ -19,7 +19,7 @@ export default function Login() {
     e.preventDefault();
     const novosErros = {};
 
-    if (!nome.trim()) novosErros.nome = "O nome é obrigatório.";
+    
     if (!email.trim()) novosErros.email = "O e-mail é obrigatório.";
     else if (!validarEmail(email)) novosErros.email = "E-mail inválido. Ex: exemplo@gmail.com";
     if (!senha) novosErros.senha = "A senha é obrigatória.";
@@ -49,10 +49,10 @@ export default function Login() {
         }
 
         setMensagemSucesso("Login realizado com sucesso!");
-        console.log({ nome, email, senha, usuario });
+        console.log({ email, senha, usuario });
 
         // limpa campos
-        setNome("");
+     
         setEmail("");
         setSenha("");
         setErros({});
@@ -82,22 +82,8 @@ export default function Login() {
       <form className={styles.form} onSubmit={handleSubmit}>
         <h1 className={styles.titulo}>ACESSE SUA CONTA</h1>
 
-        {/* Nome */}
-        <div className={styles.formGroup}>
-          <div className={styles.icon}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-              <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
-              <path fillRule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5" />
-            </svg>
-          </div>
-          <input
-            type="text"
-            className={styles.linhaInput}
-            placeholder="Nome"
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
-          />
-        </div>
+      
+       
         {erros.nome && <p className={styles.erro}>{erros.nome}</p>}
 
         {/* Email */}

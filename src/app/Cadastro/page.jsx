@@ -41,45 +41,53 @@ export default function Cadastro() {
     if (Object.keys(novosErros).length !== 0) return;
 
     setCarregando(true);
+    setMensagemSucesso("");
+
     try {
-      const API =
-        (process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3333").replace(
-          /\/$/,
-          ""
-        );
-      const url = `${API}/usuarios`;
+      const API = (process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3333").replace(/\/$/, "");
+      const url = `${API}/Cadastro?email=${encodeURIComponent(email)}&senha=${encodeURIComponent(senha)}&nome=${encodeURIComponent(nome)}`;
 
-      const res = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        mode: "cors",
-        body: JSON.stringify({
-          usu_nome: nome,
-          usu_email: email,
-          usu_senha: senha,
-          usu_data_cadastro: new Date().toISOString(),
-        }),
-      });
+      console.log('🔁 Enviando requisição de cadastro para:', url);
+      const res = await fetch(url, { method: 'GET', mode: 'cors' });
 
-      let json;
+      // ler body como texto e tentar parsear JSON
+      const bodyText = await res.text();
+      let json = null;
       try {
-        json = await res.json();
-      } catch (err) {
-        throw new Error(`Resposta inválida do servidor (status ${res.status})`);
+        json = bodyText ? JSON.parse(bodyText) : null;
+      } catch (parseErr) {
+        console.warn('Resposta do cadastro não é JSON:', parseErr, 'raw:', bodyText);
       }
 
-      if (!res.ok || !json.sucesso) {
-        setErros({
-          api: json && json.mensagem
-            ? json.mensagem
-            : `Erro ao cadastrar (status ${res.status}).`,
-        });
+      console.log('Cadastro - status:', res.status, res.statusText, 'body:', bodyText);
+
+      if (!res.ok || !json?.sucesso) {
+        // montar mensagem amigável
+        let msg = json?.mensagem || bodyText || `Erro ao cadastrar (status ${res.status})`;
+        if (typeof msg === 'string') {
+          const t = msg.trim();
+          if (t === '' || t === '{}') msg = 'Erro ao cadastrar. Verifique os dados.';
+        } else if (typeof msg === 'object') {
+          msg = msg.mensagem || 'Erro ao cadastrar.';
+        }
+
+        setErros({ api: String(msg) });
         setMensagemSucesso("");
         setCarregando(false);
         return;
       }
 
-      setMensagemSucesso(json.mensagem || "Cadastro realizado com sucesso!");
+      // extrai usuário do retorno
+      const usuario = Array.isArray(json.dados) ? json.dados[0] : json.dados;
+      if (usuario) {
+        try {
+          localStorage.setItem('usuario', JSON.stringify(usuario));
+        } catch (storageErr) {
+          console.warn('Não foi possível salvar usuario no localStorage:', storageErr);
+        }
+      }
+
+      setMensagemSucesso(json.mensagem || 'Cadastro realizado com sucesso! Redirecionando...');
       setErros({});
       setNome("");
       setEmail("");
@@ -88,11 +96,11 @@ export default function Cadastro() {
 
       setTimeout(() => {
         setMensagemSucesso("");
-        router.push("/login");
+        router.push('/login');
       }, 1500);
     } catch (error) {
-      console.error("Erro ao chamar API de cadastro:", error);
-      setErros({ api: "Erro de conexão. Verifique backend/CORS." });
+      console.error('Erro ao chamar API de cadastro:', error);
+      setErros({ api: 'Erro de conexão. Verifique backend/CORS.' });
       setMensagemSucesso("");
     } finally {
       setCarregando(false);
