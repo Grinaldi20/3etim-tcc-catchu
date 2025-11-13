@@ -47,7 +47,7 @@ export default function TelaPrincipal() {
 
           <div className="carousel-inner" style={{ height: "auto", maxHeight: "40vh" }}>
             <div className="carousel-item active">
-              <Image className={`d-block w-100 ${styles.imagem}`} src="/carrosel.png" alt="Slide 1" width={1200} height={400} quality={100} />
+              <Image className={`d-block w-100 ${styles.imagem}`} src="/Fundo Carrocel.png" alt="Slide 1" width={2000} height={1000} quality={100} />
             </div>
             <div className="carousel-item">
               <Image className={`d-block w-100 ${styles.imagem}`} src="/carrosel6.png" alt="Slide 2" width={1200} height={400} quality={100} />
