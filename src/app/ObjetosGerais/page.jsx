@@ -137,7 +137,25 @@ export default function MaterialEscolar() {
               <p>
                 <strong>Classificação:</strong> {itemSelecionado.obj_status}
               </p>
-              <button>Reservar</button>
+              <button
+                onClick={() => {
+                  try {
+                    const key = 'carrinho';
+                    const stored = localStorage.getItem(key);
+                    const carrinho = stored ? JSON.parse(stored) : [];
+                    const jaExiste = carrinho.some((it) => it.obj_id === itemSelecionado.obj_id);
+                    if (!jaExiste) {
+                      carrinho.push(itemSelecionado);
+                      localStorage.setItem(key, JSON.stringify(carrinho));
+                    }
+                    setModalAberto(false);
+                  } catch (err) {
+                    console.error('Erro ao reservar item:', err);
+                  }
+                }}
+              >
+                Reservar
+              </button>
             </div>
           </div>
         )}

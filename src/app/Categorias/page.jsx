@@ -8,6 +8,7 @@ import styles from "./page.module.css";
 import objetos from "@/mockup/objetos";
 
 export default function Categorias() {
+  
   const [modalAberto, setModalAberto] = useState(false);
   const [itemSelecionado, setItemSelecionado] = useState({
     obj_id: 0,
@@ -87,6 +88,7 @@ export default function Categorias() {
         </header>
 
         <h1 className={styles.titulo}>Categorias</h1>
+        
 
         <div className={styles.CardsCarrocel}>
           <a href="/MaterialEscolar">
@@ -223,7 +225,29 @@ export default function Categorias() {
               <strong>Classificação:</strong>
               {itemSelecionado.obj_status}
             </p>
-            <button>Reservar</button>
+            <button
+              onClick={() => {
+                try {
+                  const key = 'carrinho';
+                  const stored = localStorage.getItem(key);
+                  const carrinho = stored ? JSON.parse(stored) : [];
+
+                  // evita duplicados pelo id
+                  const jaExiste = carrinho.some((it) => it.obj_id === itemSelecionado.obj_id);
+                  if (!jaExiste) {
+                    carrinho.push(itemSelecionado);
+                    localStorage.setItem(key, JSON.stringify(carrinho));
+                  }
+
+                  // apenas fecha modal; item já salvo no localStorage
+                  setModalAberto(false);
+                } catch (err) {
+                  console.error('Erro ao reservar item:', err);
+                }
+              }}
+            >
+              Reservar
+            </button>
           </div>
         </div>
       )}
