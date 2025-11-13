@@ -45,43 +45,46 @@ export default function Cadastro() {
 
     try {
       const API = (process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3333").replace(/\/$/, "");
-      const url = `${API}/Cadastro?email=${encodeURIComponent(email)}&senha=${encodeURIComponent(senha)}&nome=${encodeURIComponent(nome)}`;
+      const url = `${API}/usuarios`;
 
-      console.log('🔁 Enviando requisição de cadastro para:', url);
-      const res = await fetch(url, { method: 'GET', mode: 'cors' });
+      console.log('🔁 Enviando requisição de cadastro (POST) para:', url);
+      const res = await fetch(url, {
+        method: 'POST',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          usu_nome: nome,
+          usu_email: email,
+          usu_senha: senha,
+          usu_data_cadastro: new Date().toISOString(),
+        }),
+      });
 
-      // ler body como texto e tentar parsear JSON
-      const bodyText = await res.text();
       let json = null;
       try {
-        json = bodyText ? JSON.parse(bodyText) : null;
+        json = await res.json();
       } catch (parseErr) {
-        console.warn('Resposta do cadastro não é JSON:', parseErr, 'raw:', bodyText);
+        const text = await res.text();
+        console.warn('Resposta do cadastro não foi JSON. Texto:', text);
+        throw new Error(`Resposta inválida do servidor (status ${res.status})`);
       }
 
-      console.log('Cadastro - status:', res.status, res.statusText, 'body:', bodyText);
+      console.log('Cadastro - status:', res.status, res.statusText, 'json:', json);
 
       if (!res.ok || !json?.sucesso) {
-        // montar mensagem amigável
-        let msg = json?.mensagem || bodyText || `Erro ao cadastrar (status ${res.status})`;
-        if (typeof msg === 'string') {
-          const t = msg.trim();
-          if (t === '' || t === '{}') msg = 'Erro ao cadastrar. Verifique os dados.';
-        } else if (typeof msg === 'object') {
-          msg = msg.mensagem || 'Erro ao cadastrar.';
-        }
-
+        const msg = json?.mensagem || `Erro ao cadastrar (status ${res.status})`;
         setErros({ api: String(msg) });
         setMensagemSucesso("");
         setCarregando(false);
         return;
       }
 
-      // extrai usuário do retorno
+      // extrai usuário do retorno e salva sem a senha
       const usuario = Array.isArray(json.dados) ? json.dados[0] : json.dados;
       if (usuario) {
+        const { usu_senha: _usu_senha, ...safeUsuario } = usuario;
         try {
-          localStorage.setItem('usuario', JSON.stringify(usuario));
+          localStorage.setItem('usuario', JSON.stringify(safeUsuario));
         } catch (storageErr) {
           console.warn('Não foi possível salvar usuario no localStorage:', storageErr);
         }
@@ -165,6 +168,7 @@ export default function Cadastro() {
           <input
             type="email"
             placeholder="Email"
+            name="usu_email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -181,6 +185,7 @@ export default function Cadastro() {
           <input
             type={mostrarSenha ? "text" : "password"}
             placeholder="Senha"
+            name="usu_name"
             value={senha}
             onChange={(e) => setSenha(e.target.value)}
           />
@@ -204,6 +209,7 @@ export default function Cadastro() {
           <input
             type={mostrarConfirmar ? "text" : "password"}
             placeholder="Confirmar Senha"
+            name="usu_name"
             value={confirmarSenha}
             onChange={(e) => setConfirmarSenha(e.target.value)}
           />
