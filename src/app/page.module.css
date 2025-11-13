@@ -110,7 +110,12 @@
   width: 100%;
   height: auto;
   object-fit: cover;
-  border-radius: 10px;
+}
+
+.imagem1 {
+  width: 1200px;
+  height: 400px;
+  object-fit: cover;
 }
 
 
