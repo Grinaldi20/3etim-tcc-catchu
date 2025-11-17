@@ -79,7 +79,7 @@ export default function Dados() {
             type={mostrar.antiga ? "text" : "password"}
             className={styles.Input}
             placeholder="Senha Antiga"
-            value={senhaAntiga}
+            value={senhaAntiga ?? ""}
             onChange={(e) => setSenhaAntiga(e.target.value)}
           />
           <button
@@ -102,7 +102,7 @@ export default function Dados() {
             type={mostrar.nova ? "text" : "password"}
             className={styles.Input}
             placeholder="Nova Senha"
-            value={novaSenha}
+            value={novaSenha ?? ""}
             onChange={(e) => setNovaSenha(e.target.value)}
           />
           <button
@@ -125,7 +125,7 @@ export default function Dados() {
             type={mostrar.confirmar ? "text" : "password"}
             className={styles.Input}
             placeholder="Confirmar Senha"
-            value={confirmarSenha}
+            value={confirmarSenha ?? ""}
             onChange={(e) => setConfirmarSenha(e.target.value)}
           />
           <button

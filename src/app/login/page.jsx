@@ -97,7 +97,7 @@ export default function Login() {
             type="email"
             className={styles.linhaInput}
             placeholder="Email"
-            value={email}
+            value={email ?? ""}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
@@ -115,7 +115,7 @@ export default function Login() {
             type={mostrarSenha ? "text" : "password"}
             className={styles.linhaInput}
             placeholder="Senha"
-            value={senha}
+            value={senha ?? ""}
             onChange={(e) => setSenha(e.target.value)}
           />
 
