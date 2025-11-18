@@ -53,9 +53,7 @@ export default function Postagem() {
               <input type="text" placeholder="Data " />
             </div>
 
-            <div className={styles.formGroup}>
-              <input type="text" placeholder="Retirado Por" />
-            </div>
+            
           </form>
         </div>
 
