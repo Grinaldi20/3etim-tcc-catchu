@@ -1,299 +1,227 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Centraliza na tela verticalmente */
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
-:root {
-  font-size: 62.5%;
+.lado {
+    background-color: #4B8C8D;;
+    height: 625px;
+    width: 260px;
+    border-radius: 0.9rem 0 0 0.9rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 1rem;
+    margin-top: 0; /* remove margem antiga */
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.form {
+    background-color: #fff;
+    padding: 3rem;
+    max-width: 550px;
+    width: 600px;
+    height: 625px;
+    margin: 0; /* remove a margem antiga */
+    border-radius: 0 0.9rem 0.9rem 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 
 
-
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem 4rem; /* removi margem negativa, usei padding horizontal */
-  width: 100%;
-  height: 100px;
-  background-color: #4B8C8D;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-  
+.titulo {
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-align: center;
+    color:#4B8C8D;
+    margin-bottom: 3.5rem;
+    margin-top: 0.5rem;
+    font-family: "Arial";
+    font-weight: bold;
 }
 
-
-/* Centraliza a pesquisa entre os elementos */
-.Pesquisa {
-  flex: 1;
-  display: flex;
-  justify-content: center;
+.button {
+    border-radius: 16px;
+    border: 2px solid white; 
+    padding: 10px 20px;
+    background-color: #4B8C8D; 
+    color: white;
+    cursor: pointer;
+    width: 17rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+    transition: all 0.3s ease;
+    display: block;        
+    margin: 1rem auto 0;   
+    margin-top: 1rem;
+    height: 45px;
+    font-family: "Roboto";
+    font-weight: 600;
+    font-size: 15px;
+     transition: transform 0.3s;
 }
 
-.Pesquisa input {
-  height: 6rem;
-  width: 100%;
-  max-width: 90rem;
-  border-radius: 5rem;
-  border: none;
-  background-color: #0E6567;
-  font-size: 2.5rem;
-  color: white;
-  padding: 1.5rem 2rem;
+.button:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); 
+    background-color: white;
+    border: 2px solid #4B8C8D; 
+    color: #4B8C8D;
+    transform: scale(1.05);
 }
 
-.Pesquisa input::placeholder {
-  color: white;
+.formGroup  {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #3a7c7b;
+    margin: 20px 0;
+     color: #4B8C8D;
+    padding: 5px;
+     margin-bottom: 2.7rem;
 }
 
-.Icons {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
+.formGroup  input {
+    border: none;
+    outline: none;
+     color: #4B8C8D;
+    font-size: 1rem;
+    flex: 1;
+    /* Animação no foco dos inputs da form-group */
+    transition: transform 0.2s ease;
+    background-color: #ffffff;
 }
 
-.Icons :global(svg) {
-  height: 5.5rem;
-  width: 5.5rem;
-  color: #ffffff;
-  cursor: pointer;
-  transition: transform 0.3s;
-  /* tira o transform daqui */
+.formGroup  input:focus {
+    transform: scale(1.05);
+    outline: none;
+    background-color: #ffffff;
 }
 
-/* efeito só quando passar o mouse */
-.Icons :global(svg):hover {
-  transform: scale(1.05);
-}
-
-.Cards {
-  display: flex;
-  justify-content: space-around;
-  /*gap: 18rem;*/
-  /*padding: 6rem;*/
-  margin-top: 6rem;
-  flex-wrap: wrap;
-}
-
-.Cards a {
-  background-color: #0E6567;
-  color: white;
-  border-radius: 2rem;
-  padding: 2rem;
-  width: 35rem;
-  text-align: center;
-  text-decoration: none;
-  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s;
-}
-
-.Cards a:hover {
-  transform: scale(1.05);
-}
-
-.Cards a img {
-  width: 100%;
-  height: 27rem;
-  border-radius: 2.5rem;
-  margin-top: 1rem;
-  object-fit: cover;
-}
-
-.Cards a p {
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-.icon1 {
-  display: flex;
-}
-
-
-.imagem {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-
-.imagem1 {
-  width: 1200px;
-  height: 400px;
-  object-fit: cover;
-}
-
-
-
-.carroselControlPrevIcon {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%234B8C8D' viewBox='0 0 16 16'%3E%3Cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3E%3C/svg%3E");
-  width: 100%;
-  height: 6rem;
-  background-size: 100% 100%;
-}
-
-.carroselControlNextIcon {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%234B8C8D' viewBox='0 0 16 16'%3E%3Cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
-  width: 100%;  /* 55px */
-  height: 8rem; /* 55px */
-  background-size: 100% 100%;
-}
-
-:global(.visually-hidden) {
-  display: none;
-}
-
-:global(.carousel-indicators button) {
-  background-color:  #0E6567; 
-  width: 100%;     /* 12px */
-  height: 0.75rem;    /* 12px */
-  border-radius: 50%;
-  opacity: 0.5;
-  margin: 0 0.3125rem; /* 5px */
-  transition: all 0.3s ease;
-  border: none;
-}
-
-:global(.carousel-indicators .active) {
-  opacity: 1;
-  background-color: #0E6567; 
-}
-
-
-
-  @media (max-width: 1170px)
-   {
-
-   .Cards {
-  display: flex;
-  justify-content: space-around;
-  /*padding: 4rem;*/
-  flex-wrap: wrap;
-}
-
-.Cards a {
-  background-color: #0E6567;
-  color: white;
-  border-radius: 2rem;
-  padding: 2rem;
-  width: 30rem;
-  text-align: center;
-  text-decoration: none;
-  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s;
-}
-
-.Cards a img {
-  width: 100%;
-  height: 22rem;
-  border-radius: 2.5rem;
-  margin-top: 1rem;
-  object-fit: cover;
-}
-
-.Icons :global(svg) {
-  height: 4.5rem;
-  width: 4.5rem;
-  color: #ffffff;
-  cursor: pointer;
-}
-
-.Pesquisa input {
-  height: 5rem;
-  width: 100%;
-  max-width: 90rem;
-  border-radius: 5rem;
-  border: none;
-  background-color: #0E6567;
-  font-size: 2.5rem;
-  color: white;
-  padding: 1.5rem 2rem;
-}
-
-
-   
-  }
-
-  @media (max-width: 1020px)
-   {
-
-   .Cards {
-  display: flex;
-  justify-content: space-around;
-  /*padding: 1.5rem;*/
-  flex-wrap: wrap;
-}
-
-.Cards a {
-  background-color: #0E6567;
-  color: white;
-  border-radius: 2rem;
-  padding: 2rem;
-  width: 30rem;
-  text-align: center;
-  text-decoration: none;
-  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s;
-}
-
-.Cards a img {
-  width: 100%;
-  height: 22rem;
-  border-radius: 2.5rem;
-  margin-top: 1rem;
-  object-fit: cover;
-}
-
-.Icons :global(svg) {
-  height: 4rem;
-  width: 4rem;
-  color: #ffffff;
-  cursor: pointer;
-}
-
-.Pesquisa input {
-  height: 4.5rem;
-  width: 100%;
-  max-width: 90rem;
-  border-radius: 5rem;
-  border: none;
-  background-color: #0E6567;
-  font-size: 2.5rem;
-  color: white;
-  padding: 1.5rem 2rem;
-}
+.icon > svg {
+    color: #4B8C8D;
+    width: 40px;  
+    height: 40px;
     
-  }
-
-
-    @media (max-width: 899px)
-   {
-
-   .Cards {
-  display: flex;
-  justify-content: center;
-  /*padding: 1.5rem;*/
-  flex-wrap: wrap;
 }
 
-.Cards a {
-  background-color: #0E6567;
-  color: white;
-  border-radius: 2rem;
-  padding: 2rem;
-  margin-top: 3rem;
-  width: 60rem;
+.formGroup  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px ;  
+
+}
+
+
+
+.ImgMaior {
+    width: 140px;
+    height: 140px;
+ 
+    margin-bottom: 8rem;
+}
+
+.ImgMenor {
+    width: 250px;
+    height: 200px;
+    
+}
+
+.subtitulo {
+    text-align: center;
+    font-family: "Arial";
+    font-size: 24px;
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    margin-top: -35%;
+    font-weight: bold;
+}
+
+.texto {
+    text-align: center;
+    font-family: "";
+    font-size: 17px;
+    color: #fff;
+    
+}
+
+.button2 {
+    border-radius: 16px;
+    border: 2px solid white; 
+    padding: 13px 17px;
+    background-color: #4B8C8D; 
+    color: white;
+    cursor: pointer;
+    width: 170px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+    transition: all 0.3s ease;
+    display: block;        
+    margin: 1rem auto 0;   
+    margin-top: 11%;
+    height: 50px;
+    margin-bottom: 1.5rem;
+       transition: transform 0.3s;
+       font-weight: 600;
+       font-size: 15px;
+       font-family: 'Roboto';
+}
+
+.button2:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); 
+    background-color: white;
+    border: 2px solid #4B8C8D; 
+    color: #4B8C8D;
+    transform: scale(1.05);
+}
+
+.formGroup .icon2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 3px ;  
+}
+
+.icon2 > svg {
+    color: #0E6567;
+    width: 40px;  
+    height: 40px;
+}
+
+.span {
+  color: #0E6567;
+  font-size: 0.875rem;
   text-align: center;
-  text-decoration: none;
-  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s;
+  margin-left: 155px;
+  margin-top: -2rem;
 }
 
-.Cards a img {
-  width: 100%;
-  height: 22rem;
-  border-radius: 2.5rem;
+.toggleSenha {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #4B8C8D;
+  margin-left: 8px;
+  transition: transform 0.2s ease;
+}
+
+.toggleSenha:hover {
+  transform: scale(1.1);
+}
+
+.erro {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: -1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.sucesso {
+  color: green;
+  font-weight: bold;
+  text-align: center;
   margin-top: 1rem;
-  object-fit: cover;
 }
-
-.imagem {
-    max-height: 250px; /* aumenta no mobile */
-    object-fit: cover;
-  }
-  }
