@@ -46,7 +46,7 @@ export default function MaterialEscolar() {
   return (
     <div className="main">
       <header className={styles.header}>
-        <Link href="http://localhost:3000">
+        <Link href="TelaPrincipal">
           <Image
             className={styles.img}
             src="/logo1.png"
