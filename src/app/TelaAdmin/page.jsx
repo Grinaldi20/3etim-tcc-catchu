@@ -68,24 +68,24 @@ export default function TelaPrincipal() {
         </div>
 
         <div className={styles.Cards}>
-          <a href="/PoliticaRetirada">
+          <a href="/Resgatados">
             <div className={styles.PoliticaRetirada}>
-              <p>Política de Retirada</p>
+              <p>Resgatados</p>
               <Image className={styles.imagem} src="/retirada.png" alt="Pertences" width={200} height={150} quality={100} />
             </div>
           </a>
 
           <a href="/Categorias">
             <div className={styles.Pertences}>
-              <p>Categorias</p>
+              <p>Pertences</p>
               <Image className={styles.imagem} src="/pertences.png" alt="Pertences" width={200} height={150} quality={100} />
             </div>
           </a>
 
-          <a href="/AchouAlgo">
-            <div className={styles.AchouAlgo}>
-              <p>Achou Algo?</p>
-              <Image className={styles.imagem} src="/algo.png" alt="Achou algo" width={200} height={150} quality={100} />
+          <a href="/Postagem">
+            <div className={styles.CadObjetos}>
+              <p>Adicionar Item</p>
+              <p className={styles.Mais}>+</p>
             </div>
           </a>
         </div>

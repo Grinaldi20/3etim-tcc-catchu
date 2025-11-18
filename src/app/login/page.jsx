@@ -51,16 +51,33 @@ export default function Login() {
       }
 
       const usuario = Array.isArray(json?.dados) ? json.dados[0] : json?.dados ?? null;
+      
+      // --- Lógica de redirecionamento modificada aqui ---
+      let proximaTela = "/TelaPrincipal"; // Padrão
+      
       if (usuario) {
+        // Assume-se que 'usu_tipo' contém o tipo de usuário, e '1' é o admin
+        const tipoUsuario = usuario.usu_tipo; 
         const { usu_senha: _unused, ...safeUsuario } = usuario;
+        
         try { localStorage.setItem("usuario", JSON.stringify(safeUsuario)); } catch (e) { console.warn(e); }
+
+        // Se o tipo de usuário for 1 (Admin), redireciona para o dashboard de admin
+        if (tipoUsuario === 1) {
+            proximaTela = "/TelaAdmin"; // Mude para o caminho real da sua tela de admin
+            console.log("Usuário Admin detectado. Redirecionando para:", proximaTela);
+        } else {
+            console.log("Usuário Comum detectado. Redirecionando para:", proximaTela);
+        }
       }
 
       setMensagemSucesso("Login realizado com sucesso!");
       setEmail(""); setSenha("");
       setTimeout(() => {
-        router.push("/TelaPrincipal");
+        router.push(proximaTela); // Usa a tela definida (Admin ou Principal)
       }, 600);
+      // ----------------------------------------------------
+
     } catch (error) {
       console.error("Erro ao chamar API de login:", error);
       setErros({ api: "Erro de conexão. Verifique backend/CORS e console." });

@@ -96,6 +96,10 @@
   object-fit: cover;
 }
 
+.Cards a .Mais{
+  font-size: 15rem;
+}
+
 .Cards a p {
   font-size: 2rem;
   font-weight: bold;
@@ -104,6 +108,8 @@
 .icon1 {
   display: flex;
 }
+
+
 
 
 .imagem {
