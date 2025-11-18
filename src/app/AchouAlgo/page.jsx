@@ -10,7 +10,7 @@ export default function AchouAlgo() {
       <div className={styles.container}>
         <div className={styles.cardText}>
 
-          <Link href="http://localhost:3000">
+          <Link href="TelaPrincipal">
 
             <div className={styles.voltar}>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">

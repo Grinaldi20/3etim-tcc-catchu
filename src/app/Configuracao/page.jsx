@@ -23,7 +23,7 @@ export default function Configuracao() {
   return (
     <div>
       <header className={styles.header}>
-        <Link href="http://localhost:3000">
+        <Link href="TelaPrincipal">
 
           <Image
             className={styles.img}
@@ -37,7 +37,7 @@ export default function Configuracao() {
         </Link>
 
 
-    <Link href="http://localhost:3000">
+    <Link href="TelaPrincipal">
 
          
        

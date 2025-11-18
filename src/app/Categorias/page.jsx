@@ -48,7 +48,7 @@ export default function Categorias() {
     <main className={styles.main}>
       <div className={styles.Gradiente}>
         <header className={styles.header}>
-          <Link href="http://localhost:3000">
+          <Link href="TelaPrincipal">
             <Image
               className={styles.img}
               src="/logo1.png"
