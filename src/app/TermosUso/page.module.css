@@ -78,15 +78,17 @@
 .Cards {
   background-color: #ffffff;
   width: 19rem;
-  height: 20.3rem;
+  min-height: 12rem;
+  height: auto;
+  box-sizing: border-box;
   font-weight: 300;
   color: #fff;
-  padding: 15px;
+  padding: 18px;
   border-radius: 2rem;
   display: flex;
   flex-direction: column;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-  justify-content: space-between;
+  justify-content: flex-start;
          transition: transform 0.5s;
 }
 
@@ -102,10 +104,17 @@
 
 
 .Cards p{
-  text-align:top;
+  text-align: left;
   color: #3b3b3b;
-  font-size: 26.7px;
-  font-family: "Poppins";
+  font-size: 0.95rem; /* ajuste para caber melhor */
+  line-height: 1.45;
+  font-family: "Arial", sans-serif;
+  margin: 0.6rem 0 0.2rem 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  flex: 1 1 auto; /* permite que o parágrafo cresça dentro do card */
+  font-size: 22px;
 }
 
 
