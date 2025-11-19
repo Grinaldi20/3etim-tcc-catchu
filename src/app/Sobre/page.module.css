@@ -78,13 +78,14 @@ object-fit: contain;
 .card{
    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   border-radius: 16px;
-  width: 60rem;
+  width: 100%;
+  max-width: 1200px; /* limite de largura em telas grandes */
   display: flex;               /* ativa o flexbox */
   flex-direction: column;      /* itens ficam em coluna */
   align-items: center;         /* centraliza horizontalmente */
   justify-content: center;     /* centraliza verticalmente */
   text-align: center;          /* centraliza textos */
-  padding: 2rem;  
+  padding: 1.5rem;  
 
 }
 
@@ -100,7 +101,8 @@ object-fit: contain;
       font-family: Arial, sans-serif;
       margin: 10px 0;
       border-bottom: 1px solid #ccc;
-      width: 800px;
+      width: 100%;
+      max-width: 800px;
       margin-bottom: 2.5rem;
      
     }
@@ -109,7 +111,8 @@ object-fit: contain;
       font-family: Arial, sans-serif;
       margin: 10px 0;
       border-bottom: 1px solid #ccc;
-      width: 800px;
+      width: 100%;
+      max-width: 800px;
       margin-bottom: 5rem;
     }
 
@@ -143,7 +146,7 @@ object-fit: contain;
     background-color: #0E6567; 
     color: white;
     cursor: pointer;
-    width: 12rem;
+  width: 12rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
     transition: all 0.3s ease;
     display: block;        
@@ -191,7 +194,7 @@ object-fit: contain;
     .Contatos{
         display: flex;
         color: #0E6567;
-        justify-content: space-around;
+      justify-content: space-around;
         
     }
 
@@ -331,10 +334,10 @@ object-fit: contain;
 
 .teamGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* ✅ 3 colunas fixas */
-  gap: 2rem; /* espaço entre os cards */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* adaptação automática */
+  gap: 1.5rem; /* espaço entre os cards */
   justify-items: center;
-  align-items: center;
+  align-items: start;
   margin-top: 2rem;
 }
 
@@ -347,7 +350,7 @@ object-fit: contain;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   width: 100%;
-  max-width: 300px;
+  max-width: 320px;
   text-align: center;
 }
 
@@ -357,8 +360,9 @@ object-fit: contain;
 }
 
 .teamCard img {
-  width: 300px;
-  height: 280px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4/3;
   object-fit: cover;
 }
 
@@ -422,8 +426,8 @@ object-fit: contain;
 
 .modalBox {
   position: relative;
-  width: 500px;
-  height: 500px;
+  width: min(90%, 600px);
+  height: auto;
   background: #ffffff;
   border-radius: 20px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
@@ -482,6 +486,19 @@ background-color: #0E6567;
   border: 3px solid #0E6567;
 }
 
+.modalHeader {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.modalImage {
+  width: clamp(100px, 30%, 220px);
+  height: auto;
+}
+
 .modalName {
   font-size: 20px;
   color: #0E6567;
@@ -502,7 +519,7 @@ background-color: #0E6567;
   color: #333;                  /* Cor legível */
   font-size: 0.95rem;           /* Tamanho equilibrado */
   margin-top: -1rem;           /* Subiu o texto (antes era 1rem) */
-  padding: 0 2rem 1rem 3rem;    /* move o texto um pouco pra direita */
+  padding: 0 1.5rem 1rem 1.5rem;    /* padding responsivo */
   font-family: "Poppins", sans-serif;
   max-width: 90%;               /* mantém o texto dentro do modal */
 }
@@ -583,6 +600,42 @@ background-color: #0E6567;
 
   .sectionText {
     font-size: 1rem;
+  }
+}
+
+/* Ajustes responsivos adicionais */
+@media (max-width: 1024px) {
+  .card { padding: 1rem; 
+  }
+  .sectionText { max-width: 680px; 
+  }
+  .details, .details2 { max-width: 680px;
+   }
+}
+
+@media (max-width: 768px) {
+  .topoFeedback { height: 80px; padding: 0 1rem; 
+  }
+  .titulo { font-size: 1.4rem; padding: 8px 20px;
+   }
+  .sectionTitle { font-size: 1.6rem; 
+  }
+  .teamCard { max-width: 260px;
+   }
+  .teamGrid { gap: 1rem;
+   }
+  .modalBox { padding: 16px; 
+  }
+  .modalBody { padding: 0 1rem 1rem 1rem;
+   }
+}
+
+@media (max-width: 420px) {
+  .sectionText { font-size: 0.95rem; line-height: 1.5;
+   }
+  .teamCard { max-width: 100%;
+   }
+  .card { padding: 0.8rem; 
   }
 }
 
