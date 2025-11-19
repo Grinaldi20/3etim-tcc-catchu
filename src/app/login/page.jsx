@@ -108,7 +108,7 @@ export default function Login() {
         </div>
         {erros.senha && <p className={styles.erro}>{erros.senha}</p>}
 
-        <Link href="/Cadastro"><span className={styles.span}>Não possui uma conta?</span></Link>
+        <Link href="/"><span className={styles.span}>Não possui uma conta?</span></Link>
 
         <button type="submit" className={styles.button}>Entrar</button>
 

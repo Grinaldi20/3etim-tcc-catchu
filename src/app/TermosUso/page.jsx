@@ -68,8 +68,9 @@ export default function TermosUso() {
           <div className={styles.Cards}>
 
             <h2>2</h2>
-            <p className={styles.p2}> Você é inteiramente responsável pelo conteúdo das publicações realizadas, incluindo descrição,
-              É proibido publicar conteúdo falso, ofensivo, ilegal, ou que viole direitos de terceiros.
+            <p className={styles.p2}>  Todas as publicações de itens perdidos ou encontrados são realizadas exclusivamente 
+  pela equipe administrativa do CatchU. O usuário não envia fotos nem publica anúncios diretamente.
+  É proibido fornecer informações falsas ou tentar enganar a administração.
             </p>
 
           </div>
@@ -77,9 +78,9 @@ export default function TermosUso() {
           <div className={styles.Cards}>
 
             <h2>3</h2>
-            <p className={styles.p3}> Em caso de dúvidas ou sugestões, entre em contato através do e-mail ou redes sociais .
-              Ao utilizar o CatchU, você declara que leu,
-              compreendeu e concorda com os presentes Termos de Uso.</p>
+            <p className={styles.p3}> Em caso de dúvidas, sugestões ou solicitações relacionadas aos itens publicados, 
+  entre em contato pelos canais oficiais do CatchU. Ao continuar utilizando o site, 
+  você declara que leu e concorda com estes Termos de Uso.</p>
 
           </div>
         </div>
@@ -88,26 +89,27 @@ export default function TermosUso() {
 
             <h2>4</h2>
             <p className={styles.p4}>
-              Respeitar outros usuários e agir de forma ética , educada e respeitosa.
-              Não divulgar informações pessoais de terceirossemautorização,
-              Não realizar atividades fraudulentas, Esperamos a compreensão de todos. </p>
+            Os usuários devem manter uma postura ética e respeitosa ao utilizar a plataforma. 
+  Não é permitido enviar dados pessoais de terceiros sem autorização ou tentar realizar 
+  qualquer atividade fraudulenta. Contamos com sua colaboração para manter o ambiente seguro.</p>
 
           </div>
 
           <div className={styles.Cards}>
 
             <h2>5</h2>
-            <p className={styles.p5}> Para publicar ou interagir no site, você deve criar uma conta fornecendo
-              informações verdadeiras , completas e atualizadas. Você é responsável por manter a confidencialidade das
-              credenciais de acesso.</p>
+            <p className={styles.p5}>   Para interagir com o site e solicitar a recuperação de um item, o usuário poderá ser solicitado 
+  a fornecer informações verdadeiras e atualizadas. Você é responsável por qualquer dado informado 
+  à equipe administrativa.</p>
 
           </div>
 
           <div className={styles.Cards}>
 
             <h2>6</h2>
-            <p className={styles.p6}> Todo o conteúdo presente no site, incluindo textos, imagens, logotipos e
-              layout, é protegido por direitos autorais e não pode ser reproduzido sem autorização. Violado tomaremos providências.</p>
+            <p className={styles.p6}> Todo o conteúdo do site  incluindo textos, imagens, logotipos e organização visual  
+  é protegido por direitos autorais. Qualquer reprodução sem autorização é proibida, 
+  e medidas podem ser tomadas em caso de violação.</p>
 
           </div>
 
