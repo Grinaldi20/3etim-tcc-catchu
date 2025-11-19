@@ -1,22 +1,65 @@
+"use client";
+
+import { useRef, useState } from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
 import Link from "next/link";
 
 export default function Postagem() {
+  const fileInputRef = useRef(null);
+  const [preview, setPreview] = useState(null);
+
+  const abrirSelecaoArquivos = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const imageURL = URL.createObjectURL(file);
+    setPreview(imageURL);
+  };
+
   return (
     <main className={styles.main}>
       <div className={styles.container}>
         <div style={{ display: "flex" }}>
           <div className={styles.lado}>
-            <Image
-              className={styles.ImgMaior}
-              src="/camera.png"
-              width={200}
-              height={150}
-              alt="Logo Maior"
-              quality={100}
+            
+            {/* Mostra a imagem escolhida ou a câmera */}
+            {preview ? (
+              <Image
+                className={styles.ImgMaior}
+                src={preview}
+                width={600}
+                height={600}
+                alt="Preview"
+              />
+            ) : (
+              <Image
+                className={styles.ImgMaior}
+                src="/camera.png"
+                width={600}
+                height={600}
+                alt="Logo Maior"
+                quality={100}
+              />
+            )}
+
+            {/* Botão que abre o seletor */}
+            <button className={styles.button2} onClick={abrirSelecaoArquivos}>
+              Adicionar Imagem
+            </button>
+
+            {/* Input de arquivo oculto */}
+            <input
+              type="file"
+              accept="image/*"
+              ref={fileInputRef}
+              style={{ display: "none" }}
+              onChange={handleFileChange}
             />
-            <button className={styles.button2}>Adicionar Imagem</button>
           </div>
 
           <form className={styles.form}>
@@ -46,15 +89,15 @@ export default function Postagem() {
             />
 
             <div className={styles.formGroup}>
-              <input type="text" placeholder="Lugar Encontrado" />
+              <input type="text" placeholder="Lugar Encontrado" className={styles.input} />
             </div>
 
             <div className={styles.formGroup}>
-              <input type="text" placeholder="Data " />
+              <input type="text" placeholder="Data" className={styles.input} />
             </div>
 
             <div className={styles.formGroup}>
-              <input type="text" placeholder="Retirado Por" />
+              <input type="text" placeholder="Retirado Por" className={styles.input} />
             </div>
           </form>
         </div>

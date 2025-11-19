@@ -153,10 +153,12 @@
   transition: transform 0.2s ease;
   margin-bottom: 2rem;
   font-size: 20px;
+  color: #000000;
 }
 
 .texto::placeholder{
     font-size: 23px;
+    color: #000000;
 }
 
 .texto:focus {
@@ -175,8 +177,10 @@
     font-size: 23px;
     margin-left: -2rem;
     transition: transform 0.2s ease;
-    color: #797979;
+    color: #000000;
     padding: 10px;
+    background-color: #ffffff;
+    
 }
 
 .select:focus {
@@ -194,3 +198,13 @@
     font-size: 20px;
     color: #cecece;
 }
+
+.input{
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.input::placeholder{
+    color: #000;
+}
+
