@@ -225,3 +225,8 @@
   text-align: center;
   margin-top: 1rem;
 }
+
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}
