@@ -15,7 +15,7 @@ export default function Dados() {
   const [erro, setErro] = useState("");
   const [sucesso, setSucesso] = useState("");
 
-  const validar = (e) => {
+  const validar = async (e) => {
     e.preventDefault();
     setErro("");
     setSucesso("");
@@ -36,14 +36,39 @@ export default function Dados() {
     }
 
     if (senhaAntiga === novaSenha) {
-      setErro("A nova senha não pode ser igual a antiga")
+      setErro("A nova senha não pode ser igual à antiga.");
       return;
     }
 
-    setSucesso("Senha alterada com sucesso!");
-    setSenhaAntiga("");
-    setNovaSenha("");
-    setConfirmarSenha("");
+    try {
+      const usu_id = localStorage.getItem("usu_id"); // PEGAR O ID DO USUÁRIO
+
+     const response = await fetch(`http://localhost:3333/usuarios/senha/${usu_id}`, {
+  method: "PATCH",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    senha_antiga: senhaAntiga,
+    nova_senha: novaSenha
+  }),
+});
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setErro(data.mensagem || "Erro ao alterar a senha.");
+        return;
+      }
+
+      setSucesso("Senha alterada com sucesso!");
+      setSenhaAntiga("");
+      setNovaSenha("");
+      setConfirmarSenha("");
+
+    } catch (error) {
+      setErro("Erro ao se conectar ao servidor.");
+    }
   };
 
   return (
@@ -75,6 +100,7 @@ export default function Dados() {
               <path fillRule="evenodd" d="M8 0a4 4 0 0 1 4 4v2.05a2.5 2.5 0 0 1 2 2.45v5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 13.5v-5a2.5 2.5 0 0 1 2-2.45V4a4 4 0 0 1 4-4M4.5 7A1.5 1.5 0 0 0 3 8.5v5A1.5 1.5 0 0 0 4.5 15h7a1.5 1.5 0 0 0 1.5-1.5v-5A1.5 1.5 0 0 0 11.5 7zM8 1a3 3 0 0 0-3 3v2h6V4a3 3 0 0 0-3-3" />
             </svg>
           </div>
+
           <input
             type={mostrar.antiga ? "text" : "password"}
             className={styles.Input}
@@ -82,6 +108,7 @@ export default function Dados() {
             value={senhaAntiga ?? ""}
             onChange={(e) => setSenhaAntiga(e.target.value)}
           />
+
           <button
             type="button"
             className={styles.toggleSenha}
@@ -98,6 +125,7 @@ export default function Dados() {
               <path fillRule="evenodd" d="M8 0a4 4 0 0 1 4 4v2.05a2.5 2.5 0 0 1 2 2.45v5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 13.5v-5a2.5 2.5 0 0 1 2-2.45V4a4 4 0 0 1 4-4M4.5 7A1.5 1.5 0 0 0 3 8.5v5A1.5 1.5 0 0 0 4.5 15h7a1.5 1.5 0 0 0 1.5-1.5v-5A1.5 1.5 0 0 0 11.5 7zM8 1a3 3 0 0 0-3 3v2h6V4a3 3 0 0 0-3-3" />
             </svg>
           </div>
+
           <input
             type={mostrar.nova ? "text" : "password"}
             className={styles.Input}
@@ -105,6 +133,7 @@ export default function Dados() {
             value={novaSenha ?? ""}
             onChange={(e) => setNovaSenha(e.target.value)}
           />
+
           <button
             type="button"
             className={styles.toggleSenha}
@@ -121,6 +150,7 @@ export default function Dados() {
               <path fillRule="evenodd" d="M8 0a4 4 0 0 1 4 4v2.05a2.5 2.5 0 0 1 2 2.45v5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 13.5v-5a2.5 2.5 0 0 1 2-2.45V4a4 4 0 0 1 4-4M4.5 7A1.5 1.5 0 0 0 3 8.5v5A1.5 1.5 0 0 0 4.5 15h7a1.5 1.5 0 0 0 1.5-1.5v-5A1.5 1.5 0 0 0 11.5 7zM8 1a3 3 0 0 0-3 3v2h6V4a3 3 0 0 0-3-3" />
             </svg>
           </div>
+
           <input
             type={mostrar.confirmar ? "text" : "password"}
             className={styles.Input}
@@ -128,6 +158,7 @@ export default function Dados() {
             value={confirmarSenha ?? ""}
             onChange={(e) => setConfirmarSenha(e.target.value)}
           />
+
           <button
             type="button"
             className={styles.toggleSenha}
