@@ -137,14 +137,14 @@ export default function Cadastro() {
         <div className={styles.formGroup}>
           <div className={styles.icon} />
           <input type={mostrarSenha ? "text" : "password"} placeholder="Senha" name="usu_senha" value={senha ?? ""} onChange={(e) => setSenha(e.target.value)} />
-          <button type="button" onClick={() => setMostrarSenha(!mostrarSenha)} className={styles.toggleSenha}>{mostrarSenha ? "🙈" : "👁️"}</button>
+          <button type="button" onClick={() => setMostrarSenha(!mostrarSenha)} className={styles.toggleSenha}> {mostrarSenha ? "🔓" : "🔒"}</button>
         </div>
         {erros.senha && <p className={styles.erro}>{erros.senha}</p>}
 
         <div className={styles.formGroup}>
           <div className={styles.icon} />
           <input type={mostrarConfirmar ? "text" : "password"} placeholder="Confirmar Senha" name="usu_senha_confirm" value={confirmarSenha ?? ""} onChange={(e) => setConfirmarSenha(e.target.value)} />
-          <button type="button" onClick={() => setMostrarConfirmar(!mostrarConfirmar)} className={styles.toggleSenha}>{mostrarConfirmar ? "🙈" : "👁️"}</button>
+          <button type="button" onClick={() => setMostrarConfirmar(!mostrarConfirmar)} className={styles.toggleSenha}> {mostrarSenha ? "🔓" : "🔒"}</button>
         </div>
         {erros.confirmarSenha && <p className={styles.erro}>{erros.confirmarSenha}</p>}
 

@@ -103,7 +103,7 @@ export default function Login() {
           <div className={styles.icon} />
           <input type={mostrarSenha ? "text" : "password"} className={styles.linhaInput} placeholder="Senha" value={senha ?? ""} onChange={(e) => setSenha(e.target.value)} />
           <button type="button" onClick={() => setMostrarSenha(!mostrarSenha)} className={styles.toggleSenha} style={{ position: "absolute", right: 10, top: "50%", transform: "translateY(-50%)", background: "none", border: "none" }}>
-            {mostrarSenha ? "🙈" : "👁️"}
+            {mostrarSenha ? "🔓" : "🔒"}
           </button>
         </div>
         {erros.senha && <p className={styles.erro}>{erros.senha}</p>}
