@@ -126,7 +126,7 @@ export default function Login() {
               border: "none",
             }}
           >
-            {mostrarSenha ? "🙈" : "👁️"}
+           {mostrarSenha ? "🔓" : "🔒"}
           </button>
         </div>
         {erros.senha && <p className={styles.erro}>{erros.senha}</p>}
