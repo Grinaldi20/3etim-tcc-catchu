@@ -10,6 +10,8 @@ export default function Dados() {
   const [usuario, setUsuario] = useState(null);
   const [loading, setLoading] = useState(true);
   const [excluindo, setExcluindo] = useState(false);
+  const [mostrarConfirm, setMostrarConfirm] = useState(false);
+  const [mensagemSucesso, setMensagemSucesso] = useState("");
   const router = useRouter();
 
   useEffect(() => {
@@ -64,34 +66,44 @@ export default function Dados() {
     carregar();
   }, []);
 
-  async function excluirConta() {
-    if (!confirm("Tem certeza que deseja excluir sua conta? Essa ação é irreversível.")) return;
+  function excluirConta() {
+    // abre o modal centralizado de confirmação
+    setMostrarConfirm(true);
+  }
 
+  async function confirmarExclusao() {
     const usu_id = (usuario && usuario.usu_id) || localStorage.getItem("usu_id");
     if (!usu_id) {
-      alert("ID do usuário não encontrado.");
+      setMensagemSucesso("ID do usuário não encontrado.");
+      setMostrarConfirm(false);
+      setTimeout(() => setMensagemSucesso(''), 2500);
       return;
     }
 
     try {
       setExcluindo(true);
+      setMostrarConfirm(false);
       const API = (process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3333").replace(/\/$/, "");
       const resp = await fetch(`${API}/usuarios/${usu_id}`, { method: "DELETE" });
-
       const json = await resp.json().catch(() => null);
 
       if (resp.ok) {
         localStorage.removeItem("usuario");
         localStorage.removeItem("usu_id");
-        alert((json && json.mensagem) ? json.mensagem : "Conta excluída com sucesso.");
-        router.push("/login");
+        setMensagemSucesso("Conta Excluida com Sucesso!");
+        setTimeout(() => {
+          setMensagemSucesso("");
+          router.push("/login");
+        }, 1400);
       } else {
         const msg = (json && json.mensagem) ? json.mensagem : `Erro ao excluir (status ${resp.status})`;
-        alert(String(msg));
+        setMensagemSucesso(String(msg));
+        setTimeout(() => setMensagemSucesso(''), 3500);
       }
     } catch (err) {
       console.error("Erro ao excluir conta:", err);
-      alert("Erro ao excluir conta. Veja console.");
+      setMensagemSucesso("Erro ao excluir conta. Veja console.");
+      setTimeout(() => setMensagemSucesso(''), 3500);
     } finally {
       setExcluindo(false);
     }
@@ -151,6 +163,26 @@ export default function Dados() {
           </button>
         </div>
       </form>
+
+      {mostrarConfirm && (
+        <div className={styles.modalOverlayCentered}>
+          <div className={styles.confirmBox} role="dialog" aria-modal="true">
+            <p style={{ marginBottom: 18, fontWeight: 600 }}>Tem certeza que deseja excluir sua conta?</p>
+            <div className={styles.confirmButtons}>
+              <button className={styles.cancelBtn} onClick={() => setMostrarConfirm(false)} disabled={excluindo}>Cancelar</button>
+              <button className={styles.confirmBtn} onClick={confirmarExclusao} disabled={excluindo}>{excluindo ? 'Excluindo...' : 'Excluir'}</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {mensagemSucesso && (
+        <div className={styles.modalOverlayCentered}>
+          <div className={styles.successBox}>
+            <p style={{ margin: 0, fontWeight: 700 }}>{mensagemSucesso}</p>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
