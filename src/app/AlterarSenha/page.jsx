@@ -41,20 +41,50 @@ export default function Dados() {
     }
 
     try {
-      const usu_id = localStorage.getItem("usu_id"); // PEGAR O ID DO USUÁRIO
+      // pega o objeto usuario salvo no login
+      const usuarioStr = localStorage.getItem("usuario");
+      if (!usuarioStr) {
+        setErro("Usuário não encontrado. Faça login novamente.");
+        return;
+      }
 
-     const response = await fetch(`http://localhost:3333/usuarios/senha/${usu_id}`, {
-  method: "PATCH",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({
-    senha_antiga: senhaAntiga,
-    nova_senha: novaSenha
-  }),
-});
+      let usuario;
+      try {
+        usuario = JSON.parse(usuarioStr);
+      } catch (err) {
+        console.error("Erro ao parsear usuario do localStorage:", err);
+        setErro("Dados do usuário inválidos. Faça login novamente.");
+        return;
+      }
 
-      const data = await response.json();
+      const usu_id = usuario?.usu_id ?? usuario?.id ?? null;
+      if (!usu_id) {
+        setErro("ID do usuário não encontrado. Faça login novamente.");
+        return;
+      }
+
+      console.log("AlterarSenha -> usu_id:", usu_id);
+
+      const response = await fetch(`http://localhost:3333/usuarios/senha/${encodeURIComponent(usu_id)}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          senha_antiga: senhaAntiga,
+          nova_senha: novaSenha,
+        }),
+      });
+
+      // parse seguro da resposta (JSON ou texto)
+      const text = await response.text();
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch {
+        data = { mensagem: text };
+      }
+      console.log("AlterarSenha -> response:", response.status, data);
 
       if (!response.ok) {
         setErro(data.mensagem || "Erro ao alterar a senha.");
@@ -65,8 +95,8 @@ export default function Dados() {
       setSenhaAntiga("");
       setNovaSenha("");
       setConfirmarSenha("");
-
     } catch (error) {
+      console.error("Erro na requisição de alterar senha:", error);
       setErro("Erro ao se conectar ao servidor.");
     }
   };
@@ -181,3 +211,4 @@ export default function Dados() {
     </main>
   );
 }
+
