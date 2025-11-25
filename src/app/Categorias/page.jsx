@@ -1,11 +1,13 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, use } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import CardCategoria from "@/components/categorias/card";
+import { normalizeImageSrc } from '@/utils/normalizeImage';
 import styles from "./page.module.css";
-import objetos from "@/mockup/objetos";
+import objetosMkp from "@/mockup/objetos"; 
+import api from "@/utils/api";
 
 export default function Categorias() {
   
@@ -21,6 +23,48 @@ export default function Categorias() {
     obj_status: "",
     obj_encontrado: 0,
   });
+
+  const [objetos, setObjetos] = useState(objetosMkp);
+
+  async function listarObjetos() { 
+    // chamada api
+    try {
+      const response =  await api.get('/objetos');
+      if (response.data.sucesso === true) {
+        // mapear campos da API para o formato esperado pelo frontend
+        const mapped = response.data.dados.map((d) => ({
+          obj_id: d.id ?? d.obj_id,
+          categ_id: d.categoria_id ?? d.categ_id ?? null,
+          usu_id: d.usuario_id ?? d.usu_id ?? null,
+          obj_descricao: d.descricao ?? d.obj_descricao ?? '',
+          obj_foto: d.foto ?? d.obj_foto ?? '',
+          obj_foto_raw: d.foto ?? null,
+          obj_local_encontrado: d.local_encontrado ?? d.obj_local_encontrado ?? '',
+          obj_data_publicacao: d.data_publicacao ?? d.obj_data_publicacao ?? '',
+          obj_status: d.status ?? d.obj_status ?? '',
+          obj_encontrado: d.encontrado ?? d.obj_encontrado ?? 0,
+          // preserve original object in case other fields are needed
+          __raw: d,
+        }));
+
+        setObjetos(mapped);
+      } else {
+        alert(`Erro ao listar objetos: ${response.data.mensagem}`);
+      }
+    } catch (error) {
+      if (error.response) {
+        alert(`Erro na resposta da API: ${error.response.data.mensagem} \n ${error.response.data.dados}`);
+      } else if (error.request) {
+        alert('Erro na requisição: Nenhuma resposta recebida da API.');
+      } else {
+        alert(`Erro ao configurar a requisição: ${error.message}`);
+      }
+    }
+  }
+
+  useEffect(() => {
+    listarObjetos();
+  }, []);
 
   function abrirModal(item) {
     setItemSelecionado(item);
@@ -207,11 +251,16 @@ export default function Categorias() {
             <h1 className={styles.tituloSecao}>
               {itemSelecionado.obj_descricao}
             </h1>
-            <Image
-              src={itemSelecionado.obj_foto}
+            <img
+              src={
+                (itemSelecionado?.obj_foto_raw && /^https?:\/\//i.test(itemSelecionado.obj_foto_raw))
+                  ? itemSelecionado.obj_foto_raw
+                  : normalizeImageSrc(itemSelecionado.obj_foto)
+              }
               alt={itemSelecionado.obj_descricao}
               width={250}
               height={250}
+              style={{ objectFit: 'contain' }}
             />
             <p>
               <strong>Encontrada dia:</strong>
