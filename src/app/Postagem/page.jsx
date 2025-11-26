@@ -40,8 +40,8 @@ export default function Postagem() {
               <Image
                 className={styles.ImgMaior}
                 src="/camera.png"
-                width={600}
-                height={600}
+                width={400}
+                height={400}
                 alt="Logo Maior"
                 quality={100}
               />
@@ -95,14 +95,14 @@ export default function Postagem() {
             <div className={styles.formGroup}>
               <input type="text" placeholder="Data" className={styles.input} />
             </div>
-
-            <div className={styles.formGroup}>
-              <input type="text" placeholder="Retirado Por" className={styles.input} />
+            
+            <div className={styles.buttonContainer}>
+              <button type="button" className={styles.button}>Publicar</button>
             </div>
+
           </form>
         </div>
-
-        <button className={styles.button}>Publicar</button>
+        
       </div>
     </main>
   );
