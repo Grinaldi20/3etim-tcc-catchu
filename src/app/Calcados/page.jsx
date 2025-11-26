@@ -7,7 +7,7 @@ import CardCategoria from "@/components/categorias/card";
 import styles from "./page.module.css";
 import objetos from "@/mockup/objetos";
 
-export default function MaterialEscolar() {
+export default function Calcados() {
   const [modalAberto, setModalAberto] = useState(false);
   const [itemSelecionado, setItemSelecionado] = useState({
     obj_id: 0,
