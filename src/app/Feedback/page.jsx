@@ -13,6 +13,9 @@ export default function Feedback() {
   const [estrelas, setEstrelas] = useState(0);
   const [mensagem, setMensagem] = useState("");
 
+  // estado para mostrar toast de sucesso/erro (substitui alert)
+  const [toast, setToast] = useState({ show: false, type: "", message: "" });
+
   // ⭐ ESTADOS DO FOOTER
   const [menuVisible, setMenuVisible] = useState(false);
   const whatsappRef = useRef(null);
@@ -27,34 +30,35 @@ export default function Feedback() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // ⭐ ENVIAR FEEDBACK
-const enviarFeedback = async (e) => {
-  e.preventDefault();
+  // ⭐ ENVIAR FEEDBACK (usando toast em vez de alert)
+  const enviarFeedback = async (e) => {
+    e.preventDefault();
 
-  if (estrelas === 0) {
-    alert("Selecione uma avaliação!");
-    return;
-  }
+    if (estrelas === 0) {
+      setToast({ show: true, type: "error", message: "Selecione uma avaliação!" });
+      setTimeout(() => setToast({ show: false, type: "", message: "" }), 3000);
+      return;
+    }
 
-  try {
-await axios.post("http://localhost:3333/feedbacks", {
-  usu_id: 1,
-  fbck_mensagem: mensagem,
-  fbck_data_envio: new Date().toISOString().slice(0, 19).replace("T", " "),
-  fbck_avaliacao: estrelas
-});
+    try {
+      await axios.post("http://localhost:3333/feedbacks", {
+        usu_id: 1,
+        fbck_mensagem: mensagem,
+        fbck_data_envio: new Date().toISOString().slice(0, 19).replace("T", " "),
+        fbck_avaliacao: estrelas
+      });
 
-    alert("Feedback enviado! Obrigado ❤️");
+      setToast({ show: true, type: "success", message: "Feedback enviado! Obrigado ❤️" });
+      setEstrelas(0);
+      setMensagem("");
+      setTimeout(() => setToast({ show: false, type: "", message: "" }), 3000);
 
-    setEstrelas(0);
-    setMensagem("");
-
-  } catch (error) {
-    console.log(error);
-    alert("Erro ao enviar feedback!");
-  }
-};
-
+    } catch (error) {
+      console.log(error);
+      setToast({ show: true, type: "error", message: "Erro ao enviar feedback!" });
+      setTimeout(() => setToast({ show: false, type: "", message: "" }), 3000);
+    }
+  };
 
   return (
     <>
@@ -190,6 +194,29 @@ await axios.post("http://localhost:3333/feedbacks", {
           <p>© {new Date().getFullYear()} Catchu. Todos os direitos reservados.</p>
         </div>
       </footer>
+
+      {/* TOAST */}
+     {toast.show && (
+       <div
+         role="status"
+         aria-live="polite"
+         style={{
+           position: "fixed",
+           top: 20,
+           left: "50%",
+           transform: "translateX(-50%)",
+           zIndex: 9999,
+           padding: "12px 18px",
+           borderRadius: 8,
+           boxShadow: "0 4px 12px rgba(0,0,0,0.12)",
+           color: "#fff",
+           background: toast.type === "success" ? "#16a34a" : "#dc2626",
+           fontWeight: 600,
+         }}
+       >
+         {toast.message}
+       </div>
+     )}
     </>
   );
 }
