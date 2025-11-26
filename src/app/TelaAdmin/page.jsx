@@ -18,9 +18,7 @@ export default function TelaPrincipal() {
       <header className={styles.header}>
         <Image className={styles.img} src="/logo1.png" alt="Logo" width={100} height={100} />
 
-        <div className={styles.Pesquisa}>
-          <input type="text" placeholder="Pesquisa" />
-        </div>
+       
 
         <div className={styles.Icons}>
           <a href="/Carrinho">

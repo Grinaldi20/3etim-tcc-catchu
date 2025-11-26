@@ -3,11 +3,17 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
-import Link from "next/link";
 
 export default function Postagem() {
   const fileInputRef = useRef(null);
+
+  const [imagem, setImagem] = useState(null);
   const [preview, setPreview] = useState(null);
+
+  const [classificacao, setClassificacao] = useState("");
+  const [descricao, setDescricao] = useState("");
+  const [local, setLocal] = useState("");
+  const [data, setData] = useState("");
 
   const abrirSelecaoArquivos = () => {
     fileInputRef.current.click();
@@ -17,8 +23,52 @@ export default function Postagem() {
     const file = event.target.files[0];
     if (!file) return;
 
+    setImagem(file);
     const imageURL = URL.createObjectURL(file);
     setPreview(imageURL);
+  };
+
+  const handlePublicar = async () => {
+    if (!imagem) return alert("Selecione uma imagem!");
+    if (!classificacao) return alert("Selecione a classificação!");
+
+    try {
+      const formData = new FormData();
+
+      // ✅ nome deve bater com multer .single('img')
+      formData.append("img", imagem);
+
+      // ✅ campos que sua API espera
+      formData.append("categ_id", classificacao);
+      formData.append("usu_id", "1"); 
+      formData.append("obj_descricao", descricao);
+      formData.append("obj_local_encontrado", local);
+      formData.append("obj_data_publicacao", data || new Date().toISOString().split("T")[0]);
+      formData.append("obj_status", "perdido");
+
+      const res = await fetch("http://localhost:3333/objetos", {
+        method: "POST",
+        body: formData
+      });
+
+      const json = await res.json();
+
+      if (json.sucesso) {
+        alert("✅ Publicado com sucesso!");
+        setImagem(null);
+        setPreview(null);
+        setClassificacao("");
+        setDescricao("");
+        setLocal("");
+        setData("");
+      } else {
+        alert("❌ Erro: " + json.mensagem);
+      }
+
+    } catch (error) {
+      console.error(error);
+      alert("Erro na conexão com a API");
+    }
   };
 
   return (
@@ -26,8 +76,6 @@ export default function Postagem() {
       <div className={styles.container}>
         <div style={{ display: "flex" }}>
           <div className={styles.lado}>
-            
-            {/* Mostra a imagem escolhida ou a câmera */}
             {preview ? (
               <Image
                 className={styles.ImgMaior}
@@ -42,17 +90,18 @@ export default function Postagem() {
                 src="/camera.png"
                 width={400}
                 height={400}
-                alt="Logo Maior"
-                quality={100}
+                alt="Câmera"
               />
             )}
 
-            {/* Botão que abre o seletor */}
-            <button className={styles.button2} onClick={abrirSelecaoArquivos}>
+            <button
+              type="button"
+              className={styles.button2}
+              onClick={abrirSelecaoArquivos}
+            >
               Adicionar Imagem
             </button>
 
-            {/* Input de arquivo oculto */}
             <input
               type="file"
               accept="image/*"
@@ -62,47 +111,54 @@ export default function Postagem() {
             />
           </div>
 
-          <form className={styles.form}>
-            <select placeholder="Classificação" className={styles.select}>
-              <option className={styles.option2} value="">
-                Classificação
-              </option>
-              <option className={styles.option} value="Roupas">
-                Roupas
-              </option>
-              <option className={styles.option} value="Calçados">
-                Calçados
-              </option>
-              <option className={styles.option} value="Material Escolar">
-                Material Escolar
-              </option>
-              <option className={styles.option} value="Resgatados">
-                Resgatados
-              </option>
+          <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
+
+            <select
+              className={styles.select}
+              value={classificacao}
+              onChange={(e) => setClassificacao(e.target.value)}
+            >
+              <option value="">Classificação</option>
+              <option value="1">Roupas</option>
+              <option value="2">Calçados</option>
+              <option value="3">Material Escolar</option>
+              <option value="4">Resgatados</option>
             </select>
 
             <textarea
-              name="Descrição"
-              id="Descrição"
               placeholder="Descrição"
               className={styles.texto}
+              value={descricao}
+              onChange={(e) => setDescricao(e.target.value)}
             />
 
-            <div className={styles.formGroup}>
-              <input type="text" placeholder="Lugar Encontrado" className={styles.input} />
-            </div>
+            <input
+              type="text"
+              placeholder="Lugar Encontrado"
+              className={styles.input}
+              value={local}
+              onChange={(e) => setLocal(e.target.value)}
+            />
 
-            <div className={styles.formGroup}>
-              <input type="text" placeholder="Data" className={styles.input} />
-            </div>
-            
+            <input
+              type="date"
+              className={styles.input}
+              value={data}
+              onChange={(e) => setData(e.target.value)}
+            />
+
             <div className={styles.buttonContainer}>
-              <button type="button" className={styles.button}>Publicar</button>
+              <button
+                type="button"
+                className={styles.button}
+                onClick={handlePublicar}
+              >
+                Publicar
+              </button>
             </div>
 
           </form>
         </div>
-        
       </div>
     </main>
   );
