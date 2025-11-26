@@ -41,31 +41,51 @@ export default function Dados() {
     }
 
     try {
-      // pega o objeto usuario salvo no login
-      const usuarioStr = localStorage.getItem("usuario");
+      // tenta várias chaves / formatos no localStorage e loga para depuração
+      const possibleKeys = ["usuario", "user", "usuarioLogado", "authUser"];
+      let usuarioStr = null;
+      let foundKey = null;
+      for (const k of possibleKeys) {
+        const v = localStorage.getItem(k);
+        if (v) { usuarioStr = v; foundKey = k; break; }
+      }
+
+      // se não encontrou, tenta pegar um id direto (usu_id / id)
+      let usu_id = null;
       if (!usuarioStr) {
-        setErro("Usuário não encontrado. Faça login novamente.");
-        return;
+        const directId = localStorage.getItem("usu_id") || localStorage.getItem("id");
+        if (directId) {
+          usu_id = directId;
+          console.log("AlterarSenha -> encontrado id direto em localStorage:", usu_id);
+        } else {
+          console.warn("AlterarSenha -> nenhuma chave de usuário encontrada em localStorage");
+          setErro("Usuário não encontrado. Faça login novamente.");
+          return;
+        }
+      } else {
+        // parsea objeto encontrado
+        let usuario = null;
+        try {
+          usuario = JSON.parse(usuarioStr);
+        } catch (err) {
+          console.error("Erro ao parsear usuario do localStorage (key=" + foundKey + "):", err, usuarioStr);
+          setErro("Dados do usuário inválidos. Faça login novamente.");
+          return;
+        }
+        usu_id = usuario?.usu_id ?? usuario?.id ?? usuario?.user?.id ?? null;
+        if (!usu_id) {
+          console.warn("AlterarSenha -> parsed user não contém id:", usuario);
+          setErro("ID do usuário não encontrado. Faça login novamente.");
+          return;
+        }
+        console.log("AlterarSenha -> usu_id extraído de key", foundKey, ":", usu_id);
       }
 
-      let usuario;
-      try {
-        usuario = JSON.parse(usuarioStr);
-      } catch (err) {
-        console.error("Erro ao parsear usuario do localStorage:", err);
-        setErro("Dados do usuário inválidos. Faça login novamente.");
-        return;
-      }
+      // se backend espera número, converta (se aplicável)
+      const idForUrl = isNaN(Number(usu_id)) ? encodeURIComponent(usu_id) : Number(usu_id);
+      console.log("AlterarSenha -> usando id na URL:", idForUrl);
 
-      const usu_id = usuario?.usu_id ?? usuario?.id ?? null;
-      if (!usu_id) {
-        setErro("ID do usuário não encontrado. Faça login novamente.");
-        return;
-      }
-
-      console.log("AlterarSenha -> usu_id:", usu_id);
-
-      const response = await fetch(`http://localhost:3333/usuarios/senha/${encodeURIComponent(usu_id)}`, {
+      const response = await fetch(`http://localhost:3333/usuarios/senha/${idForUrl}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
