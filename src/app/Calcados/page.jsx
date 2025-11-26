@@ -56,10 +56,6 @@ export default function MaterialEscolar() {
           />
         </Link>
 
-        <div className={styles.Pesquisa}>
-          <input type="text" placeholder="Pesquisa" />
-        </div>
-
         <div className={styles.Icons}>
           <a href="/Carrinho">
             <svg
