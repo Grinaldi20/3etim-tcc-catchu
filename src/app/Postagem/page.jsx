@@ -123,6 +123,7 @@ export default function Postagem() {
               <option value="2">Calçados</option>
               <option value="3">Material Escolar</option>
               <option value="4">Resgatados</option>
+              <option value="5">Objetos Gerais</option>
             </select>
 
             <textarea
