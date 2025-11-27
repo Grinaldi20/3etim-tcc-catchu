@@ -73,7 +73,7 @@ export default function TelaPrincipal() {
             </div>
           </a>
 
-          <a href="/Categorias">
+          <a href="/CategoriasAdmin">
             <div className={styles.Pertences}>
               <p>Pertences</p>
               <Image className={styles.imagem} src="/pertences.png" alt="Pertences" width={200} height={150} quality={100} />
