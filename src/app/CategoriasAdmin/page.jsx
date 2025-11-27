@@ -88,6 +88,48 @@ export default function Categorias() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+
+  const [itens, setItens] = useState([]);
+
+  useEffect(() => {
+    // carregar itens (ex: fetch API ou mock)
+    const mock = [
+      { obj_id: "1", nome: "Blusa Azul", descricao: "..." },
+      { obj_id: "2", nome: "Caderno", descricao: "..." },
+    ];
+    setItens(mock);
+  }, []);
+
+    function handleReservar(itemSelecionado) {
+    try {
+      const key = "carrinho";
+      const stored = localStorage.getItem(key);
+      const carrinho = stored ? JSON.parse(stored) : [];
+
+      const jaExiste = carrinho.some((it) => it.obj_id === itemSelecionado.obj_id);
+      if (!jaExiste) {
+        carrinho.push(itemSelecionado);
+        localStorage.setItem(key, JSON.stringify(carrinho));
+      }
+
+      // remover o item da lista de categorias
+      setItens((prev) => prev.filter((i) => i.obj_id !== itemSelecionado.obj_id));
+    } catch (err) {
+      console.error("Erro ao reservar:", err);
+    }
+  }
+
+  useEffect(() => {
+  listarObjetos().then(() => {
+    const stored = localStorage.getItem('reservados');
+    const reservados = stored ? JSON.parse(stored) : [];
+
+    setObjetos(prev =>
+      prev.filter(obj => !reservados.some(r => r.obj_id === obj.obj_id))
+    );
+  });
+}, []);
+
   return (
     <main className={styles.main}>
       <div className={styles.Gradiente}>
@@ -276,28 +318,31 @@ export default function Categorias() {
 
              <button 
                className={styles.excluirBtn}
-              onClick={() => {
-                try {
-                  const key = 'carrinho';
-                  const stored = localStorage.getItem(key);
-                  const carrinho = stored ? JSON.parse(stored) : [];
+  
+                onClick={() => {
+                  try {
+                    const key = 'reservados';
+                    const stored = localStorage.getItem(key);
+                    const reservados = stored ? JSON.parse(stored) : [];
 
-                  // evita duplicados pelo id
-                  const jaExiste = carrinho.some((it) => it.obj_id === itemSelecionado.obj_id);
-                  if (!jaExiste) {
-                    carrinho.push(itemSelecionado);
-                    localStorage.setItem(key, JSON.stringify(carrinho));
+                    const jaExiste = reservados.some((it) => it.obj_id === itemSelecionado.obj_id);
+                    if (!jaExiste) {
+                      reservados.push(itemSelecionado);
+                      localStorage.setItem(key, JSON.stringify(reservados));
+                    }
+
+                    // Remove da categorias
+                    setObjetos(prev => prev.filter(i => i.obj_id !== itemSelecionado.obj_id));
+
+                    setModalAberto(false);
+                  } catch (err) {
+                    console.error("Erro ao reservar item:", err);
                   }
+                }}
+              >
+                Já Reservado
+              </button>
 
-                  // apenas fecha modal; item já salvo no localStorage
-                  setModalAberto(false);
-                } catch (err) {
-                  console.error('Erro ao reservar item:', err);
-                }
-              }}
-            >
-              Já resgatado
-            </button>
           </div>
         </div>
       )}
