@@ -1,11 +1,16 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, use } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import CardCategoria from "@/components/categorias/card";
+import { normalizeImageSrc } from '@/utils/normalizeImage';
 import styles from "./page.module.css";
-import objetos from "@/mockup/objetos";
+// remove mockup as initial data so we don't flash placeholder items while API loads
+// import objetosMkp from "@/mockup/objetos"; // mudar nome objetos para objetosMkp
+
+// referência para acesso a api
+import api from "@/utils/api";
 
 export default function MaterialEscolar() {
   const [modalAberto, setModalAberto] = useState(false);
@@ -20,6 +25,29 @@ export default function MaterialEscolar() {
     obj_status: "",
     obj_encontrado: 0,
   });
+
+  // estado inicial vazio — vamos popular com os dados reais da API
+  const [objetos, setObjetos] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  /*
+   Image handling strategy (aplicado neste arquivo):
+   1) Ao buscar os itens na API, mapeamos o campo `foto` da API para `obj_foto`
+     e guardamos o valor original em `obj_foto_raw`.
+   2) Quando formos renderizar a imagem (card ou modal), damos preferência
+     ao `obj_foto_raw` quando ele for uma URL absoluta (ex.: http://host:port/...).
+     Isso garante que a imagem será carregada exatamente do host/porta
+     que a API retornou.
+   3) Se não houver uma URL absoluta, usamos `normalizeImageSrc` para:
+     - transformar caminhos como `public/objetos/...` em `/objetos/...` (correto para /public)
+     - transformar strings sem protocolo como `localhost:3333/...` em `http://localhost:3333/...`
+     - garantir que retornamos sempre uma string segura para usar em `src`.
+   4) Para evitar problemas com o otimizador do Next (/_next/image) e bugs de proxy,
+     renderizamos imagens dinâmicas usando uma tag `<img>` simples.
+  */
+
+  // lista objetos da api por categoria
+  // (implementação consolidada mais abaixo; removemos a versão simples para evitar comportamentos duplicados)
 
   const [menuVisible, setMenuVisible] = useState(false);
   const whatsappRef = useRef(null);
@@ -42,6 +70,66 @@ export default function MaterialEscolar() {
   function fecharModal() {
     setModalAberto(false);
   }
+
+  // Single function responsible for fetching, normalizing and filtering objects
+  async function listarObjetos() {
+    setLoading(true);
+    try {
+      // Requisição para a API. Usamos o helper `api` que já tem o baseURL configurado.
+      // Passamos `categ_nome` como query para filtrar por categoria no backend.
+      const response = await api.get('/objetos', { params: { categ_nome: 'Material escolar' } });
+
+      if (!response.data || response.data.sucesso !== true) {
+        console.error('Resposta inesperada da API:', response);
+        setObjetos([]);
+        return;
+      }
+
+      // Mapear os campos da API para o formato usado pelo frontend.
+      // Importante: preservamos `obj_foto_raw` com o valor original da API
+      // para podermos usar exatamente a URL que o backend retornou quando for absoluta.
+      const todos = response.data.dados.map((d) => ({
+        obj_id: d.id ?? d.obj_id,
+        categ_id: d.categoria_id ?? d.categ_id ?? null,
+        usu_id: d.usuario_id ?? d.usu_id ?? null,
+        obj_descricao: d.descricao ?? d.obj_descricao ?? '',
+        obj_foto: d.foto ?? d.obj_foto ?? '',
+        obj_foto_raw: d.foto ?? null,
+        obj_local_encontrado: d.local_encontrado ?? d.obj_local_encontrado ?? '',
+        obj_data_publicacao: d.data_publicacao ?? d.obj_data_publicacao ?? '',
+        obj_status: d.status ?? d.obj_status ?? '',
+        obj_encontrado: d.encontrado ?? d.obj_encontrado ?? 0,
+        __raw: d,
+      }));
+
+      // Ler itens salvos no cliente para filtrar (carrinho, finalizados)
+      const carrStored = localStorage.getItem('carrinho');
+      const carrinho = carrStored ? JSON.parse(carrStored) : [];
+
+      const fStored = localStorage.getItem('finalizados');
+      const finalizados = fStored ? JSON.parse(fStored) : [];
+
+      // Filtrar: remover qualquer item que esteja em carrinho OU em finalizados
+      const filtrados = todos.filter(
+        (item) =>
+          !carrinho.some((r) => String(r.obj_id) === String(item.obj_id)) &&
+          !finalizados.some((fid) => String(fid) === String(item.obj_id))
+      );
+
+      setObjetos(filtrados);
+    } catch (err) {
+      console.error('Erro ao buscar objetos:', err);
+      setObjetos([]);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // Chama o fetch uma vez ao montar o componente
+  useEffect(() => {
+    listarObjetos();
+  }, []);
+
 
   return (
     <div className="main">
@@ -86,15 +174,23 @@ export default function MaterialEscolar() {
           <h1 className={styles.h1}>Material Escolar</h1>
         </div>
 
-        <div className={styles.CardsItens}>
-          {objetos.map((item) => (
-            <CardCategoria
-              key={item.obj_id}
-              obj={item}
-              onClick={() => abrirModal(item)}
-            />
-          ))}
-        </div>
+        {/* Se ainda estivermos carregando, mostre um indicador simples.
+            Evita que dados antigos/mockups apareçam brevemente. */}
+        {loading ? (
+          <div className={styles.CardsItens}>
+            <p>Carregando...</p>
+          </div>
+        ) : (
+          <div className={styles.CardsItens}>
+            {objetos.map((item) => (
+              <CardCategoria
+                key={item.obj_id}
+                obj={item}
+                onClick={() => abrirModal(item)}
+              />
+            ))}
+          </div>
+        )}
 
         {modalAberto && (
           <div className={styles.modal}>
@@ -117,11 +213,20 @@ export default function MaterialEscolar() {
               <h1 className={styles.tituloSecao}>
                 {itemSelecionado.obj_descricao}
               </h1>
-              <Image
-                src={itemSelecionado.obj_foto}
+              {/* Use the exact API URL when available (obj_foto_raw) and absolute;
+                  otherwise normalize the value stored in obj_foto so it becomes
+                  a valid path or absolute URL. We use a plain <img> here to avoid
+                  Next's image optimizer for dynamic URLs from the API. */}
+              <img
+                src={
+                  (itemSelecionado?.obj_foto_raw && /^https?:\/\//i.test(itemSelecionado.obj_foto_raw))
+                    ? itemSelecionado.obj_foto_raw
+                    : normalizeImageSrc(itemSelecionado.obj_foto)
+                }
                 alt={itemSelecionado.obj_descricao}
                 width={250}
                 height={250}
+                style={{ objectFit: 'contain' }}
               />
               <p>
                 <strong>Encontrada dia:</strong>{" "}

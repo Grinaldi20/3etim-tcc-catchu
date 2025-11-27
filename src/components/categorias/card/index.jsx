@@ -25,3 +25,4 @@ export default function CardCategoria({ obj, onClick }) {
     );
 }
 
+
