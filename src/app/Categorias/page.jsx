@@ -26,41 +26,64 @@ export default function Categorias() {
 
   const [objetos, setObjetos] = useState(objetosMkp);
 
-  async function listarObjetos() { 
-    // chamada api
-    try {
-      const response =  await api.get('/objetos');
-      if (response.data.sucesso === true) {
-        // mapear campos da API para o formato esperado pelo frontend
-        const mapped = response.data.dados.map((d) => ({
-          obj_id: d.id ?? d.obj_id,
-          categ_id: d.categoria_id ?? d.categ_id ?? null,
-          usu_id: d.usuario_id ?? d.usu_id ?? null,
-          obj_descricao: d.descricao ?? d.obj_descricao ?? '',
-          obj_foto: d.foto || 'algo.png',
-          obj_foto_raw: d.foto || 'algo.png',
-          obj_local_encontrado: d.local_encontrado ?? d.obj_local_encontrado ?? '',
-          obj_data_publicacao: d.data_publicacao ?? d.obj_data_publicacao ?? '',
-          obj_status: d.status ?? d.obj_status ?? '',
-          obj_encontrado: d.encontrado ?? d.obj_encontrado ?? 0,
-          // preserve original object in case other fields are needed
-          __raw: d,
-        }));
+  async function listarObjetos() {
+  try {
+    const resposta = await axios.get("http://localhost:3333/objetos");
+    return resposta.data;
+  } catch (err) {
+    console.error("Erro ao buscar objetos:", err);
+    return [];
+  }
+}
 
-        setObjetos(mapped);
-      } else {
-        alert(`Erro ao listar objetos: ${response.data.mensagem}`);
+useEffect(() => {
+  async function carregarObjetosFiltrados() {
+    try {
+      // busca da API — adapte para sua função listarObjetos caso já a use
+      const response = await api.get("/objetos");
+      if (!response.data || response.data.sucesso !== true) {
+        console.error("Resposta inesperada da API:", response);
+        return;
       }
-    } catch (error) {
-      if (error.response) {
-        alert(`Erro na resposta da API: ${error.response.data.mensagem} \n ${error.response.data.dados}`);
-      } else if (error.request) {
-        alert('Erro na requisição: Nenhuma resposta recebida da API.');
-      } else {
-        alert(`Erro ao configurar a requisição: ${error.message}`);
-      }
+
+      const todos = response.data.dados.map((d) => ({
+        obj_id: d.id ?? d.obj_id,
+        categ_id: d.categoria_id ?? d.categ_id ?? null,
+        usu_id: d.usuario_id ?? d.usu_id ?? null,
+        obj_descricao: d.descricao ?? d.obj_descricao ?? '',
+        obj_foto: d.foto ?? d.obj_foto ?? '',
+        obj_foto_raw: d.foto ?? null,
+        obj_local_encontrado: d.local_encontrado ?? d.obj_local_encontrado ?? '',
+        obj_data_publicacao: d.data_publicacao ?? d.obj_data_publicacao ?? '',
+        obj_status: d.status ?? d.obj_status ?? '',
+        obj_encontrado: d.encontrado ?? d.obj_encontrado ?? 0,
+        __raw: d,
+      }));
+
+      // ler carrinho e finalizados
+      const carrStored = localStorage.getItem("carrinho");
+      const carrinho = carrStored ? JSON.parse(carrStored) : [];
+
+      const fStored = localStorage.getItem("finalizados");
+      const finalizados = fStored ? JSON.parse(fStored) : [];
+
+      // filtrar: remover qualquer item que esteja em carrinho OU em finalizados
+      const filtrados = todos.filter(
+        (item) =>
+          !carrinho.some((r) => String(r.obj_id) === String(item.obj_id)) &&
+          !finalizados.some((fid) => String(fid) === String(item.obj_id))
+      );
+
+      setObjetos(filtrados);
+    } catch (err) {
+      console.error("Erro ao carregar objetos filtrados:", err);
     }
   }
+
+  carregarObjetosFiltrados();
+}, []);
+
+
   
   useEffect(() => {
     listarObjetos();
@@ -87,6 +110,23 @@ export default function Categorias() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  useEffect(() => {
+  async function carregarObjetos() {
+    const resposta = await listarObjetos();
+    const objetos = resposta.data;
+
+    const finalizadosStored = localStorage.getItem("finalizados");
+    const finalizados = finalizadosStored ? JSON.parse(finalizadosStored) : [];
+
+    // 🔥 remove itens que estão "finalizados"
+    const filtrados = objetos.filter((obj) => !finalizados.includes(obj.obj_id));
+
+    setItens(filtrados);
+  }
+
+  carregarObjetos();
+}, []);
 
   return (
     <main className={styles.main}>
@@ -272,29 +312,28 @@ export default function Categorias() {
               <strong>Classificação:</strong>
               {itemSelecionado.obj_status}
             </p>
-            <button
-              onClick={() => {
-                try {
-                  const key = 'carrinho';
-                  const stored = localStorage.getItem(key);
-                  const carrinho = stored ? JSON.parse(stored) : [];
+    <button
+  onClick={() => {
+    try {
+      const key = 'carrinho';
+      const stored = localStorage.getItem(key);
+      const carrinho = stored ? JSON.parse(stored) : [];
 
-                  // evita duplicados pelo id
-                  const jaExiste = carrinho.some((it) => it.obj_id === itemSelecionado.obj_id);
-                  if (!jaExiste) {
-                    carrinho.push(itemSelecionado);
-                    localStorage.setItem(key, JSON.stringify(carrinho));
-                  }
+      const jaExiste = carrinho.some((it) => String(it.obj_id) === String(itemSelecionado.obj_id));
+      if (!jaExiste) {
+        carrinho.push(itemSelecionado);
+        localStorage.setItem(key, JSON.stringify(carrinho));
+      }
 
-                  // apenas fecha modal; item já salvo no localStorage
-                  setModalAberto(false);
-                } catch (err) {
-                  console.error('Erro ao reservar item:', err);
-                }
-              }}
-            >
-              Reservar
-            </button>
+      setObjetos(prev => prev.filter(i => String(i.obj_id) !== String(itemSelecionado.obj_id)));
+      setModalAberto(false);
+    } catch (err) {
+      console.error('Erro ao reservar item:', err);
+    }
+  }}
+>
+  Reservar
+</button>
           </div>
         </div>
       )}

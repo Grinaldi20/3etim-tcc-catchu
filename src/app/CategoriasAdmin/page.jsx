@@ -26,41 +26,95 @@ export default function Categorias() {
 
   const [objetos, setObjetos] = useState(objetosMkp);
 
-  async function listarObjetos() { 
-    // chamada api
-    try {
-      const response =  await api.get('/objetos');
-      if (response.data.sucesso === true) {
-        // mapear campos da API para o formato esperado pelo frontend
-        const mapped = response.data.dados.map((d) => ({
-          obj_id: d.id ?? d.obj_id,
-          categ_id: d.categoria_id ?? d.categ_id ?? null,
-          usu_id: d.usuario_id ?? d.usu_id ?? null,
-          obj_descricao: d.descricao ?? d.obj_descricao ?? '',
-          obj_foto: d.foto ?? d.obj_foto ?? '',
-          obj_foto_raw: d.foto ?? null,
-          obj_local_encontrado: d.local_encontrado ?? d.obj_local_encontrado ?? '',
-          obj_data_publicacao: d.data_publicacao ?? d.obj_data_publicacao ?? '',
-          obj_status: d.status ?? d.obj_status ?? '',
-          obj_encontrado: d.encontrado ?? d.obj_encontrado ?? 0,
-          // preserve original object in case other fields are needed
-          __raw: d,
-        }));
+    async function listarObjetos() {
+  try {
+    const resposta = await axios.get("http://localhost:3333/objetos");
+    return resposta.data;
+  } catch (err) {
+    console.error("Erro ao buscar objetos:", err);
+    return [];
+  }
+}
+useEffect(() => {
+  if (typeof window !== "undefined") {
+    const salvo = JSON.parse(localStorage.getItem("itemsRemovidos")) || [];
+    setItemsRemovidos(salvo);
+  }
+}, []);
 
-        setObjetos(mapped);
-      } else {
-        alert(`Erro ao listar objetos: ${response.data.mensagem}`);
+const removerItem = (id) => {
+  const novos = itemsRemovidos.filter(i => i.obj_id !== id);
+  setItemsRemovidos(novos);
+  localStorage.setItem("itemsRemovidos", JSON.stringify(novos));
+};
+
+const [itemsRemovidos, setItemsRemovidos] = useState([]);
+
+useEffect(() => {
+  async function carregarObjetosAdmin() {
+    try {
+      const response = await api.get("/objetos");
+
+      if (!response.data || response.data.sucesso !== true) {
+        console.error("Resposta inesperada da API (admin):", response);
+        return;
       }
-    } catch (error) {
-      if (error.response) {
-        alert(`Erro na resposta da API: ${error.response.data.mensagem} \n ${error.response.data.dados}`);
-      } else if (error.request) {
-        alert('Erro na requisição: Nenhuma resposta recebida da API.');
-      } else {
-        alert(`Erro ao configurar a requisição: ${error.message}`);
-      }
+
+      const todos = response.data.dados.map((d) => ({
+        obj_id: d.id ?? d.obj_id,
+        categ_id: d.categoria_id ?? d.categ_id ?? null,
+        usu_id: d.usuario_id ?? d.usu_id ?? null,
+        obj_descricao: d.descricao ?? d.obj_descricao ?? '',
+        obj_foto: d.foto ?? d.obj_foto ?? '',
+        obj_foto_raw: d.foto ?? null,
+        obj_local_encontrado: d.local_encontrado ?? d.obj_local_encontrado ?? '',
+        obj_data_publicacao: d.data_publicacao ?? d.obj_data_publicacao ?? '',
+        obj_status: d.status ?? d.obj_status ?? '',
+        obj_encontrado: d.encontrado ?? d.obj_encontrado ?? 0,
+        __raw: d,
+      }));
+
+      // Itens reservados
+      const stored = localStorage.getItem("carrinho");
+      const carrinho = stored ? JSON.parse(stored) : [];
+
+      // Filtra os que NÃO estão reservados E NÃO estão removidos
+      const filtrados = todos.filter((item) =>
+        !carrinho.some((r) => String(r.obj_id) === String(item.obj_id)) &&
+        !itemsRemovidos.includes(String(item.obj_id))
+      );
+
+      setObjetos(filtrados);
+    } catch (err) {
+      console.error("Erro ao carregar objetos admin:", err);
     }
   }
+
+  carregarObjetosAdmin();
+}, [itemsRemovidos]);
+
+
+function excluirItem(id) {
+  // remove do carrinho
+  const stored = localStorage.getItem("carrinho");
+  let carrinho = stored ? JSON.parse(stored) : [];
+  carrinho = carrinho.filter((item) => item.obj_id !== id);
+  localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+  // 🔥 salvar ID no "itensFinalizados"
+  const finalizadosStored = localStorage.getItem("finalizados");
+  const finalizados = finalizadosStored ? JSON.parse(finalizadosStored) : [];
+
+  if (!finalizados.includes(id)) {
+    finalizados.push(id);
+    localStorage.setItem("finalizados", JSON.stringify(finalizados));
+  }
+
+  setReservados(carrinho);
+  setModalAberto(false);
+}
+
+
 
   useEffect(() => {
     listarObjetos();
@@ -103,8 +157,12 @@ export default function Categorias() {
     function handleReservar(itemSelecionado) {
     try {
       const key = "carrinho";
-      const stored = localStorage.getItem(key);
-      const carrinho = stored ? JSON.parse(stored) : [];
+      const stored = localStorage.getItem("carrinho");
+const reservados = stored ? JSON.parse(stored) : [];
+
+const naoReservados = todos.filter(
+  item => !reservados.some(r => r.obj_id === item.obj_id)
+);
 
       const jaExiste = carrinho.some((it) => it.obj_id === itemSelecionado.obj_id);
       if (!jaExiste) {
@@ -319,26 +377,26 @@ export default function Categorias() {
              <button 
                className={styles.excluirBtn}
   
-                onClick={() => {
-                  try {
-                    const key = 'reservados';
-                    const stored = localStorage.getItem(key);
-                    const reservados = stored ? JSON.parse(stored) : [];
+             onClick={() => {
+  try {
+    const key = "carrinho";
+    const stored = localStorage.getItem(key);
+    const carrinho = stored ? JSON.parse(stored) : [];
 
-                    const jaExiste = reservados.some((it) => it.obj_id === itemSelecionado.obj_id);
-                    if (!jaExiste) {
-                      reservados.push(itemSelecionado);
-                      localStorage.setItem(key, JSON.stringify(reservados));
-                    }
+    const jaExiste = carrinho.some((it) => String(it.obj_id) === String(itemSelecionado.obj_id));
+    if (!jaExiste) {
+      carrinho.push(itemSelecionado);
+      localStorage.setItem(key, JSON.stringify(carrinho));
+    }
 
-                    // Remove da categorias
-                    setObjetos(prev => prev.filter(i => i.obj_id !== itemSelecionado.obj_id));
+    // remove do estado que está exibindo os cards nessa página
+    setObjetos(prev => prev.filter(i => String(i.obj_id) !== String(itemSelecionado.obj_id)));
 
-                    setModalAberto(false);
-                  } catch (err) {
-                    console.error("Erro ao reservar item:", err);
-                  }
-                }}
+    setModalAberto(false);
+  } catch (err) {
+    console.error("Erro ao reservar item (admin):", err);
+  }
+}}
               >
                 Já Reservado
               </button>

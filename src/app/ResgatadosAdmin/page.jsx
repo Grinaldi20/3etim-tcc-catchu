@@ -42,16 +42,41 @@ export default function MaterialEscolar() {
   }
 
   // 🔥 EXCLUIR ITEM DEFINITIVAMENTE DO LOCALSTORAGE
-  function excluirItem(id) {
+function excluirItem(id) {
+  try {
+    const idStr = String(id);
+
+    // 1) Remover do carrinho
     const stored = localStorage.getItem("carrinho");
-    let carrinho = stored ? JSON.parse(stored) : [];
+    const carrinho = stored ? JSON.parse(stored) : [];
 
-    carrinho = carrinho.filter((item) => item.obj_id !== id);
+    const novoCarrinho = carrinho.filter(
+      (item) => String(item.obj_id) !== idStr
+    );
 
-    localStorage.setItem("carrinho", JSON.stringify(carrinho));
-    setReservados(carrinho);
+    localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
+
+    // 2) Adicionar o ID em "finalizados"
+    const fStored = localStorage.getItem("finalizados");
+    const finalizados = fStored ? JSON.parse(fStored) : [];
+
+    if (!finalizados.includes(idStr)) {
+      const atualizados = [...finalizados, idStr];
+      localStorage.setItem("finalizados", JSON.stringify(atualizados));
+    }
+
+    // 3) Atualiza o estado local (removendo da lista de reservados)
+    setReservados(novoCarrinho);
+
+    // 4) Fecha modal
     setModalAberto(false);
+
+  } catch (err) {
+    console.error("Erro ao excluir e finalizar item:", err);
   }
+}
+
+
 
   return (
     <div className="main">
@@ -120,13 +145,11 @@ export default function MaterialEscolar() {
               <p><strong>Classificação:</strong> {itemSelecionado.obj_status}</p>
 
               {/* 🔥 EXCLUIR DEFINITIVO */}
-              /*
-              <button
-                className={styles.excluirBtn}
-                onClick={() => excluirItem(itemSelecionado.obj_id)}
-              >
+              
+              <button className={styles.excluirBtn} onClick={() => excluirItem(itemSelecionado.obj_id)}>
                 Excluir Definitivamente
               </button>
+
             </div>
           </div>
         )}
