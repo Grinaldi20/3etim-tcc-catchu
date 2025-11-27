@@ -1,0 +1,424 @@
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap'); 
+
+:root {
+    font-size: 62.5%; 
+}
+
+
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+  width: 100%;
+  background-color:#4B8C8D;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+
+
+.Pesquisa {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.Pesquisa input {
+  height: 6rem;
+  width: 100%;
+  max-width: 90rem;
+  border-radius: 5rem;
+  border: none;
+  background-color: #0E6567;
+  font-size: 2.5rem;
+  color: white;
+  padding: 1.5rem 2rem;
+}
+
+.Pesquisa input::placeholder {
+  color: white;
+}
+
+
+.Icons {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+.Icons :global(svg) {
+  height: 5.5rem;
+  width: 5.5rem;
+  color: #ffffff;
+  cursor: pointer;
+  transition: transform 0.3s;
+  /* tira o transform daqui */
+}
+
+/* efeito só quando passar o mouse */
+.Icons :global(svg):hover {
+  transform: scale(1.05);
+}
+
+.centro{
+    text-align: center;
+    margin-bottom: 8rem;
+}
+
+
+.h3{
+    margin-bottom: 1rem;
+    font-size: 18px;
+}
+
+.h1 {
+    display: inline-block;
+    padding: 10px 25px;
+    background-color: #ffffff;
+    color: #0E6567;
+    font-size: 3rem;
+    font-family: 'Arial';
+    font-weight: bold;
+    border-radius: 0 0 15px 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    margin-bottom: 3.5rem;  
+  }
+
+.CardsItens{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    gap: 3rem;
+    padding: 3rem;
+    flex-wrap: wrap;
+   margin-bottom: 5rem;
+}
+
+.CardsItens .Cards{
+    background-color: #0E6567;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+    background-image: linear-gradient(#0E6567 ,  #449d9e);
+    width: 35rem;
+    height: 36rem;
+    font-size: 2rem;
+    font-weight: 300;
+    font-family: Poppins;
+    color: #ffff;
+    padding: 15px;
+    border-radius: 20px;
+    margin-bottom: 5rem;
+}
+
+.h3{
+    margin-bottom: 1.5rem;
+    font-size: 20px;
+}
+
+.linha{
+ width: 350px;
+  border-bottom: 3px solid #ffffff;
+  margin-left: -15px;
+  margin-bottom: 1rem;
+}
+
+.CardsItens button {
+  border-radius: 16px;
+  border: 3px solid #0E6567; 
+  background-color: #ffffff; 
+  color: #0E6567;
+  cursor: pointer;
+  width: 20rem;
+  height: 5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+  transition: all 0.3s ease;
+  font-family: "Roboto";
+  font-size: 18px;
+}
+
+.CardsItens button:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); 
+  background-color: #0E6567; 
+  border: 3px solid #ffffff; 
+  color: #ffffff;
+}
+
+
+.CardsItens .Cards img{
+    width: 24rem;
+    height: 23rem; 
+    border-radius: 20px;
+    margin-bottom: 0.2rem;
+}
+
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+    backdrop-filter: blur(6px);
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  position: relative;
+  background: linear-gradient(to right, #fff 90%, #0E6567 10% );
+  padding: 30px 20px;
+  border-radius: 12px;
+  width: 550px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.modalContent img {
+  margin: 15px 0;
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.excluirBtn {
+  border-radius: 10px;
+  border: 2px solid white;
+  background-color: #670e0e;
+  color: white;
+  cursor: pointer;
+  width: 20rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  height: 41.5px;
+  font-family: "Arial";
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.excluirBtn:hover {
+  background-color: white;
+  border: 2px solid #670e0e;
+  color: #670e0e; /* corrigido */
+  transform: scale(1.05);
+}
+
+.fechar {
+  position: absolute;
+  top: 20px;
+  left: 15px;
+  cursor: pointer;
+  font-size: 22px;
+  font-weight: bold;
+  color: #0E6567;
+}
+
+.fechar svg{
+  width: 50px;
+  height: 50px;
+}
+
+.tituloSecao {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #0E6567;
+  font-family: "Arial";
+  margin-top: 0.5rem;
+}
+
+.tituloSecao h1{
+   font-size: 35px;
+  font-weight: bold;
+  font-family: "Arial";
+}
+
+.modalContent p {
+  margin: 5px 0;
+  color: #363636;
+  font-size: 15px;
+   font-family: "Arial";
+   font-weight: 150;
+   margin-bottom: 1rem;
+}
+
+.modalContent h2 {
+  color: #0E6567;
+  cursor: pointer;
+  margin-top: 1rem;
+  font-family: "Roboto";
+  font-weight: bold;
+  font-size: 22px;
+}
+.modalContent button:hover {
+ background-color: white;
+  border: 2px solid #0E6567;
+  color: #0E6567;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #4B8C8D;
+  color: #ffffff;
+  padding: 0.7rem;
+  box-shadow: 0 -4px 16px rgba(0,0,0,0.08);
+  z-index: 1000;
+}
+
+.footerInner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+
+/* marca / logo */
+.footerBrand {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1.2rem;
+  min-width: 220px;
+}
+.footerLogo {
+  border-radius: 10px;
+  object-fit: contain;
+}
+.footerTag {
+  font-size: 1.6rem;
+  margin: 0;
+  font-weight: 600;
+}
+.footerSmall {
+  margin: 0;
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+
+
+/* social */
+.footerSocial {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  min-width: 140px;
+  justify-content: flex-end;
+}
+.iconLink{
+  display: inline-flex;
+  width: 5rem;
+  height: 5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 300px;
+  background: rgba(255,255,255,0.06);
+  transition: transform .15s ease, background .15s ease;
+  color: #ffffff;
+  text-decoration: none;
+}
+.iconLink:hover{
+  transform: translateY(-3px);
+  background: rgba(255,255,255,0.12);
+}
+
+/* bottom line */
+.footerBottom {
+  max-width: 1200px;
+  margin: 1.4rem auto 0;
+  text-align: center;
+  font-size: 1.4rem;
+  color: rgba(255,255,255,0.85);
+}
+
+.whatsappMenu {
+  position: absolute;
+  top: 40%; /* sobe um pouco */
+  left: 120%; /* um pouco mais à direita */
+  transform: translateY(-50%);
+  background-color: #4B8C8D;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s ease;
+  font-size: 18px;
+  font-family: 'Arial';
+}
+
+.whatsappMenu a {
+  color: white;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.whatsappMenu a:hover {
+  background-color: #7cc1c2;
+}
+/* quando ativo */
+.whatsappMenu.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(10px, -50%); /* movimento suave lateral */
+}
+
+.whatsappMenu a {
+  color: white;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.whatsappMenu a:hover {
+  background-color: #7cc1c2;
+}
+
+
+/* ===== Responsive adjustments ===== */
+@media (max-width: 768px) {
+  .footer {
+    padding: 2.4rem 1.6rem;
+  }
+
+  .footerInner {
+    flex-direction: column;   /* vira coluna no mobile */
+    align-items: center;
+    gap: 1.6rem;
+  }
+
+  .footerNav {
+    gap: 1.2rem;
+    justify-content: center;
+  }
+
+  .footerSocial {
+    justify-content: center;
+  }
+
+  /* já existia este bloco no seu css — preservei e ampliei */
+  .gap {
+    gap: 2rem;                /* antes era 160% */
+    flex-direction: column;
+  }
+
+  .imagem {
+    justify-content: center;
+  }
+}
