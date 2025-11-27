@@ -37,8 +37,8 @@ export default function Categorias() {
           categ_id: d.categoria_id ?? d.categ_id ?? null,
           usu_id: d.usuario_id ?? d.usu_id ?? null,
           obj_descricao: d.descricao ?? d.obj_descricao ?? '',
-          obj_foto: d.obj_foto || 'algo.png',
-          obj_foto_raw: d.obj_foto || 'algo.png',
+          obj_foto: d.foto || 'algo.png',
+          obj_foto_raw: d.foto || 'algo.png',
           obj_local_encontrado: d.local_encontrado ?? d.obj_local_encontrado ?? '',
           obj_data_publicacao: d.data_publicacao ?? d.obj_data_publicacao ?? '',
           obj_status: d.status ?? d.obj_status ?? '',
@@ -61,7 +61,7 @@ export default function Categorias() {
       }
     }
   }
-
+  
   useEffect(() => {
     listarObjetos();
   }, []);
