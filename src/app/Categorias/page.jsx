@@ -8,6 +8,8 @@ import { normalizeImageSrc } from '@/utils/normalizeImage';
 import styles from "./page.module.css";
 import objetosMkp from "@/mockup/objetos";
 import api from "@/utils/api";
+import axios from "axios";
+
 
 export default function Categorias() {
 

@@ -153,11 +153,11 @@ export default function Postagem() {
               onChange={(e) => setClassificacao(e.target.value)}
             >
               <option value="">Classificação</option>
-              <option value="1">Roupas</option>
-              <option value="2">Calçados</option>
-              <option value="3">Material Escolar</option>
-              <option value="4">Resgatados</option>
-              <option value="5">Objetos Gerais</option>
+              <option value="2">Roupas</option>
+              <option value="5">Calçados</option>
+              <option value="4">Material Escolar</option>
+              <option value="1">Resgatados</option>
+              <option value="3">Objetos Gerais</option>
             </select>
 
             <textarea
