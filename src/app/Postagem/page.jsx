@@ -80,12 +80,24 @@ export default function Postagem() {
     <main className={styles.main}>
       <div className={styles.container}>
         <div style={{ display: "flex" }}>
-          <div className={styles.lado}>
-            <div className={styles.fechar} onClick={fecharModal}>
-              <svg className={styles.svg}
+          <div className={styles.lado} style={{ position: "relative" }}>
+            <div
+              onClick={fecharModal}
+              style={{
+                position: "absolute",
+                top: 8,
+                left: 8,
+                zIndex: 20,
+                cursor: "pointer",
+                background: "transparent",
+                borderRadius: 4,
+                padding: 4,
+              }}
+            >
+              <svg
                 fill="#0E6567"
-                width="64"
-                height="64"
+                width="50"
+                height="50"
                 viewBox="0 0 1024 1024"
                 xmlns="http://www.w3.org/2000/svg"
                 stroke="#0E6567"
@@ -93,15 +105,16 @@ export default function Postagem() {
                 strokeLinecap="round"
                 strokeLinejoin="round"
               >
-            <path d="M604.7 759.2l61.8-61.8L481.1 512l185.4-185.4-61.8-61.8L357.5 512z"></path>
-          </svg>
-        </div>
+                <path d="M604.7 759.2l61.8-61.8L481.1 512l185.4-185.4-61.8-61.8L357.5 512z"></path>
+              </svg>
+            </div>
             {preview ? (
               <Image
                 className={styles.ImgMaior}
                 src={preview}
                 width={600}
                 height={600}
+                style={{ marginTop: 48 }}
                 alt="Preview"
               />
             ) : (
@@ -110,6 +123,7 @@ export default function Postagem() {
                 src="/camera.png"
                 width={400}
                 height={400}
+                style={{ marginTop: 48 }}
                 alt="Câmera"
               />
             )}
