@@ -3,8 +3,13 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
+import { useRouter } from "next/navigation";
 
 export default function Postagem() {
+  const router = useRouter();
+  const fecharModal = () => {
+    router.push("/TelaAdmin");
+  };
   const fileInputRef = useRef(null);
 
   const [imagem, setImagem] = useState(null);
@@ -76,6 +81,21 @@ export default function Postagem() {
       <div className={styles.container}>
         <div style={{ display: "flex" }}>
           <div className={styles.lado}>
+            <div className={styles.fechar} onClick={fecharModal}>
+              <svg className={styles.svg}
+                fill="#0E6567"
+                width="64"
+                height="64"
+                viewBox="0 0 1024 1024"
+                xmlns="http://www.w3.org/2000/svg"
+                stroke="#0E6567"
+                strokeWidth="0.01024"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+            <path d="M604.7 759.2l61.8-61.8L481.1 512l185.4-185.4-61.8-61.8L357.5 512z"></path>
+          </svg>
+        </div>
             {preview ? (
               <Image
                 className={styles.ImgMaior}

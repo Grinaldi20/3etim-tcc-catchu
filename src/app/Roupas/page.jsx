@@ -1,13 +1,18 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, use } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import CardCategoria from "@/components/categorias/card";
+import { normalizeImageSrc } from '@/utils/normalizeImage';
 import styles from "./page.module.css";
-import objetos from "@/mockup/objetos";
+// remove mockup as initial data so we don't flash placeholder items while API loads
+// import objetosMkp from "@/mockup/objetos"; // mudar nome objetos para objetosMkp
 
-export default function MaterialEscolar() {
+// referência para acesso a api
+import api from "@/utils/api";
+
+export default function Roupas() {
   const [modalAberto, setModalAberto] = useState(false);
   const [itemSelecionado, setItemSelecionado] = useState({
     obj_id: 0,
@@ -20,6 +25,29 @@ export default function MaterialEscolar() {
     obj_status: "",
     obj_encontrado: 0,
   });
+
+  // estado inicial vazio — vamos popular com os dados reais da API
+  const [objetos, setObjetos] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  /*
+   Image handling strategy (aplicado neste arquivo):
+   1) Ao buscar os itens na API, mapeamos o campo `foto` da API para `obj_foto`
+     e guardamos o valor original em `obj_foto_raw`.
+   2) Quando formos renderizar a imagem (card ou modal), damos preferência
+     ao `obj_foto_raw` quando ele for uma URL absoluta (ex.: http://host:port/...).
+     Isso garante que a imagem será carregada exatamente do host/porta
+     que a API retornou.
+   3) Se não houver uma URL absoluta, usamos `normalizeImageSrc` para:
+     - transformar caminhos como `public/objetos/...` em `/objetos/...` (correto para /public)
+     - transformar strings sem protocolo como `localhost:3333/...` em `http://localhost:3333/...`
+     - garantir que retornamos sempre uma string segura para usar em `src`.
+   4) Para evitar problemas com o otimizador do Next (/_next/image) e bugs de proxy,
+     renderizamos imagens dinâmicas usando uma tag `<img>` simples.
+  */
+
+  // lista objetos da api por categoria
+  // (implementação consolidada mais abaixo; removemos a versão simples para evitar comportamentos duplicados)
 
   const [menuVisible, setMenuVisible] = useState(false);
   const whatsappRef = useRef(null);
@@ -42,6 +70,66 @@ export default function MaterialEscolar() {
   function fecharModal() {
     setModalAberto(false);
   }
+
+  // Single function responsible for fetching, normalizing and filtering objects
+  async function listarObjetos() {
+    setLoading(true);
+    try {
+      // Requisição para a API. Usamos o helper `api` que já tem o baseURL configurado.
+      // Passamos `categ_nome` como query para filtrar por categoria no backend.
+      const response = await api.get('/objetos', { params: { categ_nome: 'Roupas' } });
+
+      if (!response.data || response.data.sucesso !== true) {
+        console.error('Resposta inesperada da API:', response);
+        setObjetos([]);
+        return;
+      }
+
+      // Mapear os campos da API para o formato usado pelo frontend.
+      // Importante: preservamos `obj_foto_raw` com o valor original da API
+      // para podermos usar exatamente a URL que o backend retornou quando for absoluta.
+      const todos = response.data.dados.map((d) => ({
+        obj_id: d.id ?? d.obj_id,
+        categ_id: d.categoria_id ?? d.categ_id ?? null,
+        usu_id: d.usuario_id ?? d.usu_id ?? null,
+        obj_descricao: d.descricao ?? d.obj_descricao ?? '',
+        obj_foto: d.foto ?? d.obj_foto ?? '',
+        obj_foto_raw: d.foto ?? null,
+        obj_local_encontrado: d.local_encontrado ?? d.obj_local_encontrado ?? '',
+        obj_data_publicacao: d.data_publicacao ?? d.obj_data_publicacao ?? '',
+        obj_status: d.status ?? d.obj_status ?? '',
+        obj_encontrado: d.encontrado ?? d.obj_encontrado ?? 0,
+        __raw: d,
+      }));
+
+      // Ler itens salvos no cliente para filtrar (carrinho, finalizados)
+      const carrStored = localStorage.getItem('carrinho');
+      const carrinho = carrStored ? JSON.parse(carrStored) : [];
+
+      const fStored = localStorage.getItem('finalizados');
+      const finalizados = fStored ? JSON.parse(fStored) : [];
+
+      // Filtrar: remover qualquer item que esteja em carrinho OU em finalizados
+      const filtrados = todos.filter(
+        (item) =>
+          !carrinho.some((r) => String(r.obj_id) === String(item.obj_id)) &&
+          !finalizados.some((fid) => String(fid) === String(item.obj_id))
+      );
+
+      setObjetos(filtrados);
+    } catch (err) {
+      console.error('Erro ao buscar objetos:', err);
+      setObjetos([]);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // Chama o fetch uma vez ao montar o componente
+  useEffect(() => {
+    listarObjetos();
+  }, []);
+
 
   return (
     <div className="main">
@@ -86,15 +174,23 @@ export default function MaterialEscolar() {
           <h1 className={styles.h1}>Roupas</h1>
         </div>
 
-        <div className={styles.CardsItens}>
-          {objetos.map((item) => (
-            <CardCategoria
-              key={item.obj_id}
-              obj={item}
-              onClick={() => abrirModal(item)}
-            />
-          ))}
-        </div>
+        {/* Se ainda estivermos carregando, mostre um indicador simples.
+            Evita que dados antigos/mockups apareçam brevemente. */}
+        {loading ? (
+          <div className={styles.CardsItens}>
+            <p>Carregando...</p>
+          </div>
+        ) : (
+          <div className={styles.CardsItens}>
+            {objetos.map((item) => (
+              <CardCategoria
+                key={item.obj_id}
+                obj={item}
+                onClick={() => abrirModal(item)}
+              />
+            ))}
+          </div>
+        )}
 
         {modalAberto && (
           <div className={styles.modal}>
@@ -117,11 +213,20 @@ export default function MaterialEscolar() {
               <h1 className={styles.tituloSecao}>
                 {itemSelecionado.obj_descricao}
               </h1>
-              <Image
-                src={itemSelecionado.obj_foto}
+              {/* Use the exact API URL when available (obj_foto_raw) and absolute;
+                  otherwise normalize the value stored in obj_foto so it becomes
+                  a valid path or absolute URL. We use a plain <img> here to avoid
+                  Next's image optimizer for dynamic URLs from the API. */}
+              <img
+                src={
+                  (itemSelecionado?.obj_foto_raw && /^https?:\/\//i.test(itemSelecionado.obj_foto_raw))
+                    ? itemSelecionado.obj_foto_raw
+                    : normalizeImageSrc(itemSelecionado.obj_foto)
+                }
                 alt={itemSelecionado.obj_descricao}
                 width={250}
                 height={250}
+                style={{ objectFit: 'contain' }}
               />
               <p>
                 <strong>Encontrada dia:</strong>{" "}
@@ -195,6 +300,7 @@ export default function MaterialEscolar() {
                   <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334" />
                 </svg>
               </a>
+
 
               <div
                 ref={whatsappRef}
