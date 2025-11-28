@@ -314,27 +314,57 @@ export default function Categorias() {
               {itemSelecionado.obj_status}
             </p>
             <button
-              onClick={() => {
+              onClick={async () => {
                 try {
+                  // montar payload (ajuste usu_id para o usuário logado se tiver)
+                  const payload = {
+                    obj_id: itemSelecionado.obj_id,
+                    usu_id: itemSelecionado.usu_id ?? 1,
+                    res_data: new Date().toISOString().slice(0, 19).replace('T', ' '),
+                    res_status: 'pendente'
+                  };
+
+                  // tenta cadastrar a reserva no backend
+                  let resposta = null;
+                  try {
+                    resposta = await api.post('/reservas', payload);
+                    if (!resposta?.data || resposta.data.sucesso !== true) {
+                      console.warn('Resposta inesperada da API de reservas:', resposta);
+                      resposta = null;
+                    }
+                  } catch (errApi) {
+                    console.warn('Falha ao chamar API de reservas, vai gravar localmente:', errApi);
+                    resposta = null;
+                  }
+
+                  // grava no carrinho local (ou atualiza se já existir)
                   const key = 'carrinho';
                   const stored = localStorage.getItem(key);
                   const carrinho = stored ? JSON.parse(stored) : [];
 
                   const jaExiste = carrinho.some((it) => String(it.obj_id) === String(itemSelecionado.obj_id));
                   if (!jaExiste) {
-                    carrinho.push(itemSelecionado);
+                    const resId = resposta?.data?.dados?.res_id ?? null;
+                    const itemComReserva = { ...itemSelecionado, res_id: resId };
+                    carrinho.push(itemComReserva);
                     localStorage.setItem(key, JSON.stringify(carrinho));
                   }
 
+                  // atualizar UI e fechar modal
                   setObjetos(prev => prev.filter(i => String(i.obj_id) !== String(itemSelecionado.obj_id)));
                   setModalAberto(false);
                 } catch (err) {
                   console.error('Erro ao reservar item:', err);
+                  alert('Erro ao reservar. Veja o console para mais informações.');
                 }
               }}
             >
               Reservar
             </button>
+
+
+
+
           </div>
         </div>
       )}

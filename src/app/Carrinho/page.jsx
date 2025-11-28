@@ -20,12 +20,32 @@ export default function Carrinho() {
     }
   }, []);
 
-  function excluirItem(id) {
+  async function excluirItem(objId) {
     try {
-      const novo = itens.filter((it) => it.obj_id !== id);
+      // 1. Achar a reserva correspondente no carrinho local
+      const reserva = itens.find((it) => it.obj_id === objId);
+
+      // 2. Se tiver res_id, tentar apagar no backend (fallback se falhar)
+      if (reserva && reserva.res_id) {
+        try {
+          const resp = await fetch(`http://localhost:3000/reservas/${reserva.res_id}`, {
+            method: "DELETE"
+          });
+          if (!resp.ok) {
+            console.warn("Falha ao deletar reserva no backend:", resp.status);
+          }
+        } catch (errApi) {
+          console.warn("Erro ao chamar API para deletar reserva:", errApi);
+        }
+      } else {
+        console.warn("Reserva não encontrada no item ou sem res_id. Vai remover localmente.");
+      }
+
+      // 3. Remover do localStorage e atualizar estado
+      const novo = itens.filter((it) => it.obj_id !== objId);
       localStorage.setItem("carrinho", JSON.stringify(novo));
       setItens(novo);
-      // se ficou vazio, volta pra categorias
+
       if (novo.length === 0) {
         router.push("/Categorias");
       }
