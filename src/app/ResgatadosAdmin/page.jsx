@@ -58,13 +58,14 @@ function excluirItem(id) {
 
     // 2) Adicionar o ID em "finalizados"
     const fStored = localStorage.getItem("finalizados");
-    const finalizados = fStored ? JSON.parse(fStored) : [];
+    const finalizados = JSON.parse(localStorage.getItem("finalizados")) || [];
 
-    if (!finalizados.includes(idStr)) {
-      const atualizados = [...finalizados, idStr];
-      localStorage.setItem("finalizados", JSON.stringify(atualizados));
-    }
+      if (!finalizados.includes(id)) {
+        finalizados.push(id);
+        localStorage.setItem("finalizados", JSON.stringify(finalizados));
+      }
 
+   
     // 3) Atualiza o estado local (removendo da lista de reservados)
     setReservados(novoCarrinho);
 

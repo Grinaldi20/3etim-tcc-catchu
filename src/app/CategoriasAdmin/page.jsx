@@ -8,6 +8,7 @@ import { normalizeImageSrc } from '@/utils/normalizeImage';
 import styles from "./page.module.css";
 import objetosMkp from "@/mockup/objetos"; 
 import api from "@/utils/api";
+import axios from "axios";
 
 export default function Categorias() {
   
@@ -93,24 +94,33 @@ useEffect(() => {
   carregarObjetosAdmin();
 }, [itemsRemovidos]);
 
+const finalizados =
+  typeof window !== "undefined"
+    ? JSON.parse(localStorage.getItem("finalizados") || "[]")
+    : [];
+
 
 function excluirItem(id) {
-  // remove do carrinho
+  if (typeof window === "undefined") return; // evita erro no SSR
+
+  // 1) remove do carrinho
   const stored = localStorage.getItem("carrinho");
   let carrinho = stored ? JSON.parse(stored) : [];
   carrinho = carrinho.filter((item) => item.obj_id !== id);
   localStorage.setItem("carrinho", JSON.stringify(carrinho));
 
-  // 🔥 salvar ID no "itensFinalizados"
-  const finalizadosStored = localStorage.getItem("finalizados");
-  const finalizados = finalizadosStored ? JSON.parse(finalizadosStored) : [];
+  // 2) salva no finalizados
+  const finalizados = JSON.parse(localStorage.getItem("finalizados")) || [];
 
   if (!finalizados.includes(id)) {
     finalizados.push(id);
     localStorage.setItem("finalizados", JSON.stringify(finalizados));
   }
 
-  setReservados(carrinho);
+  // 3) remove o item da tela
+  setObjetos((prev) => prev.filter((obj) => obj.obj_id !== id));
+
+  // 4) fecha modal
   setModalAberto(false);
 }
 
@@ -158,7 +168,7 @@ function excluirItem(id) {
     try {
       const key = "carrinho";
       const stored = localStorage.getItem("carrinho");
-const reservados = stored ? JSON.parse(stored) : [];
+      const reservados = stored ? JSON.parse(stored) : [];
 
 const naoReservados = todos.filter(
   item => !reservados.some(r => r.obj_id === item.obj_id)
@@ -187,6 +197,13 @@ const naoReservados = todos.filter(
     );
   });
 }, []);
+
+  // 🔥 salvar ID no "itensFinalizados"
+
+
+
+  
+
 
   return (
     <main className={styles.main}>
@@ -317,13 +334,14 @@ const naoReservados = todos.filter(
       </div>
 
       <div className={styles.CardsItens}>
-        {objetos.map((item) => (
-          <CardCategoria
-            key={item.obj_id}
-            obj={item}
-            onClick={() => abrirModal(item)}
-          />
-        ))}
+       {objetos
+  ?.filter((obj) => !finalizados.includes(obj.obj_id))
+  .map((item) => (
+        <CardCategoria 
+        key={item.obj_id} 
+        obj={item} 
+        onClick={() => abrirModal(item)} />
+      ))}
       </div>
 
       {/* Modal */}
