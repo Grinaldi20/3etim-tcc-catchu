@@ -30,12 +30,29 @@ export default function MaterialEscolar() {
 
         // 2. Busca todos os objetos do banco
         const res = await fetch("http://localhost:3333/objetos");
-        const objetos = await res.json();
+        const json = await res.json();
+
+        /*
+          A API pode retornar um array diretamente ou um objeto com a forma:
+            { sucesso: true, dados: [ ... ] }
+          Se fizermos `const objetos = await res.json()` e assumirmos que é um
+          array, pode ocorrer `filter is not a function` quando for um objeto.
+          Então normalizamos para `allObjects` que será sempre um array.
+        */
+        const allObjects = Array.isArray(json)
+          ? json
+          : Array.isArray(json?.dados)
+          ? json.dados
+          : [];
 
         // 3. Filtra somente os que estão em finalizados
-        const filtrados = objetos.filter(obj =>
-          finalizados.includes(obj.obj_id)
-        );
+        // Normaliza ids para string para evitar problema de tipos
+        const finalizadosSet = new Set((finalizados || []).map((id) => String(id)));
+
+        const filtrados = allObjects.filter((obj) => {
+          const objId = String(obj?.obj_id ?? obj?.id ?? "");
+          return finalizadosSet.has(objId);
+        });
 
         setReservados(filtrados);
 
