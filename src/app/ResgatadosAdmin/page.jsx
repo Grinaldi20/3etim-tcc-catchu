@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useRef, useEffect } from "react";
@@ -32,13 +31,6 @@ export default function MaterialEscolar() {
         const res = await fetch("http://localhost:3333/objetos");
         const json = await res.json();
 
-        /*
-          A API pode retornar um array diretamente ou um objeto com a forma:
-            { sucesso: true, dados: [ ... ] }
-          Se fizermos `const objetos = await res.json()` e assumirmos que é um
-          array, pode ocorrer `filter is not a function` quando for um objeto.
-          Então normalizamos para `allObjects` que será sempre um array.
-        */
         const allObjects = Array.isArray(json)
           ? json
           : Array.isArray(json?.dados)
@@ -46,7 +38,6 @@ export default function MaterialEscolar() {
           : [];
 
         // 3. Filtra somente os que estão em finalizados
-        // Normaliza ids para string para evitar problema de tipos
         const finalizadosSet = new Set((finalizados || []).map((id) => String(id)));
 
         const filtrados = allObjects.filter((obj) => {
@@ -54,7 +45,23 @@ export default function MaterialEscolar() {
           return finalizadosSet.has(objId);
         });
 
-        setReservados(filtrados);
+        // 4. NORMALIZA IMAGEM: força usar URL do backend/uploads, nunca dados do localStorage
+        const normalizados = filtrados.map((obj) => {
+          const fotoUrl =
+            obj.foto && /^https?:\/\//i.test(obj.foto)
+              ? obj.foto
+              : obj.obj_foto
+              ? `http://localhost:3333/uploads/Objetos/${obj.obj_foto}`
+              : `/uploads/Objetos/sem.png`;
+
+          return {
+            ...obj,
+            foto: fotoUrl,
+            obj_foto: obj.obj_foto || null,
+          };
+        });
+
+        setReservados(normalizados);
 
       } catch (error) {
         console.error("Erro ao carregar objetos finalizados:", error);
@@ -77,7 +84,15 @@ export default function MaterialEscolar() {
   }, []);
 
   function abrirModal(item) {
-    setItemSelecionado(item);
+    // garante que o modal receba a URL normalizada (não a do carrinho)
+    const fotoUrl =
+      item.foto && /^https?:\/\//i.test(item.foto)
+        ? item.foto
+        : item.obj_foto
+        ? `http://localhost:3333/uploads/Objetos/${item.obj_foto}`
+        : `/uploads/Objetos/sem.png`;
+
+    setItemSelecionado({ ...item, foto: fotoUrl, obj_foto: item.obj_foto || null });
     setModalAberto(true);
   }
 
@@ -168,7 +183,12 @@ export default function MaterialEscolar() {
               <h1 className={styles.tituloSecao}>{itemSelecionado.obj_descricao}</h1>
 
               <Image
-                src={itemSelecionado.obj_foto}
+                src={
+                  itemSelecionado.foto ||
+                  (itemSelecionado.obj_foto
+                    ? `http://localhost:3333/uploads/Objetos/${itemSelecionado.obj_foto}`
+                    : `/uploads/Objetos/sem.png`)
+                }
                 alt={itemSelecionado.obj_descricao}
                 width={250}
                 height={250}
