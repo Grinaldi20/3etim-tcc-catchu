@@ -51,6 +51,17 @@ const removerItem = (id) => {
 
 const [itemsRemovidos, setItemsRemovidos] = useState([]);
 
+// Estado reativo para finalizados (ids como strings)
+const [finalizadosState, setFinalizadosState] = useState(() => {
+  if (typeof window === 'undefined') return [];
+  try {
+    const raw = JSON.parse(localStorage.getItem('finalizados') || '[]');
+    return Array.isArray(raw) ? raw.map(r => String(r)) : [];
+  } catch (err) {
+    return [];
+  }
+});
+
 useEffect(() => {
   async function carregarObjetosAdmin() {
     try {
@@ -79,10 +90,11 @@ useEffect(() => {
       const stored = localStorage.getItem("carrinho");
       const carrinho = stored ? JSON.parse(stored) : [];
 
-      // Filtra os que NÃO estão reservados E NÃO estão removidos
+      // Filtra os que NÃO estão reservados, NÃO estão removidos e NÃO estão finalizados
       const filtrados = todos.filter((item) =>
         !carrinho.some((r) => String(r.obj_id) === String(item.obj_id)) &&
-        !itemsRemovidos.includes(String(item.obj_id))
+        !itemsRemovidos.includes(String(item.obj_id)) &&
+        !finalizadosState.includes(String(item.obj_id))
       );
 
       setObjetos(filtrados);
@@ -92,12 +104,7 @@ useEffect(() => {
   }
 
   carregarObjetosAdmin();
-}, [itemsRemovidos]);
-
-const finalizados =
-  typeof window !== "undefined"
-    ? JSON.parse(localStorage.getItem("finalizados") || "[]")
-    : [];
+}, [itemsRemovidos, finalizadosState]);
 
 
 function excluirItem(id) {
@@ -175,6 +182,50 @@ const handleReservar = (item) => {
 
     alert("Item reservado com sucesso!");
 };
+
+// Marca o item como resgatado: salva o ID em `finalizados`, limpa do carrinho e do storage local de reservados,
+// remove da lista exibida nesta página e fecha o modal.
+function marcarComoResgatado(item) {
+  if (typeof window === 'undefined' || !item) return;
+
+  try {
+    const idStr = String(item.obj_id ?? item.id ?? item.objId ?? '');
+
+    // salvar apenas o ID em `finalizados`
+    const finalizados = JSON.parse(localStorage.getItem('finalizados')) || [];
+    const already = finalizados.some(f => String(f) === idStr);
+    if (!already) {
+      finalizados.push(item.obj_id);
+      localStorage.setItem('finalizados', JSON.stringify(finalizados));
+      // atualizar estado reativo para atualizar a UI imediatamente
+      setFinalizadosState(prev => prev.includes(idStr) ? prev : [...prev, idStr]);
+    }
+
+    // remover do carrinho se existir
+    const storedCarr = localStorage.getItem('carrinho');
+    if (storedCarr) {
+      const carrinho = JSON.parse(storedCarr).filter(c => String(c.obj_id) !== idStr);
+      localStorage.setItem('carrinho', JSON.stringify(carrinho));
+    }
+
+    // Não adicionamos mais ao 'carrinho' — carrinho é somente para reservas feitas pelo usuário.
+    // O admin escreve apenas em `finalizados` (ids) para que a tela de Resgatados mostre os itens.
+
+    // remover de qualquer lista local de "reservadosAdmin" (se usada)
+    const key = 'reservadosAdmin';
+    const stored = localStorage.getItem(key);
+    if (stored) {
+      const arr = JSON.parse(stored).filter(a => String(a.obj_id) !== idStr);
+      localStorage.setItem(key, JSON.stringify(arr));
+    }
+
+    // atualizar UI local
+    setObjetos(prev => prev.filter(i => String(i.obj_id) !== idStr));
+    setModalAberto(false);
+  } catch (err) {
+    console.error('Erro ao marcar como resgatado:', err);
+  }
+}
   useEffect(() => {
   listarObjetos().then(() => {
     const stored = localStorage.getItem('reservados');
@@ -323,7 +374,7 @@ const handleReservar = (item) => {
 
       <div className={styles.CardsItens}>
       {objetos
-  ?.filter((obj) => !finalizados.includes(String(obj.obj_id)))
+  ?.filter((obj) => !finalizadosState.includes(String(obj.obj_id)))
   .map((item) => (
     <CardCategoria 
       key={item.obj_id} 
@@ -381,32 +432,12 @@ const handleReservar = (item) => {
             </p>
     
 
-             <button 
+             <button
                className={styles.excluirBtn}
-  
-             onClick={() => {
-  try {
-    const key = "reservadosAdmin";
-    const stored = localStorage.getItem(key);
-    const carrinho = stored ? JSON.parse(stored) : [];
-
-    const jaExiste = carrinho.some((it) => String(it.obj_id) === String(itemSelecionado.obj_id));
-    if (!jaExiste) {
-      carrinho.push(itemSelecionado);
-      localStorage.setItem(key, JSON.stringify(carrinho));
-    }
-
-    // remove do estado que está exibindo os cards nessa página
-    setObjetos(prev => prev.filter(i => String(i.obj_id) !== String(itemSelecionado.obj_id)));
-
-    setModalAberto(false);
-  } catch (err) {
-    console.error("Erro ao reservar item (admin):", err);
-  }
-}}
-              >
-                Já Resgatado
-              </button>
+               onClick={() => marcarComoResgatado(itemSelecionado)}
+             >
+               Já Resgatado
+             </button>
 
           </div>
         </div>

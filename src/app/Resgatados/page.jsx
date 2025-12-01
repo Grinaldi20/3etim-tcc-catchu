@@ -46,9 +46,38 @@ export default function MaterialEscolar() {
   const [reservados, setReservados] = useState([]);
 
 useEffect(() => {
-  const stored = localStorage.getItem("carrinho");
-  const carrinho = stored ? JSON.parse(stored) : [];
-  setReservados(carrinho);
+  async function loadFinalizados() {
+    try {
+      const fStored = localStorage.getItem('finalizados');
+      const finalizados = fStored ? JSON.parse(fStored) : [];
+
+      if (!finalizados || finalizados.length === 0) {
+        setReservados([]);
+        return;
+      }
+
+      const res = await fetch('http://localhost:3333/objetos');
+      const json = await res.json();
+      const allObjects = Array.isArray(json) ? json : Array.isArray(json?.dados) ? json.dados : [];
+
+      const finalSet = new Set((finalizados || []).map(id => String(id)));
+      const filtrados = allObjects.filter(obj => finalSet.has(String(obj?.obj_id ?? obj?.id ?? '')));
+
+      setReservados(filtrados);
+    } catch (err) {
+      console.error('Erro ao carregar finalizados em Resgatados:', err);
+      setReservados([]);
+    }
+  }
+
+  loadFinalizados();
+
+  function handleStorage(e) {
+    if (e.key === 'finalizados' || e.key === null) loadFinalizados();
+  }
+
+  window.addEventListener('storage', handleStorage);
+  return () => window.removeEventListener('storage', handleStorage);
 }, []);
 
   return (

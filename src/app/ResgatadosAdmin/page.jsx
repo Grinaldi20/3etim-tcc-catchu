@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import CardCategoria from "@/components/categorias/card2";
 import styles from "./page.module.css";
+import axios from "axios";
 
 export default function ReservadosAdmin() {
   const [modalAberto, setModalAberto] = useState(false);
