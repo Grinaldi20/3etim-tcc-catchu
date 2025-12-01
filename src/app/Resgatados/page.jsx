@@ -43,6 +43,14 @@ export default function MaterialEscolar() {
     setModalAberto(false);
   }
 
+  const [reservados, setReservados] = useState([]);
+
+useEffect(() => {
+  const stored = localStorage.getItem("carrinho");
+  const carrinho = stored ? JSON.parse(stored) : [];
+  setReservados(carrinho);
+}, []);
+
   return (
     <div className="main">
       <header className={styles.header}>
@@ -87,7 +95,7 @@ export default function MaterialEscolar() {
         </div>
 
         <div className={styles.CardsItens}>
-          {objetos.map((item) => (
+          {reservados.map((item) => (
             <CardCategoria
               key={item.obj_id}
               obj={item}

@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import CardCategoria from "@/components/categorias/card2";
 import styles from "./page.module.css";
+import axios from "axios";
 
 export default function MaterialEscolar() {
   const [modalAberto, setModalAberto] = useState(false);
@@ -42,40 +43,40 @@ export default function MaterialEscolar() {
   }
 
   // 🔥 EXCLUIR ITEM DEFINITIVAMENTE DO LOCALSTORAGE
-function excluirItem(id) {
+async function excluirItem(id) {
+  console.log("➡️ Enviando DELETE para:", `http://localhost:3333/objetos/${id}`);
+
+  if (typeof window === "undefined") return;
+
   try {
-    const idStr = String(id);
+    // 🔥 1) EXCLUI DO BANCO
+    console.log("ID enviado:", id, "Tipo:", typeof id);
+    await axios.delete(`http://localhost:3333/objetos/${id}`);
 
-    // 1) Remover do carrinho
+    // 🔥 2) Remove do carrinho (localStorage)
     const stored = localStorage.getItem("carrinho");
-    const carrinho = stored ? JSON.parse(stored) : [];
+    let carrinho = stored ? JSON.parse(stored) : [];
+    carrinho = carrinho.filter((item) => item.obj_id !== id);
+    localStorage.setItem("carrinho", JSON.stringify(carrinho));
 
-    const novoCarrinho = carrinho.filter(
-      (item) => String(item.obj_id) !== idStr
-    );
-
-    localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
-
-    // 2) Adicionar o ID em "finalizados"
-    const fStored = localStorage.getItem("finalizados");
+    // 🔥 3) Salvar ID no "finalizados"
     const finalizados = JSON.parse(localStorage.getItem("finalizados")) || [];
+    if (!finalizados.includes(id)) {
+      finalizados.push(id);
+      localStorage.setItem("finalizados", JSON.stringify(finalizados));
+    }
 
-      if (!finalizados.includes(id)) {
-        finalizados.push(id);
-        localStorage.setItem("finalizados", JSON.stringify(finalizados));
-      }
+    // 🔥 4) Remove da tela imediatamente
+    setReservados((prev) => prev.filter((obj) => obj.obj_id !== id));
 
-   
-    // 3) Atualiza o estado local (removendo da lista de reservados)
-    setReservados(novoCarrinho);
-
-    // 4) Fecha modal
+    // 🔥 5) Fecha modal
     setModalAberto(false);
 
   } catch (err) {
-    console.error("Erro ao excluir e finalizar item:", err);
+    console.error("Erro ao excluir item:", err);
   }
 }
+
 
 
 
