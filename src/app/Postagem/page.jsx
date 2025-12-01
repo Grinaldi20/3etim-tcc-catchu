@@ -156,7 +156,7 @@ export default function Postagem() {
               <option value="2">Roupas</option>
               <option value="5">Calçados</option>
               <option value="4">Material Escolar</option>
-              <option value="1">Resgatados</option>
+    
               <option value="3">Objetos Gerais</option>
             </select>
 
