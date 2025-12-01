@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useRef, useEffect } from "react";
@@ -13,7 +14,7 @@ export default function ReservadosAdmin() {
   const [menuVisible, setMenuVisible] = useState(false);
   const whatsappRef = useRef(null);
 
-   // 🔥 AGORA BUSCA SOMENTE OS FINALIZADOS E PUXA DO BANCO
+  // 🔥 CARREGAR OS ITENS RESERVADOS DO LOCALSTORAGE
   useEffect(() => {
     async function carregarResgatados() {
       try {
@@ -30,6 +31,13 @@ export default function ReservadosAdmin() {
         const res = await fetch("http://localhost:3333/objetos");
         const json = await res.json();
 
+        /*
+          A API pode retornar um array diretamente ou um objeto com a forma:
+            { sucesso: true, dados: [ ... ] }
+          Se fizermos `const objetos = await res.json()` e assumirmos que é um
+          array, pode ocorrer `filter is not a function` quando for um objeto.
+          Então normalizamos para `allObjects` que será sempre um array.
+        */
         const allObjects = Array.isArray(json)
           ? json
           : Array.isArray(json?.dados)
@@ -37,6 +45,7 @@ export default function ReservadosAdmin() {
           : [];
 
         // 3. Filtra somente os que estão em finalizados
+        // Normaliza ids para string para evitar problema de tipos
         const finalizadosSet = new Set((finalizados || []).map((id) => String(id)));
 
         const filtrados = allObjects.filter((obj) => {
@@ -44,23 +53,7 @@ export default function ReservadosAdmin() {
           return finalizadosSet.has(objId);
         });
 
-        // 4. NORMALIZA IMAGEM: força usar URL do backend/uploads, nunca dados do localStorage
-        const normalizados = filtrados.map((obj) => {
-          const fotoUrl =
-            obj.foto && /^https?:\/\//i.test(obj.foto)
-              ? obj.foto
-              : obj.obj_foto
-              ? `http://localhost:3333/uploads/Objetos/${obj.obj_foto}`
-              : `/uploads/Objetos/sem.png`;
-
-          return {
-            ...obj,
-            foto: fotoUrl,
-            obj_foto: obj.obj_foto || null,
-          };
-        });
-
-        setReservados(normalizados);
+        setReservados(filtrados);
 
       } catch (error) {
         console.error("Erro ao carregar objetos finalizados:", error);
@@ -71,7 +64,7 @@ export default function ReservadosAdmin() {
     carregarResgatados();
   }, []);
 
-  // FECHAR MENU
+  // fechar menu whatsapp
   useEffect(() => {
     function handleClickOutside(event) {
       if (whatsappRef.current && !whatsappRef.current.contains(event.target)) {
@@ -83,15 +76,7 @@ export default function ReservadosAdmin() {
   }, []);
 
   function abrirModal(item) {
-    // garante que o modal receba a URL normalizada (não a do carrinho)
-    const fotoUrl =
-      item.foto && /^https?:\/\//i.test(item.foto)
-        ? item.foto
-        : item.obj_foto
-        ? `http://localhost:3333/uploads/Objetos/${item.obj_foto}`
-        : `/uploads/Objetos/sem.png`;
-
-    setItemSelecionado({ ...item, foto: fotoUrl, obj_foto: item.obj_foto || null });
+    setItemSelecionado(item);
     setModalAberto(true);
   }
 
@@ -99,30 +84,41 @@ export default function ReservadosAdmin() {
     setModalAberto(false);
   }
 
-  // 🔥 EXCLUIR DEFINITIVAMENTE (REMOVE DO FINALIZADOS)
-  function excluirItem(id) {
-    try {
-      const idStr = String(id);
+  // 🔥 EXCLUIR ITEM DEFINITIVAMENTE DO LOCALSTORAGE
+async function excluirItem(id) {
+  console.log("➡️ Enviando DELETE para:", `http://localhost:3333/objetos/${id}`);
 
-      const fStored = localStorage.getItem("finalizados");
-      const finalizados = fStored ? JSON.parse(fStored) : [];
+  if (typeof window === "undefined") return;
 
-      const novoFinalizados = finalizados.filter(
-        itemId => String(itemId) !== idStr
-      );
+  try {
+    // 🔥 1) EXCLUI DO BANCO
+    console.log("ID enviado:", id, "Tipo:", typeof id);
+    await axios.delete(`http://localhost:3333/objetos/${id}`);
 
-      localStorage.setItem("finalizados", JSON.stringify(novoFinalizados));
+    // 🔥 2) Remove do carrinho (localStorage)
+    const stored = localStorage.getItem("carrinho");
+    let carrinho = stored ? JSON.parse(stored) : [];
+    carrinho = carrinho.filter((item) => item.obj_id !== id);
+    localStorage.setItem("carrinho", JSON.stringify(carrinho));
 
-      setReservados(prev =>
-        prev.filter(item => String(item.obj_id) !== idStr)
-      );
-
-      setModalAberto(false);
-
-    } catch (err) {
-      console.error("Erro ao excluir e finalizar item:", err);
+    // 🔥 3) Salvar ID no "finalizados"
+    const finalizados = JSON.parse(localStorage.getItem("finalizados")) || [];
+    if (!finalizados.includes(id)) {
+      finalizados.push(id);
+      localStorage.setItem("finalizados", JSON.stringify(finalizados));
     }
+
+    // 🔥 4) Remove da tela imediatamente
+    setReservados((prev) => prev.filter((obj) => obj.obj_id !== id));
+
+    // 🔥 5) Fecha modal
+    setModalAberto(false);
+
+  } catch (err) {
+    console.error("Erro ao excluir item:", err);
   }
+}
+
 
 
 
