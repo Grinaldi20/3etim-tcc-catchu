@@ -163,30 +163,18 @@ function excluirItem(id) {
     ];
     setItens(mock);
   }, []);
+const handleReservar = (item) => {
+    // pega o que já existe
+    const stored = JSON.parse(localStorage.getItem("finalizados")) ?? [];
 
-    function handleReservar(itemSelecionado) {
-    try {
-      const key = "carrinho";
-      const stored = localStorage.getItem("carrinho");
-      const reservados = stored ? JSON.parse(stored) : [];
+    // adiciona o novo item
+    const updatedList = [...stored, item];
 
-const naoReservados = todos.filter(
-  item => !reservados.some(r => r.obj_id === item.obj_id)
-);
+    // salva
+    localStorage.setItem("finalizados", JSON.stringify(updatedList));
 
-      const jaExiste = carrinho.some((it) => it.obj_id === itemSelecionado.obj_id);
-      if (!jaExiste) {
-        carrinho.push(itemSelecionado);
-        localStorage.setItem(key, JSON.stringify(carrinho));
-      }
-
-      // remover o item da lista de categorias
-      setItens((prev) => prev.filter((i) => i.obj_id !== itemSelecionado.obj_id));
-    } catch (err) {
-      console.error("Erro ao reservar:", err);
-    }
-  }
-
+    alert("Item reservado com sucesso!");
+};
   useEffect(() => {
   listarObjetos().then(() => {
     const stored = localStorage.getItem('reservados');
@@ -334,14 +322,15 @@ const naoReservados = todos.filter(
       </div>
 
       <div className={styles.CardsItens}>
-       {objetos
-  ?.filter((obj) => !finalizados.includes(obj.obj_id))
+      {objetos
+  ?.filter((obj) => !finalizados.includes(String(obj.obj_id)))
   .map((item) => (
-        <CardCategoria 
-        key={item.obj_id} 
-        obj={item} 
-        onClick={() => abrirModal(item)} />
-      ))}
+    <CardCategoria 
+      key={item.obj_id} 
+      obj={item} 
+      onClick={() => abrirModal(item)} 
+    />
+  ))}
       </div>
 
       {/* Modal */}
@@ -397,7 +386,7 @@ const naoReservados = todos.filter(
   
              onClick={() => {
   try {
-    const key = "carrinho";
+    const key = "reservadosAdmin";
     const stored = localStorage.getItem(key);
     const carrinho = stored ? JSON.parse(stored) : [];
 
@@ -416,7 +405,7 @@ const naoReservados = todos.filter(
   }
 }}
               >
-                Já Reservado
+                Já Resgatado
               </button>
 
           </div>

@@ -5,9 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import CardCategoria from "@/components/categorias/card2";
 import styles from "./page.module.css";
-import axios from "axios";
 
-export default function MaterialEscolar() {
+export default function ReservadosAdmin() {
   const [modalAberto, setModalAberto] = useState(false);
   const [reservados, setReservados] = useState([]);
   const [itemSelecionado, setItemSelecionado] = useState(null);
@@ -130,7 +129,7 @@ export default function MaterialEscolar() {
   return (
     <div className="main">
       <header className={styles.header}>
-        <Link href="TelaPrincipal">
+        <Link href="/TelaPrincipal">
           <Image className={styles.img} src="/logo1.png" alt="Logo" width={100} height={100} />
         </Link>
 
@@ -182,7 +181,7 @@ export default function MaterialEscolar() {
 
               <h1 className={styles.tituloSecao}>{itemSelecionado.obj_descricao}</h1>
 
-              <Image
+              <img
                 src={
                   itemSelecionado.foto ||
                   (itemSelecionado.obj_foto
@@ -192,6 +191,7 @@ export default function MaterialEscolar() {
                 alt={itemSelecionado.obj_descricao}
                 width={250}
                 height={250}
+                style={{ objectFit: 'contain' }}
               />
 
               <p><strong>Encontrada dia:</strong> {itemSelecionado.obj_data_publicacao}</p>
