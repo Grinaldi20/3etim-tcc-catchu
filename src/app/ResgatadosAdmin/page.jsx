@@ -15,9 +15,8 @@ export default function MaterialEscolar() {
   const [menuVisible, setMenuVisible] = useState(false);
   const whatsappRef = useRef(null);
 
-  // 🔥 CARREGAR OS ITENS RESERVADOS DO LOCALSTORAGE
+   // 🔥 AGORA BUSCA SOMENTE OS FINALIZADOS E PUXA DO BANCO
   useEffect(() => {
-<<<<<<< HEAD
     async function carregarResgatados() {
       try {
         // 1. Pega IDs finalizados
@@ -74,14 +73,9 @@ export default function MaterialEscolar() {
     }
 
     carregarResgatados();
-=======
-    const stored = localStorage.getItem("carrinho");
-    const carrinho = stored ? JSON.parse(stored) : [];
-    setReservados(carrinho);
->>>>>>> parent of 3277c69 (ja resgatado)
   }, []);
 
-  // fechar menu whatsapp
+  // FECHAR MENU
   useEffect(() => {
     function handleClickOutside(event) {
       if (whatsappRef.current && !whatsappRef.current.contains(event.target)) {
@@ -101,41 +95,30 @@ export default function MaterialEscolar() {
     setModalAberto(false);
   }
 
-  // 🔥 EXCLUIR ITEM DEFINITIVAMENTE DO LOCALSTORAGE
-async function excluirItem(id) {
-  console.log("➡️ Enviando DELETE para:", `http://localhost:3333/objetos/${id}`);
+  // 🔥 EXCLUIR DEFINITIVAMENTE (REMOVE DO FINALIZADOS)
+  function excluirItem(id) {
+    try {
+      const idStr = String(id);
 
-  if (typeof window === "undefined") return;
+      const fStored = localStorage.getItem("finalizados");
+      const finalizados = fStored ? JSON.parse(fStored) : [];
 
-  try {
-    // 🔥 1) EXCLUI DO BANCO
-    console.log("ID enviado:", id, "Tipo:", typeof id);
-    await axios.delete(`http://localhost:3333/objetos/${id}`);
+      const novoFinalizados = finalizados.filter(
+        itemId => String(itemId) !== idStr
+      );
 
-    // 🔥 2) Remove do carrinho (localStorage)
-    const stored = localStorage.getItem("carrinho");
-    let carrinho = stored ? JSON.parse(stored) : [];
-    carrinho = carrinho.filter((item) => item.obj_id !== id);
-    localStorage.setItem("carrinho", JSON.stringify(carrinho));
+      localStorage.setItem("finalizados", JSON.stringify(novoFinalizados));
 
-    // 🔥 3) Salvar ID no "finalizados"
-    const finalizados = JSON.parse(localStorage.getItem("finalizados")) || [];
-    if (!finalizados.includes(id)) {
-      finalizados.push(id);
-      localStorage.setItem("finalizados", JSON.stringify(finalizados));
+      setReservados(prev =>
+        prev.filter(item => String(item.obj_id) !== idStr)
+      );
+
+      setModalAberto(false);
+
+    } catch (err) {
+      console.error("Erro ao excluir e finalizar item:", err);
     }
-
-    // 🔥 4) Remove da tela imediatamente
-    setReservados((prev) => prev.filter((obj) => obj.obj_id !== id));
-
-    // 🔥 5) Fecha modal
-    setModalAberto(false);
-
-  } catch (err) {
-    console.error("Erro ao excluir item:", err);
   }
-}
-
 
 
 
