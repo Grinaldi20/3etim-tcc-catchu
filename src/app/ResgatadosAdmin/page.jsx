@@ -31,7 +31,6 @@ export default function MaterialEscolar() {
 
         // 2. Busca todos os objetos do banco
         const res = await fetch("http://localhost:3333/objetos");
-<<<<<<< HEAD
         const json = await res.json();
 
         /*
@@ -56,15 +55,6 @@ export default function MaterialEscolar() {
           return finalizadosSet.has(objId);
         });
 
-=======
-        const objetos = await res.json();
-
-        // 3. Filtra somente os que estão em finalizados
-        const filtrados = objetos.filter(obj =>
-          finalizados.includes(obj.obj_id)
-        );
-
->>>>>>> parent of 861e7d2 (Merge branch 'main' of https://github.com/Grinaldi20/3etim-tcc-catchu)
         setReservados(filtrados);
 
       } catch (error) {

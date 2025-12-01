@@ -25,7 +25,8 @@ export default function Categorias() {
     obj_encontrado: 0,
   });
 
-  const [objetos, setObjetos] = useState(objetosMkp);
+  // start empty so mock doesn't flash; we'll populate from API
+  const [objetos, setObjetos] = useState([]);
 
   async function listarObjetos() {
     try {
@@ -86,9 +87,8 @@ export default function Categorias() {
 
 
 
-  useEffect(() => {
-    listarObjetos();
-  }, []);
+  // listarObjetos is available if needed, but we use carregarObjetosFiltrados above
+  // to fetch and normalize items (so no duplicate fetch here).
 
   function abrirModal(item) {
     setItemSelecionado(item);
@@ -112,22 +112,8 @@ export default function Categorias() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  useEffect(() => {
-    async function carregarObjetos() {
-      const resposta = await listarObjetos();
-      const objetos = resposta.data;
-
-      const finalizadosStored = localStorage.getItem("finalizados");
-      const finalizados = finalizadosStored ? JSON.parse(finalizadosStored) : [];
-
-      // 🔥 remove itens que estão "finalizados"
-      const filtrados = objetos.filter((obj) => !finalizados.includes(obj.obj_id));
-
-      setItens(filtrados);
-    }
-
-    carregarObjetos();
-  }, []);
+  // removed duplicate/incorrect effect that used listarObjetos() and setItens.
+  // The fetching/filtering is already handled in carregarObjetosFiltrados above.
 
   return (
     <main className={styles.main}>
