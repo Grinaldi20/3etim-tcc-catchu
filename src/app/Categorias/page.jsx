@@ -362,11 +362,6 @@ export default function Categorias() {
               Reservar
             </button>
 
-            <button>
-            
-              Editar
-            </button>
-
 
 
 
