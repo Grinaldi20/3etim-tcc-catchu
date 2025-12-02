@@ -25,7 +25,7 @@ export default function Categorias() {
     obj_encontrado: 0,
   });
 
-  // start empty so mock doesn't flash; we'll populate from API
+ 
   const [objetos, setObjetos] = useState([]);
 
   async function listarObjetos() {
@@ -87,8 +87,7 @@ export default function Categorias() {
 
 
 
-  // listarObjetos is available if needed, but we use carregarObjetosFiltrados above
-  // to fetch and normalize items (so no duplicate fetch here).
+ 
 
   function abrirModal(item) {
     setItemSelecionado(item);
@@ -112,8 +111,7 @@ export default function Categorias() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // removed duplicate/incorrect effect that used listarObjetos() and setItens.
-  // The fetching/filtering is already handled in carregarObjetosFiltrados above.
+ 
 
   return (
     <main className={styles.main}>

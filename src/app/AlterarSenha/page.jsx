@@ -41,7 +41,7 @@ export default function Dados() {
     }
 
     try {
-      // tenta várias chaves / formatos no localStorage e loga para depuração
+     
       const possibleKeys = ["usuario", "user", "usuarioLogado", "authUser"];
       let usuarioStr = null;
       let foundKey = null;
@@ -50,7 +50,7 @@ export default function Dados() {
         if (v) { usuarioStr = v; foundKey = k; break; }
       }
 
-      // se não encontrou, tenta pegar um id direto (usu_id / id)
+     
       let usu_id = null;
       if (!usuarioStr) {
         const directId = localStorage.getItem("usu_id") || localStorage.getItem("id");
@@ -63,7 +63,7 @@ export default function Dados() {
           return;
         }
       } else {
-        // parsea objeto encontrado
+      
         let usuario = null;
         try {
           usuario = JSON.parse(usuarioStr);
@@ -164,7 +164,7 @@ export default function Dados() {
             className={styles.toggleSenha}
             onClick={() => setMostrar({ ...mostrar, antiga: !mostrar.antiga })}
           >
-            {mostrar.antiga ? "🙈" : "👁️"}
+            {mostrar.antiga ? "🔓" : "🔒"}
           </button>
         </div>
 
@@ -189,7 +189,7 @@ export default function Dados() {
             className={styles.toggleSenha}
             onClick={() => setMostrar({ ...mostrar, nova: !mostrar.nova })}
           >
-            {mostrar.nova ? "🙈" : "👁️"}
+            {mostrar.nova ? "🔓" : "🔒"}
           </button>
         </div>
 
@@ -214,7 +214,7 @@ export default function Dados() {
             className={styles.toggleSenha}
             onClick={() => setMostrar({ ...mostrar, confirmar: !mostrar.confirmar })}
           >
-            {mostrar.confirmar ? "🙈" : "👁️"}
+            {mostrar.confirmar ? "🔓" : "🔒"}
           </button>
         </div>
 

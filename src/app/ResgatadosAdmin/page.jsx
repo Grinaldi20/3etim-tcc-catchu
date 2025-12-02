@@ -126,7 +126,7 @@ async function excluirItem(id) {
   return (
     <div className="main">
       <header className={styles.header}>
-        <Link href="/TelaAdmin">
+        <Link href="/CategoriasAdmin">
           <Image className={styles.img} src="/logo1.png" alt="Logo" width={100} height={100} />
         </Link>
 

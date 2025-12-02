@@ -268,7 +268,7 @@ function marcarComoResgatado(item) {
     <div className={styles.pageRoot}>
       <main className={styles.main}>
         <header className={styles.header}>
-          <Link href="TelaAdmin">
+          <Link href="CategoriasAdmin">
             <Image
               className={styles.img}
               src="/logo1.png"

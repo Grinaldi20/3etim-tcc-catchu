@@ -197,24 +197,10 @@ export default function Feedback() {
 
       {/* TOAST */}
      {toast.show && (
-       <div
-         role="status"
-         aria-live="polite"
-         style={{
-           position: "fixed",
-           top: 20,
-           left: "50%",
-           transform: "translateX(-50%)",
-           zIndex: 9999,
-           padding: "12px 18px",
-           borderRadius: 8,
-           boxShadow: "0 4px 12px rgba(0,0,0,0.12)",
-           color: "#fff",
-           background: toast.type === "success" ? "#16a34a" : "#dc2626",
-           fontWeight: 600,
-         }}
-       >
-         {toast.message}
+       <div className={styles.toast} role="status" aria-live="polite">
+         <div className={`${styles.toastBox} ${toast.type === 'success' ? styles.toastSuccess : styles.toastError}`}>
+           {toast.message}
+         </div>
        </div>
      )}
     </>

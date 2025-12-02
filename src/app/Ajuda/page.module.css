@@ -1,6 +1,6 @@
 
 .pageWrapper {
-  min-height: 100vh;   /* altura mínima tela inteira */
+  min-height: 100vh; 
   background-color: #ffffff;
   font-family: "Poppins", sans-serif;
   display: flex;
@@ -75,11 +75,11 @@ object-fit: contain;
   border-radius: 16px;
   width: 100%;
   max-width: 1000px;
-  display: flex;               /* ativa o flexbox */
-  flex-direction: column;      /* itens ficam em coluna */
-  align-items: center;         /* centraliza horizontalmente */
-  justify-content: center;     /* centraliza verticalmente */
-  text-align: center;          /* centraliza textos */
+  display: flex;           
+  flex-direction: column;     
+  align-items: center;        
+  justify-content: center;    
+  text-align: center;        
   padding: 2rem;  
   box-sizing: border-box;
 
@@ -214,7 +214,7 @@ object-fit: contain;
     background-color: #4B8C8D;
   color: #ffffff;
   padding: 0.7rem;
-  margin-top: auto;   /* faz o rodapé ir para baixo */
+  margin-top: auto;  
   box-shadow: 0 -4px 16px rgba(0,0,0,0.08);
   width: 100%;
 }
@@ -322,7 +322,7 @@ object-fit: contain;
 .whatsappMenu.active {
   opacity: 1;
   pointer-events: auto;
-  transform: translate(10px, -50%); /* movimento suave lateral */
+  transform: translate(10px, -50%); 
 }
 
 .whatsappMenu a {
@@ -345,7 +345,7 @@ object-fit: contain;
   }
 
   .footerInner {
-    flex-direction: column;   /* vira coluna no mobile */
+    flex-direction: column;  
     align-items: center;
     gap: 1.6rem;
   }
@@ -359,9 +359,9 @@ object-fit: contain;
     justify-content: center;
   }
 
-  /* já existia este bloco no seu css — preservei e ampliei */
+ 
   .gap {
-    gap: 2rem;                /* antes era 160% */
+    gap: 2rem;             
     flex-direction: column;
   }
 
@@ -370,7 +370,7 @@ object-fit: contain;
   }
 }
 
-/* Additional responsive rules for Ajuda page */
+
 @media (max-width: 900px) {
   .titulo { font-size: 1.6rem; padding: 8px 24px; margin-bottom: 3.5rem; }
   .card { padding: 1.25rem; }

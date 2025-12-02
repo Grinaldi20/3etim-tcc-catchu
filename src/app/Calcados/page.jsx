@@ -30,22 +30,6 @@ export default function Calcados() {
   const [objetos, setObjetos] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  /*
-   Image handling strategy (aplicado neste arquivo):
-   1) Ao buscar os itens na API, mapeamos o campo `foto` da API para `obj_foto`
-     e guardamos o valor original em `obj_foto_raw`.
-   2) Quando formos renderizar a imagem (card ou modal), damos preferência
-     ao `obj_foto_raw` quando ele for uma URL absoluta (ex.: http://host:port/...).
-     Isso garante que a imagem será carregada exatamente do host/porta
-     que a API retornou.
-   3) Se não houver uma URL absoluta, usamos `normalizeImageSrc` para:
-     - transformar caminhos como `public/objetos/...` em `/objetos/...` (correto para /public)
-     - transformar strings sem protocolo como `localhost:3333/...` em `http://localhost:3333/...`
-     - garantir que retornamos sempre uma string segura para usar em `src`.
-   4) Para evitar problemas com o otimizador do Next (/_next/image) e bugs de proxy,
-     renderizamos imagens dinâmicas usando uma tag `<img>` simples.
-  */
-
   // lista objetos da api por categoria
   // (implementação consolidada mais abaixo; removemos a versão simples para evitar comportamentos duplicados)
 
@@ -213,10 +197,7 @@ export default function Calcados() {
               <h1 className={styles.tituloSecao}>
                 {itemSelecionado.obj_descricao}
               </h1>
-              {/* Use the exact API URL when available (obj_foto_raw) and absolute;
-                  otherwise normalize the value stored in obj_foto so it becomes
-                  a valid path or absolute URL. We use a plain <img> here to avoid
-                  Next's image optimizer for dynamic URLs from the API. */}
+           
               <img
                 src={
                   (itemSelecionado?.obj_foto_raw && /^https?:\/\//i.test(itemSelecionado.obj_foto_raw))
