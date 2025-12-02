@@ -234,6 +234,8 @@ export default function ObjetosGerais() {
           </div>
         )}
 
+</main>
+
   <footer className={styles.footer}>
           <div className={styles.footerInner}>
             <div className={styles.footerBrand}>
@@ -342,7 +344,7 @@ export default function ObjetosGerais() {
             <p>© {new Date().getFullYear()} Catchu. Todos os direitos reservados.</p>
           </div>
         </footer>
-      </main>
+     
     </div>
   );
 }

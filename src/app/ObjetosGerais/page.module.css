@@ -258,7 +258,7 @@
 }
 
 .footer {
-  position: static; /* not fixed anymore */
+margin-top: auto;
   width: 100%;
   background-color: #4B8C8D;
   color: #ffffff;
@@ -266,11 +266,7 @@
   box-shadow: 0 -4px 16px rgba(0,0,0,0.08);
 }
 
-/* ensure footer sticks to bottom when content is short */
-.footer {
-  margin-top: auto;
-  z-index: 1000;
-}
+
 
 .footerInner {
   max-width: 1400px;
