@@ -1,16 +1,16 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, use } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import CardCategoria from "@/components/categorias/card";
 import { normalizeImageSrc } from '@/utils/normalizeImage';
 import styles from "./page.module.css";
-import objetosMkp from "@/mockup/objetos"; 
+// import objetosMkp from "@/mockup/objetos"; (removed - using API data)
 import api from "@/utils/api";
 import axios from "axios";
 
-export default function Categorias() {
+export default function MaterialAdmin() {
   
   const [modalAberto, setModalAberto] = useState(false);
   const [itemSelecionado, setItemSelecionado] = useState({
@@ -25,9 +25,10 @@ export default function Categorias() {
     obj_encontrado: 0,
   });
 
-  const [objetos, setObjetos] = useState(objetosMkp);
+  const [objetos, setObjetos] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  async function listarObjetos() {
+    async function listarObjetos() {
   try {
     const resposta = await axios.get("http://localhost:3333/objetos");
     return resposta.data;
@@ -36,50 +37,42 @@ export default function Categorias() {
     return [];
   }
 }
-  // itens removidos (client-only). Initialize empty on first render to match SSR
-  const [itemsRemovidos, setItemsRemovidos] = useState([]);
-
-  // carregar itemsRemovidos após montagem (evita mismatch entre servidor/cliente)
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    try {
-      const salvo = JSON.parse(localStorage.getItem("itemsRemovidos")) || [];
-      // normalizar para array de strings se estiver armazenado como ids
-      const normalized = Array.isArray(salvo) ? salvo.map(s => (s && s.obj_id) ? String(s.obj_id) : String(s)) : [];
-      setItemsRemovidos(normalized);
-    } catch (err) {
-      console.warn('Falha ao ler itemsRemovidos do localStorage', err);
-    }
-  }, []);
-
-  const removerItem = (id) => {
-    const novos = itemsRemovidos.filter(i => String(i) !== String(id));
-    setItemsRemovidos(novos);
-    localStorage.setItem("itemsRemovidos", JSON.stringify(novos));
-  };
-
-// Estado reativo para finalizados (ids como strings). Start empty to match SSR;
-// load real value after mount to avoid hydration mismatch.
-const [finalizadosState, setFinalizadosState] = useState([]);
-
 useEffect(() => {
-  if (typeof window === 'undefined') return;
-  try {
-    const raw = JSON.parse(localStorage.getItem('finalizados') || '[]');
-    const arr = Array.isArray(raw) ? raw.map(r => String(r)) : [];
-    setFinalizadosState(arr);
-  } catch (err) {
-    console.warn('Falha ao ler finalizados do localStorage', err);
+  if (typeof window !== "undefined") {
+    const salvo = JSON.parse(localStorage.getItem("itemsRemovidos")) || [];
+    setItemsRemovidos(salvo);
   }
 }, []);
+
+const removerItem = (id) => {
+  const novos = itemsRemovidos.filter(i => i.obj_id !== id);
+  setItemsRemovidos(novos);
+  localStorage.setItem("itemsRemovidos", JSON.stringify(novos));
+};
+
+const [itemsRemovidos, setItemsRemovidos] = useState([]);
+
+// Estado reativo para finalizados (ids como strings)
+const [finalizadosState, setFinalizadosState] = useState(() => {
+  if (typeof window === 'undefined') return [];
+  try {
+    const raw = JSON.parse(localStorage.getItem('finalizados') || '[]');
+    return Array.isArray(raw) ? raw.map(r => String(r)) : [];
+  } catch (err) {
+    return [];
+  }
+});
 
 useEffect(() => {
   async function carregarObjetosAdmin() {
     try {
-      const response = await api.get("/objetos");
+      setLoading(true);
+      // Buscar apenas objetos da categoria "Material escolar" para classificar igual à tela pública
+      const response = await api.get('/objetos', { params: { categ_nome: 'Material escolar' } });
 
       if (!response.data || response.data.sucesso !== true) {
-        console.error("Resposta inesperada da API (admin):", response);
+        console.error('Resposta inesperada da API (admin):', response);
+        setObjetos([]);
         return;
       }
 
@@ -97,20 +90,37 @@ useEffect(() => {
         __raw: d,
       }));
 
-      // Itens reservados
-      const stored = localStorage.getItem("carrinho");
-      const carrinho = stored ? JSON.parse(stored) : [];
+      // Ordena por data de publicação (mais recentes primeiro)
+      todos.sort((a, b) => {
+        const da = a.obj_data_publicacao ? new Date(a.obj_data_publicacao) : null;
+        const db = b.obj_data_publicacao ? new Date(b.obj_data_publicacao) : null;
+        if (da && db) return db - da;
+        if (da && !db) return -1;
+        if (!da && db) return 1;
+        return 0;
+      });
 
-      // Filtra os que NÃO estão reservados, NÃO estão removidos e NÃO estão finalizados
-      const filtrados = todos.filter((item) =>
-        !carrinho.some((r) => String(r.obj_id) === String(item.obj_id)) &&
-        !itemsRemovidos.includes(String(item.obj_id)) &&
-        !finalizadosState.includes(String(item.obj_id))
+      // Itens reservados e finalizados
+      const carrStored = localStorage.getItem('carrinho');
+      const carrinho = carrStored ? JSON.parse(carrStored) : [];
+
+      const fStored = localStorage.getItem('finalizados');
+      const finalizados = fStored ? JSON.parse(fStored) : [];
+
+      // Filtra: remover itens que estão em carrinho OU finalizados OU removidos
+      const filtrados = todos.filter(
+        (item) =>
+          !carrinho.some((r) => String(r.obj_id) === String(item.obj_id)) &&
+          !finalizados.some((fid) => String(fid) === String(item.obj_id)) &&
+          !itemsRemovidos.includes(String(item.obj_id))
       );
 
       setObjetos(filtrados);
     } catch (err) {
-      console.error("Erro ao carregar objetos admin:", err);
+      console.error('Erro ao carregar objetos admin:', err);
+      setObjetos([]);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -144,49 +154,9 @@ function excluirItem(id) {
 
 
 
-  // carregar objetos admin e reagir a changes em itemsRemovidos/finalizados
   useEffect(() => {
-    async function carregarObjetosAdminInit() {
-      try {
-        const response = await api.get("/objetos");
-
-        if (!response.data || response.data.sucesso !== true) {
-          console.error("Resposta inesperada da API (admin):", response);
-          return;
-        }
-
-        const todos = response.data.dados.map((d) => ({
-          obj_id: d.id ?? d.obj_id,
-          categ_id: d.categoria_id ?? d.categ_id ?? null,
-          usu_id: d.usuario_id ?? d.usu_id ?? null,
-          obj_descricao: d.descricao ?? d.obj_descricao ?? '',
-          obj_foto: d.foto ?? d.obj_foto ?? '',
-          obj_foto_raw: d.foto ?? null,
-          obj_local_encontrado: d.local_encontrado ?? d.obj_local_encontrado ?? '',
-          obj_data_publicacao: d.data_publicacao ?? d.obj_data_publicacao ?? '',
-          obj_status: d.status ?? d.obj_status ?? '',
-          obj_encontrado: d.encontrado ?? d.obj_encontrado ?? 0,
-          __raw: d,
-        }));
-
-        const stored = localStorage.getItem("carrinho");
-        const carrinho = stored ? JSON.parse(stored) : [];
-
-        const filtrados = todos.filter((item) =>
-          !carrinho.some((r) => String(r.obj_id) === String(item.obj_id)) &&
-          !itemsRemovidos.includes(String(item.obj_id)) &&
-          !finalizadosState.includes(String(item.obj_id))
-        );
-
-        setObjetos(filtrados);
-      } catch (err) {
-        console.error("Erro ao carregar objetos admin:", err);
-      }
-    }
-
-    // carregar sempre que itemsRemovidos ou finalizadosState mudarem
-    if (typeof window !== 'undefined') carregarObjetosAdminInit();
-  }, [itemsRemovidos, finalizadosState]);
+    listarObjetos();
+  }, []);
 
   function abrirModal(item) {
     setItemSelecionado(item);
@@ -277,13 +247,16 @@ function marcarComoResgatado(item) {
     console.error('Erro ao marcar como resgatado:', err);
   }
 }
-  // remover itens que estejam em 'reservados' (se existir) após montar
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+  listarObjetos().then(() => {
     const stored = localStorage.getItem('reservados');
     const reservados = stored ? JSON.parse(stored) : [];
-    setObjetos(prev => prev.filter(obj => !reservados.some(r => String(r.obj_id) === String(obj.obj_id))));
-  }, []);
+
+    setObjetos(prev =>
+      prev.filter(obj => !reservados.some(r => r.obj_id === obj.obj_id))
+    );
+  });
+}, []);
 
   // 🔥 salvar ID no "itensFinalizados"
 
@@ -293,8 +266,8 @@ function marcarComoResgatado(item) {
 
 
   return (
-    <main className={styles.main}>
-      <div className={styles.Gradiente}>
+    <div className={styles.pageRoot}>
+      <main className={styles.main}>
         <header className={styles.header}>
           <Link href="TelaAdmin">
             <Image
@@ -332,105 +305,25 @@ function marcarComoResgatado(item) {
             </a>
           </div>
         </header>
-
-        <h1 className={styles.titulo}>Categorias</h1>
-        
-
-        <div className={styles.CardsCarrocel}>
-          <a href="/MaterialAdmin">
-            <div className={styles.MaterialEscolar}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path d="M5 13v-3h4v.5a.5.5 0 0 0 1 0V10h1v3z" />
-                <path d="M6 2v.341C3.67 3.165 2 5.388 2 8v5.5A2.5 2.5 0 0 0 4.5 16h7a2.5 2.5 0 0 0 2.5-2.5V8a6 6 0 0 0-4-5.659V2a2 2 0 1 0-4 0m2-1a1 1 0 0 1 1 1v.083a6 6 0 0 0-2 0V2a1 1 0 0 1 1-1m0 3a4 4 0 0 1 3.96 3.43.5.5 0 1 1-.99.14 3 3 0 0 0-5.94 0 .5.5 0 1 1-.99-.14A4 4 0 0 1 8 4M4.5 9h7a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 .5-.5" />
-              </svg>
-              <h2 className={styles.h2}>Material Escolar</h2>
-            </div>
-          </a>
-
-          <a href="/RoupasAdmin">
-            <div className={styles.Roupas}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24px"
-                viewBox="0 -960 960 960"
-                width="24px"
-                fill="#fff"
-              >
-                <path d="m240-522-40 22q-14 8-30 4t-24-18L66-654q-8-14-4-30t18-24l230-132h70q9 0 14.5 5.5T400-820v20q0 33 23.5 56.5T480-720q33 0 56.5-23.5T560-800v-20q0-9 5.5-14.5T580-840h70l230 132q14 8 18 24t-4 30l-80 140q-8 14-23.5 17.5T760-501l-40-20v361q0 17-11.5 28.5T680-120H280q-17 0-28.5-11.5T240-160v-362Z" />
-              </svg>
-              <h2 className={styles.h2}>Roupas</h2>
-            </div>
-          </a>
-
-          <a href="/CalcadosAdmin">
-            <div className={styles.Sapatos}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24px"
-                viewBox="0 -960 960 960"
-                width="24px"
-                fill="#fff"
-              >
-                <path d="M216-580H88q4-14 10.5-26.5T114-631l154-206q17-23 45.5-30.5T368-861l28 14q21 11 32.5 30t11.5 42v84l74-19q30-8 58 7.5t38 44.5l65 196 170 170q20 20 27.5 43t7.5 49q0 37-20 66t-52 43L354-525q-29-27-64-41t-74-14ZM566-80q-30 0-57-11t-50-31L134-417q-19-17-31-38.5T86-500h130q23 0 44.5 8t38.5 25L703-80H566Z" />
-              </svg>
-              <h2 className={styles.h2}>Calçados</h2>
-            </div>
-          </a>
-
-          <a href="/ObjetosAdmin">
-            <div className={styles.ObjetosGerais}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  fillRule="evenodd" d="M15.528 2.973a.75.75 0 0 1 .472.696v8.662a.75.75 0 0 1-.472.696l-7.25 2.9a.75.75 0 0 1-.557 0l-7.25-2.9A.75.75 0 0 1 0 12.331V3.669a.75.75 0 0 1 .471-.696L7.443.184l.004-.001.274-.11a.75.75 0 0 1 .558 0l.274.11.004.001zm-1.374.527L8 5.962 1.846 3.5 1 3.839v.4l6.5 2.6v7.922l.5.2.5-.2V6.84l6.5-2.6v-.4l-.846-.339Z"
-                />
-              </svg>
-              <h2 className={styles.h2}>Objetos Gerais</h2>
-            </div>
-          </a>
-
-          <a href="/ResgatadosAdmin">
-            <div className={styles.Resgatados}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="icon"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0" />
-              </svg>
-              <h2 className={styles.h2}>Resgatados</h2>
-            </div>
-          </a>
+     <div className={styles.centro}>
+          <h1 className={styles.h1}>Material Escolar</h1>
         </div>
-      </div>
 
-      <div className={styles.CardsItens}>
-      {objetos
-  ?.filter((obj) => !finalizadosState.includes(String(obj.obj_id)))
-  .map((item) => (
-    <CardCategoria 
-      key={item.obj_id} 
-      obj={item} 
-      onClick={() => abrirModal(item)} 
-    />
-  ))}
-      </div>
+      {loading ? (
+        <div className={styles.CardsItens}>
+          <p>Carregando...</p>
+        </div>
+      ) : (
+        <div className={styles.CardsItens}>
+          {objetos.map((item) => (
+            <CardCategoria
+              key={item.obj_id}
+              obj={item}
+              onClick={() => abrirModal(item)}
+            />
+          ))}
+        </div>
+      )}
 
       {/* Modal */}
       {modalAberto && (
@@ -490,6 +383,8 @@ function marcarComoResgatado(item) {
           </div>
         </div>
       )}
+
+      </main>
 
       {/* Footer */}
       <footer className={styles.footer}>
@@ -583,7 +478,7 @@ function marcarComoResgatado(item) {
         <div className={styles.footerBottom}>
           <p>© {new Date().getFullYear()} Catchu. Todos os direitos reservados.</p>
         </div>
-      </footer>
-    </main>
+        </footer>
+      </div>
   );
 }

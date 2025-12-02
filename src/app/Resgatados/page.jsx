@@ -6,6 +6,7 @@ import Link from "next/link";
 import CardCategoria from "@/components/categorias/card2";
 import styles from "./page.module.css";
 import objetos from "@/mockup/objetos";
+import { normalizeImageSrc } from '@/utils/normalizeImage';
 
 export default function MaterialEscolar() {
   const [modalAberto, setModalAberto] = useState(false);
@@ -35,7 +36,17 @@ export default function MaterialEscolar() {
   }, []);
 
   function abrirModal(item) {
-    setItemSelecionado(item);
+    const normalized = {
+      obj_id: item.obj_id ?? item.id,
+      obj_descricao: item.obj_descricao ?? item.descricao ?? item.nome ?? '',
+      obj_foto: item.obj_foto ?? item.foto ?? item.src ?? '',
+      obj_foto_raw: item.obj_foto_raw ?? item.foto ?? null,
+      obj_local_encontrado: item.obj_local_encontrado ?? item.local_encontrado ?? '',
+      obj_data_publicacao: item.obj_data_publicacao ?? item.data_publicacao ?? '',
+      obj_status: item.obj_status ?? item.status ?? '',
+      ...item,
+    };
+    setItemSelecionado(normalized);
     setModalAberto(true);
   }
 
@@ -61,7 +72,24 @@ useEffect(() => {
       const allObjects = Array.isArray(json) ? json : Array.isArray(json?.dados) ? json.dados : [];
 
       const finalSet = new Set((finalizados || []).map(id => String(id)));
-      const filtrados = allObjects.filter(obj => finalSet.has(String(obj?.obj_id ?? obj?.id ?? '')));
+
+      // normalize API objects into the shape used by cards/modals
+      const filtrados = allObjects
+        .filter(obj => finalSet.has(String(obj?.obj_id ?? obj?.id ?? '')))
+        .map((d) => ({
+          obj_id: d.id ?? d.obj_id,
+          categ_id: d.categoria_id ?? d.categ_id ?? null,
+          usu_id: d.usuario_id ?? d.usu_id ?? null,
+          obj_descricao: d.descricao ?? d.obj_descricao ?? d.nome ?? '',
+          foto: d.foto ?? d.obj_foto ?? '',
+          obj_foto: d.foto ?? d.obj_foto ?? '',
+          obj_foto_raw: d.foto ?? null,
+          obj_local_encontrado: d.local_encontrado ?? d.obj_local_encontrado ?? '',
+          obj_data_publicacao: d.data_publicacao ?? d.obj_data_publicacao ?? '',
+          obj_status: d.status ?? d.obj_status ?? '',
+          obj_encontrado: d.encontrado ?? d.obj_encontrado ?? 0,
+          __raw: d,
+        }));
 
       setReservados(filtrados);
     } catch (err) {
@@ -155,7 +183,7 @@ useEffect(() => {
                 {itemSelecionado.obj_descricao}
               </h1>
               <Image
-                src={itemSelecionado.obj_foto}
+                src={normalizeImageSrc(itemSelecionado.obj_foto ?? itemSelecionado.foto)}
                 alt={itemSelecionado.obj_descricao}
                 width={250}
                 height={250}

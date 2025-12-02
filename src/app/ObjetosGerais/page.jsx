@@ -107,7 +107,7 @@ export default function ObjetosGerais() {
   }, []);
 
   return (
-    <div className="main">
+    <div className={styles.pageRoot}>
       <header className={styles.header}>
         <Link href="TelaPrincipal">
           <Image
@@ -144,7 +144,7 @@ export default function ObjetosGerais() {
         </div>
       </header>
 
-      <main className={styles.main}>
+  <main className={styles.main}>
         <div className={styles.centro}>
           <h1 className={styles.h1}>Objetos Gerais</h1>
         </div>
@@ -234,7 +234,7 @@ export default function ObjetosGerais() {
           </div>
         )}
 
-        <footer className={styles.footer}>
+  <footer className={styles.footer}>
           <div className={styles.footerInner}>
             <div className={styles.footerBrand}>
               <Link href="/">
