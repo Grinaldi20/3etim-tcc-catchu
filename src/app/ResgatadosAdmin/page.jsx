@@ -7,6 +7,7 @@ import Link from "next/link";
 import CardCategoria from "@/components/categorias/card2";
 import styles from "./page.module.css";
 import axios from "axios";
+import { normalizeImageSrc } from '@/utils/normalizeImage';
 
 export default function ReservadosAdmin() {
   const [modalAberto, setModalAberto] = useState(false);
@@ -15,49 +16,75 @@ export default function ReservadosAdmin() {
   const [menuVisible, setMenuVisible] = useState(false);
   const whatsappRef = useRef(null);
 
+  // Helper para formatar datas (aceita YYYY-MM-DD ou ISO)
+  const formatDate = (raw) => {
+    if (!raw) return '-';
+    try {
+      // se veio no formato YYYY-MM-DD ou YYYY-MM-DDT... -> pegar parte da data
+      const datePart = String(raw).split('T')[0];
+      const parts = datePart.split('-');
+      if (parts.length === 3) {
+        const [y, m, d] = parts;
+        return `${d.padStart(2, '0')}/${m.padStart(2, '0')}/${y}`;
+      }
+      const dt = new Date(raw);
+      if (isNaN(dt)) return String(raw);
+      const dd = String(dt.getDate()).padStart(2, '0');
+      const mm = String(dt.getMonth() + 1).padStart(2, '0');
+      const yy = dt.getFullYear();
+      return `${dd}/${mm}/${yy}`;
+    } catch (e) {
+      return String(raw);
+    }
+  };
+
   // 🔥 CARREGAR OS ITENS RESERVADOS DO LOCALSTORAGE
   useEffect(() => {
-    async function carregarResgatados() {
+    function carregarResgatados() {
       try {
-        // 1. Pega IDs finalizados
-        const fStored = localStorage.getItem("finalizados");
+        // Prioridade: se há registros detalhados em 'resgatados', use-os
+        const raw = localStorage.getItem('resgatados');
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          // parsed é uma lista de objetos { obj_id, nome_retirante, data_retirada, item }
+          // Normalizamos para o formato que a lista espera: manter o objeto original dentro.
+          const list = parsed.map(r => {
+            const base = r.item || {};
+            return {
+              ...base,
+              obj_id: r.obj_id ?? base.obj_id ?? base.id,
+              nome_retirante: r.nome_retirante,
+              data_retirada: r.data_retirada
+            };
+          });
+          setReservados(list);
+          return;
+        }
+
+        // Fallback: usar finalizados + API (comportamento antigo)
+        const fStored = localStorage.getItem('finalizados');
         const finalizados = fStored ? JSON.parse(fStored) : [];
 
-        if (finalizados.length === 0) {
+        if (!finalizados || finalizados.length === 0) {
           setReservados([]);
           return;
         }
 
-        // 2. Busca todos os objetos do banco
-        const res = await fetch("http://localhost:3333/objetos");
-        const json = await res.json();
-
-        /*
-          A API pode retornar um array diretamente ou um objeto com a forma:
-            { sucesso: true, dados: [ ... ] }
-          Se fizermos `const objetos = await res.json()` e assumirmos que é um
-          array, pode ocorrer `filter is not a function` quando for um objeto.
-          Então normalizamos para `allObjects` que será sempre um array.
-        */
-        const allObjects = Array.isArray(json)
-          ? json
-          : Array.isArray(json?.dados)
-          ? json.dados
-          : [];
-
-        // 3. Filtra somente os que estão em finalizados
-        // Normaliza ids para string para evitar problema de tipos
-        const finalizadosSet = new Set((finalizados || []).map((id) => String(id)));
-
-        const filtrados = allObjects.filter((obj) => {
-          const objId = String(obj?.obj_id ?? obj?.id ?? "");
-          return finalizadosSet.has(objId);
-        });
-
-        setReservados(filtrados);
+        fetch('http://localhost:3333/objetos')
+          .then(res => res.json())
+          .then(json => {
+            const allObjects = Array.isArray(json) ? json : Array.isArray(json?.dados) ? json.dados : [];
+            const finalizadosSet = new Set((finalizados || []).map(id => String(id)));
+            const filtrados = allObjects.filter(obj => finalizadosSet.has(String(obj?.obj_id ?? obj?.id ?? '')));
+            setReservados(filtrados);
+          })
+          .catch(err => {
+            console.error('Erro ao carregar objetos finalizados (fallback):', err);
+            setReservados([]);
+          });
 
       } catch (error) {
-        console.error("Erro ao carregar objetos finalizados:", error);
+        console.error('Erro ao carregar resgatados:', error);
         setReservados([]);
       }
     }
@@ -110,7 +137,19 @@ async function excluirItem(id) {
     }
 
     // 🔥 4) Remove da tela imediatamente
-    setReservados((prev) => prev.filter((obj) => obj.obj_id !== id));
+    setReservados((prev) => prev.filter((obj) => String(obj.obj_id) !== String(id)));
+
+    // 🔥 Também remove de localStorage.resgatados caso exista
+    try {
+      const raw = localStorage.getItem('resgatados');
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        const filtered = parsed.filter(r => String(r.obj_id) !== String(id));
+        localStorage.setItem('resgatados', JSON.stringify(filtered));
+      }
+    } catch (e) {
+      console.warn('Falha ao atualizar localStorage.resgatados:', e);
+    }
 
     // 🔥 5) Fecha modal
     setModalAberto(false);
@@ -155,11 +194,13 @@ async function excluirItem(id) {
         
         <div className={styles.CardsItens}>
           {reservados.map((item) => (
-            <CardCategoria
-              key={item.obj_id}
-              obj={item}
-              onClick={() => abrirModal(item)}
-            />
+            <div key={item.obj_id} className={styles.resgatadoCard}>
+              <CardCategoria
+                obj={item}
+                onClick={() => abrirModal(item)}
+              />
+              {/* Observação: nome_retirante e data_retirada são mostrados APENAS no modal do item. */}
+            </div>
           ))}
 
           {reservados.length === 0 && (
@@ -179,21 +220,28 @@ async function excluirItem(id) {
               <h1 className={styles.tituloSecao}>{itemSelecionado.obj_descricao}</h1>
 
               <img
-                src={
-                  itemSelecionado.foto ||
-                  (itemSelecionado.obj_foto
-                    ? `http://localhost:3333/uploads/Objetos/${itemSelecionado.obj_foto}`
-                    : `/uploads/Objetos/sem.png`)
-                }
+                src={normalizeImageSrc(
+                  // Tenta várias propriedades que podem conter a imagem (API antiga/novas snapshots)
+                  itemSelecionado.obj_foto_raw ??
+                  itemSelecionado.foto ??
+                  (itemSelecionado.obj_foto ? `http://localhost:3333/uploads/Objetos/${itemSelecionado.obj_foto}` : null) ??
+                  itemSelecionado.url ??
+                  itemSelecionado.image ??
+                  null
+                )}
                 alt={itemSelecionado.obj_descricao}
                 width={250}
                 height={250}
                 style={{ objectFit: 'contain' }}
               />
 
-              <p><strong>Encontrada dia:</strong> {itemSelecionado.obj_data_publicacao}</p>
-              <p><strong>Local:</strong> {itemSelecionado.obj_local_encontrado}</p>
-              <p><strong>Classificação:</strong> {itemSelecionado.obj_status}</p>
+              {/* Ordem solicitada: Encontrado dia, local, Data de retirada, retirado por */}
+              <p><strong>Encontrada dia:</strong> {itemSelecionado.obj_data_publicacao || '-'}</p>
+              <p><strong>Local:</strong> {itemSelecionado.obj_local_encontrado || '-'}</p>
+              <p><strong>Data retirada:</strong> {formatDate(itemSelecionado.data_retirada)}</p>
+              <p><strong>Retirado por:</strong> {itemSelecionado.nome_retirante || '-'}</p>
+
+              {/* Não exibimos a classificação para itens resgatados (foi removida ao salvar) */}
 
               {/* 🔥 EXCLUIR DEFINITIVO */}
               

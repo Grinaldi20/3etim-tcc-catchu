@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
 import { useRouter } from "next/navigation";
@@ -34,8 +34,8 @@ export default function Postagem() {
   };
 
   const handlePublicar = async () => {
-    if (!imagem) return alert("Selecione uma imagem!");
-    if (!classificacao) return alert("Selecione a classificação!");
+    if (!imagem) return showToast('error', 'Selecione uma imagem!');
+    if (!classificacao) return showToast('error', 'Selecione a classificação!');
 
     try {
       const formData = new FormData();
@@ -59,7 +59,7 @@ export default function Postagem() {
       const json = await res.json();
 
       if (json.sucesso) {
-        alert("✅ Publicado com sucesso!");
+        showToast('success', 'Publicado com sucesso!');
         setImagem(null);
         setPreview(null);
         setClassificacao("");
@@ -67,13 +67,20 @@ export default function Postagem() {
         setLocal("");
         setData("");
       } else {
-        alert("❌ Erro: " + json.mensagem);
+        showToast('error', `Erro: ${json.mensagem}`);
       }
 
     } catch (error) {
       console.error(error);
-      alert("Erro na conexão com a API");
+      showToast('error', 'Erro na conexão com a API');
     }
+  };
+
+  // Toast / modal de feedback
+  const [toast, setToast] = useState({ visible: false, type: 'success', message: '' });
+  const showToast = (type, message, duration = 2800) => {
+    setToast({ visible: true, type, message });
+    setTimeout(() => setToast({ visible: false, type, message: '' }), duration);
   };
 
   return (
@@ -195,6 +202,29 @@ export default function Postagem() {
           </form>
         </div>
       </div>
+
+      {toast.visible && (
+        <div className={styles.toastOverlay}>
+          <div className={`${styles.toastCard} ${toast.type === 'success' ? styles.toastSuccess : styles.toastError}`}>
+            <div className={styles.toastIcon}>
+              {toast.type === 'success' ? (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 6L9 17L4 12" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              ) : (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 9v4" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M12 17h.01" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              )}
+            </div>
+            <div className={styles.toastBody}>
+              <div className={styles.toastTitle}>{toast.type === 'success' ? 'Sucesso' : 'Erro'}</div>
+              <div className={styles.toastMessage}>{toast.message}</div>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }

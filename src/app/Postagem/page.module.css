@@ -253,3 +253,58 @@
     .ImgMaior { width: 220px; height: 220px; }
 }
 
+/* Toast / centered feedback modal */
+.toastOverlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    pointer-events: none; /* permite clicar fora sem bloquear, toast itself will accept events */
+}
+.toastCard {
+    pointer-events: auto;
+    min-width: 260px;
+    max-width: 90%;
+    background: linear-gradient(135deg, #ffffff 0%, #f7fffd 100%);
+    border-radius: 12px;
+    padding: 1.2rem 1.6rem;
+    box-shadow: 0 12px 30px rgba(6,57,54,0.18);
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+    border: 1px solid rgba(14,101,103,0.08);
+}
+.toastIcon {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+.toastSuccess .toastIcon {
+    background: linear-gradient(180deg, #0E6567, #4B8C8D);
+    color: #fff;
+}
+.toastError .toastIcon {
+    background: linear-gradient(180deg, #d9534f, #c0352b);
+    color: #fff;
+}
+.toastBody {
+    display: flex;
+    flex-direction: column;
+}
+.toastTitle {
+    font-weight: 700;
+    color: #063936;
+    font-size: 1.4rem;
+}
+.toastMessage {
+    color: #274544;
+    font-size: 1.2rem;
+    margin-top: 0.15rem;
+}
+

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { useRouter } from 'next/navigation';
 import Image from "next/image";
 import Link from "next/link";
 import CardCategoria from "@/components/categorias/card";
@@ -11,6 +12,7 @@ import api from "@/utils/api";
 import axios from "axios";
 
 export default function Categorias() {
+  const router = useRouter();
   
   const [modalAberto, setModalAberto] = useState(false);
   const [itemSelecionado, setItemSelecionado] = useState({
@@ -26,6 +28,7 @@ export default function Categorias() {
   });
 
   const [objetos, setObjetos] = useState(objetosMkp);
+  const [nomeRetirante, setNomeRetirante] = useState("");
 
   async function listarObjetos() {
   try {
@@ -239,43 +242,62 @@ const handleReservar = (item) => {
 function marcarComoResgatado(item) {
   if (typeof window === 'undefined' || !item) return;
 
-  try {
-    const idStr = String(item.obj_id ?? item.id ?? item.objId ?? '');
-
-    // salvar apenas o ID em `finalizados`
-    const finalizados = JSON.parse(localStorage.getItem('finalizados')) || [];
-    const already = finalizados.some(f => String(f) === idStr);
-    if (!already) {
-      finalizados.push(item.obj_id);
-      localStorage.setItem('finalizados', JSON.stringify(finalizados));
-      // atualizar estado reativo para atualizar a UI imediatamente
-      setFinalizadosState(prev => prev.includes(idStr) ? prev : [...prev, idStr]);
-    }
-
-    // remover do carrinho se existir
-    const storedCarr = localStorage.getItem('carrinho');
-    if (storedCarr) {
-      const carrinho = JSON.parse(storedCarr).filter(c => String(c.obj_id) !== idStr);
-      localStorage.setItem('carrinho', JSON.stringify(carrinho));
-    }
-
-    // Não adicionamos mais ao 'carrinho' — carrinho é somente para reservas feitas pelo usuário.
-    // O admin escreve apenas em `finalizados` (ids) para que a tela de Resgatados mostre os itens.
-
-    // remover de qualquer lista local de "reservadosAdmin" (se usada)
-    const key = 'reservadosAdmin';
-    const stored = localStorage.getItem(key);
-    if (stored) {
-      const arr = JSON.parse(stored).filter(a => String(a.obj_id) !== idStr);
-      localStorage.setItem(key, JSON.stringify(arr));
-    }
-
-    // atualizar UI local
-    setObjetos(prev => prev.filter(i => String(i.obj_id) !== idStr));
-    setModalAberto(false);
-  } catch (err) {
-    console.error('Erro ao marcar como resgatado:', err);
+  if (!nomeRetirante.trim()) {
+    alert("Digite o nome de quem retirou o item.");
+    return;
   }
+
+    try {
+      const id = String(item.obj_id);
+
+      const dataAtual = new Date().toISOString().split("T")[0]; // formato: YYYY-MM-DD
+
+      // criar um snapshot do item sem a classificação (obj_status) antes de salvar
+      const itemSnapshot = {
+        ...item,
+        obj_status: '' // remove a classificação quando for para Resgatados
+      };
+
+      const novoResgatado = {
+        obj_id: id,
+        nome_retirante: nomeRetirante,
+        data_retirada: dataAtual,
+        // snapshot do item para referência (sem classificação)
+        item: itemSnapshot
+      };
+
+      // --- salvar registro detalhado em 'resgatados' (lista de objetos) ---
+      const resgatados = JSON.parse(localStorage.getItem('resgatados')) || [];
+      const jaResgatado = resgatados.some(r => String(r.obj_id) === id);
+      if (!jaResgatado) {
+        resgatados.push(novoResgatado);
+        localStorage.setItem('resgatados', JSON.stringify(resgatados));
+      }
+
+      // --- manter 'finalizados' como lista de ids (compatível com filtro existente) ---
+      const finalizados = JSON.parse(localStorage.getItem('finalizados')) || [];
+      if (!finalizados.some(fid => String(fid) === id)) {
+        finalizados.push(id);
+        localStorage.setItem('finalizados', JSON.stringify(finalizados));
+        setFinalizadosState(prev => [...prev, id]);
+      }
+
+      // remove do carrinho
+      const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+      const novoCarrinho = carrinho.filter(c => String(c.obj_id) !== id);
+      localStorage.setItem('carrinho', JSON.stringify(novoCarrinho));
+
+      // remove da tela
+      setObjetos(prev => prev.filter(i => String(i.obj_id) !== id));
+
+      setNomeRetirante('');
+      // mantemos o modal fechado mas NÃO redirecionamos automaticamente
+      // O admin poderá navegar manualmente para /ResgatadosAdmin quando desejar.
+      setModalAberto(false);
+
+    } catch (err) {
+      console.error('Erro ao marcar como resgatado:', err);
+    }
 }
   // remover itens que estejam em 'reservados' (se existir) após montar
   useEffect(() => {
@@ -479,6 +501,13 @@ function marcarComoResgatado(item) {
               {itemSelecionado.obj_status}
             </p>
     
+           <input
+  type="text"
+  placeholder="Nome de quem retirou"
+  value={nomeRetirante}
+  onChange={(e) => setNomeRetirante(e.target.value)}
+  className={styles.input}
+/>
 
              <button
                className={styles.excluirBtn}
@@ -486,6 +515,8 @@ function marcarComoResgatado(item) {
              >
                Já Resgatado
              </button>
+
+        
 
           </div>
         </div>

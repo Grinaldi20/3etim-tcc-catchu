@@ -370,6 +370,33 @@
    font-weight: 150;
 }
 
+/* Estilo do input usado no modal (Classe: .input) */
+.input {
+  width: calc(100% - 4rem);
+  max-width: 420px;
+  padding: 0.9rem 1.2rem;
+  border-radius: 10px;
+  border: 2px solid rgba(14,101,103,0.12);
+  background: rgba(255,255,255,0.95);
+  color: #063936; /* tom escuro que combina com a paleta */
+  font-size: 1.6rem;
+  outline: none;
+  transition: box-shadow 0.18s ease, transform 0.08s ease, border-color 0.18s ease;
+  margin: 0.8rem auto;
+  display: block;
+  box-shadow: 0 2px 8px rgba(4,30,30,0.04);
+}
+
+.input::placeholder {
+  color: rgba(6,57,54,0.45);
+}
+
+.input:focus {
+  border-color: #0E6567; /* cor principal do site */
+  box-shadow: 0 10px 30px rgba(14,101,103,0.14);
+  transform: translateY(-1px);
+}
+
 
 .excluirBtn {
   border-radius: 10px;

@@ -25,6 +25,27 @@ export default function MaterialEscolar() {
   const [menuVisible, setMenuVisible] = useState(false);
   const whatsappRef = useRef(null);
 
+  // Helper para formatar datas (aceita YYYY-MM-DD ou ISO)
+  const formatDate = (raw) => {
+    if (!raw) return '-';
+    try {
+      const datePart = String(raw).split('T')[0];
+      const parts = datePart.split('-');
+      if (parts.length === 3) {
+        const [y, m, d] = parts;
+        return `${d.padStart(2, '0')}/${m.padStart(2, '0')}/${y}`;
+      }
+      const dt = new Date(raw);
+      if (isNaN(dt)) return String(raw);
+      const dd = String(dt.getDate()).padStart(2, '0');
+      const mm = String(dt.getMonth() + 1).padStart(2, '0');
+      const yy = dt.getFullYear();
+      return `${dd}/${mm}/${yy}`;
+    } catch (e) {
+      return String(raw);
+    }
+  };
+
   useEffect(() => {
     function handleClickOutside(event) {
       if (whatsappRef.current && !whatsappRef.current.contains(event.target)) {
@@ -55,10 +76,28 @@ export default function MaterialEscolar() {
   }
 
   const [reservados, setReservados] = useState([]);
-
 useEffect(() => {
-  async function loadFinalizados() {
+  function carregarResgatados() {
     try {
+      const raw = localStorage.getItem('resgatados');
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        // parsed é lista de { obj_id, nome_retirante, data_retirada, item }
+        const list = parsed.map(r => {
+          const base = r.item || {};
+          return {
+            ...base,
+            obj_id: r.obj_id ?? base.obj_id ?? base.id,
+            nome_retirante: r.nome_retirante,
+            data_retirada: r.data_retirada,
+            obj_foto_raw: base.obj_foto_raw ?? base.foto ?? null,
+          };
+        });
+        setReservados(list);
+        return;
+      }
+
+      // Fallback: comportamento antigo com finalizados + API
       const fStored = localStorage.getItem('finalizados');
       const finalizados = fStored ? JSON.parse(fStored) : [];
 
@@ -67,41 +106,43 @@ useEffect(() => {
         return;
       }
 
-      const res = await fetch('http://localhost:3333/objetos');
-      const json = await res.json();
-      const allObjects = Array.isArray(json) ? json : Array.isArray(json?.dados) ? json.dados : [];
+      fetch('http://localhost:3333/objetos')
+        .then(res => res.json())
+        .then(json => {
+          const allObjects = Array.isArray(json) ? json : Array.isArray(json?.dados) ? json.dados : [];
+          const finalSet = new Set((finalizados || []).map(id => String(id)));
+          const filtrados = allObjects.filter(obj => finalSet.has(String(obj?.obj_id ?? obj?.id ?? '')))
+            .map((d) => ({
+              obj_id: d.id ?? d.obj_id,
+              categ_id: d.categoria_id ?? d.categ_id ?? null,
+              usu_id: d.usuario_id ?? d.usu_id ?? null,
+              obj_descricao: d.descricao ?? d.obj_descricao ?? d.nome ?? '',
+              foto: d.foto ?? d.obj_foto ?? '',
+              obj_foto: d.foto ?? d.obj_foto ?? '',
+              obj_foto_raw: d.foto ?? null,
+              obj_local_encontrado: d.local_encontrado ?? d.obj_local_encontrado ?? '',
+              obj_data_publicacao: d.data_publicacao ?? d.obj_data_publicacao ?? '',
+              obj_status: d.status ?? d.obj_status ?? '',
+              obj_encontrado: d.encontrado ?? d.obj_encontrado ?? 0,
+              __raw: d,
+            }));
+          setReservados(filtrados);
+        })
+        .catch(err => {
+          console.error('Erro ao carregar objetos finalizados (fallback):', err);
+          setReservados([]);
+        });
 
-      const finalSet = new Set((finalizados || []).map(id => String(id)));
-
-      // normalize API objects into the shape used by cards/modals
-      const filtrados = allObjects
-        .filter(obj => finalSet.has(String(obj?.obj_id ?? obj?.id ?? '')))
-        .map((d) => ({
-          obj_id: d.id ?? d.obj_id,
-          categ_id: d.categoria_id ?? d.categ_id ?? null,
-          usu_id: d.usuario_id ?? d.usu_id ?? null,
-          obj_descricao: d.descricao ?? d.obj_descricao ?? d.nome ?? '',
-          foto: d.foto ?? d.obj_foto ?? '',
-          obj_foto: d.foto ?? d.obj_foto ?? '',
-          obj_foto_raw: d.foto ?? null,
-          obj_local_encontrado: d.local_encontrado ?? d.obj_local_encontrado ?? '',
-          obj_data_publicacao: d.data_publicacao ?? d.obj_data_publicacao ?? '',
-          obj_status: d.status ?? d.obj_status ?? '',
-          obj_encontrado: d.encontrado ?? d.obj_encontrado ?? 0,
-          __raw: d,
-        }));
-
-      setReservados(filtrados);
-    } catch (err) {
-      console.error('Erro ao carregar finalizados em Resgatados:', err);
+    } catch (error) {
+      console.error('Erro ao carregar resgatados:', error);
       setReservados([]);
     }
   }
 
-  loadFinalizados();
+  carregarResgatados();
 
   function handleStorage(e) {
-    if (e.key === 'finalizados' || e.key === null) loadFinalizados();
+    if (e.key === 'resgatados' || e.key === 'finalizados' || e.key === null) carregarResgatados();
   }
 
   window.addEventListener('storage', handleStorage);
@@ -183,20 +224,26 @@ useEffect(() => {
                 {itemSelecionado.obj_descricao}
               </h1>
               <Image
-                src={normalizeImageSrc(itemSelecionado.obj_foto ?? itemSelecionado.foto)}
+                src={normalizeImageSrc(
+                  itemSelecionado.obj_foto_raw ?? itemSelecionado.obj_foto ?? itemSelecionado.foto ?? null
+                )}
                 alt={itemSelecionado.obj_descricao}
                 width={250}
                 height={250}
               />
+
               <p>
                 <strong>Encontrada dia:</strong>{" "}
-                {itemSelecionado.obj_data_publicacao}
+                {itemSelecionado.obj_data_publicacao || '-'}
               </p>
               <p>
-                <strong>Local:</strong> {itemSelecionado.obj_local_encontrado}
+                <strong>Local:</strong> {itemSelecionado.obj_local_encontrado || '-' }
               </p>
               <p>
-                <strong>Classificação:</strong> {itemSelecionado.obj_status}
+                <strong>Data retirada:</strong> {formatDate(itemSelecionado.data_retirada)}
+              </p>
+              <p>
+                <strong>Retirado por:</strong> {itemSelecionado.nome_retirante || '-'}
               </p>
 
             </div>
