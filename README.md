@@ -1,4 +1,4 @@
-# CATCHU 🚀
+# CATCHU(Achados e Perdidos) 🚀
 
 Aplicação web full stack desenvolvida como Trabalho de Conclusão de Curso (TCC) do Ensino Médio Técnico, com foco em experiência do usuário, integração com API REST e gerenciamento de banco de dados.
 
