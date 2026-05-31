@@ -92,7 +92,7 @@ Projeto desenvolvido por:
 
 - Murilo Grinaldi
 - Pedro Martins
-- Caini Lima
+- Caiani Souza
 - Thiago Sampaio
 
 ---
